@@ -14,8 +14,9 @@ This is an application to make map veto for the game Counter-Strike Global Offen
 
 1. Clone the repository
 2. npm install
-3. webpack --watch
-4. You can start the application from index.html or use nw.js executable for your platform
+3. bower install
+4. webpack --watch
+5. You can start the application from index.html or use nw.js executable for your platform
 
 ## License
 
