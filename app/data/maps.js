@@ -1,0 +1,93 @@
+const MAPS = [{
+    value: 'dust2',
+    label: 'de_dust2',
+    name: 'de_dust2',
+    imagePath: 'app/images/maps/dust2.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'inferno',
+    label: 'de_inferno',
+    name: 'de_inferno',
+    imagePath: 'app/images/maps/inferno.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'cache',
+    label: 'de_cache',
+    name: 'de_cache',
+    imagePath: 'app/images/maps/cache.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'cobblestone',
+    label: 'de_cobblestone',
+    name: 'de_cobblestone',
+    imagePath: 'app/images/maps/cobblestone.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'mirage',
+    label: 'de_mirage',
+    name: 'de_mirage',
+    imagePath: 'app/images/maps/mirage.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'overpass',
+    label: 'de_overpass',
+    name: 'de_overpass',
+    imagePath: 'app/images/maps/overpass.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'nuke',
+    label: 'de_nuke',
+    name: 'de_nuke',
+    imagePath: 'app/images/maps/nuke.png',
+    isSelected: false,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'train',
+    label: 'de_train',
+    name: 'de_train',
+    imagePath: 'app/images/maps/train.png',
+    isSelected: true,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'santorini',
+    label: 'de_santorini',
+    name: 'de_santorini',
+    imagePath: 'app/images/maps/santorini.png',
+    isSelected: false,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}, {
+    value: 'season',
+    label: 'de_season',
+    name: 'de_season',
+    imagePath: 'app/images/maps/season.png',
+    isSelected: false,
+    isBanned: false,
+    isPicked: false,
+    isRandom: false
+}];
+
+export default MAPS;

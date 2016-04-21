@@ -1,0 +1,20 @@
+{
+  "name": "CSGO Map Veto",
+  "description": "A tool to easily make map veto.",
+  "main": "index.html",
+  "authors": [
+    "AkiVer <ys.renaud@gmail.com>"
+  ],
+  "license": "GPL v2",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
