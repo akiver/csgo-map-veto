@@ -77,7 +77,7 @@ export function selectMap(vote, map) {
 }
 
 export function selectRandomMap(vote, remainingMapList) {
-    let r = Math.floor(Math.random() * (remainingMapList.length - 0));
+    let r = Math.floor(Math.random() * remainingMapList.length);
     let map = remainingMapList[r];
     return {
         type: types.SELECT_RANDOM_MAP,
