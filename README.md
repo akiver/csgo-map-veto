@@ -2,6 +2,8 @@
 
 This is an application to make map veto for the game Counter-Strike Global Offensive. I made this application for a friend and it's inspired from https://csgomapveto.com/. The main difference is that you can use it offline.
 
+![Preview](https://raw.githubusercontent.com/akiver/csgo-map-veto/master/preview.jpg)
+
 ## Dependencies
 
 - [NW.JS](http://nwjs.io/)
