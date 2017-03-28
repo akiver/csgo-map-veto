@@ -1,5 +1,5 @@
-import React from 'react';
-import Modal from 'react-modal';
+import React from 'react'
+import Modal from 'react-modal'
 
 class ModalVote extends React.Component {
 
@@ -9,20 +9,20 @@ class ModalVote extends React.Component {
         onMapSelected: React.PropTypes.func,
         onHide: React.PropTypes.func,
         vote: React.PropTypes.object
-    };
+    }
 
     renderMap(map, idx) {
         return (
             <div key={idx}
                  className="col-xs-4">
                 <img
-                    src={map.imagePath}
+                    src={`images/maps/${map.imageName}`}
                     alt={map.name}
                     className="img-responsive img-thumbnail img-modal"
                     onClick={() => this.props.onMapSelected(this.props.vote, map)}/>
                 <p className="text-center">{map.name}</p>
             </div>
-        );
+        )
     }
 
     renderMapRow(maps, idx) {
@@ -30,28 +30,29 @@ class ModalVote extends React.Component {
             <div key={idx}
                  className="row">
                 {maps.map((map, idx) => {
-                    return this.renderMap(map, idx);
+                    return this.renderMap(map, idx)
                 })}
             </div>
-        );
+        )
     }
 
     renderMaps() {
-        let rowCount = Math.ceil(this.props.remainingMapList.length / 3);
-        let content = [];
+        let rowCount = Math.ceil(this.props.remainingMapList.length / 3)
+        let content = []
         for (let i = 0; i < rowCount; i++) {
-            let maps = this.props.remainingMapList.slice(i * 3, i * 3 + 3);
-            content.push(this.renderMapRow(maps, i));
+            let maps = this.props.remainingMapList.slice(i * 3, i * 3 + 3)
+            content.push(this.renderMapRow(maps, i))
         }
 
-        return content;
+        return content
     }
 
     render() {
-        //console.log('render ModalVote', this.props);
+        //console.log('render ModalVote', this.props)
         return (
             <Modal className="Modal__Bootstrap modal-dialog"
                    onRequestClose={this.props.onHide}
+                   contentLabel="Test"
                    isOpen={this.props.isOpen}>
                 <div className="modal-content">
                     <div className="modal-header">
@@ -68,8 +69,8 @@ class ModalVote extends React.Component {
                     </div>
                 </div>
             </Modal>
-        );
+        )
     }
 }
 
-export default ModalVote;
+export default ModalVote

@@ -1,5 +1,5 @@
-import React from 'react';
-import Select from 'react-select';
+import React from 'react'
+import Select from 'react-select'
 
 class Settings extends React.Component {
 
@@ -17,14 +17,14 @@ class Settings extends React.Component {
         bestOfList: React.PropTypes.array,
         selectedBestOf: React.PropTypes.object,
         selectedMode: React.PropTypes.object
-    };
+    }
 
     render() {
-        //console.log('render Settings', this.props);
+        //console.log('render Settings', this.props)
         return (
             <div>
                 <div className='form-group'>
-                    <label for="team1-name">Team 1</label>
+                    <label htmlFor="team1-name">Team 1</label>
                     <input type="text"
                            className="form-control"
                            id="team1-name"
@@ -32,7 +32,7 @@ class Settings extends React.Component {
                            onChange={(e) => this.props.onTeamName1Changed(e.target.value)}
                            disabled={this.props.isVetoStarted}
                            value={this.props.teamName1} />
-                    <label for="team2-name">Team 2</label>
+                    <label htmlFor="team2-name">Team 2</label>
                     <input type="text"
                            className="form-control"
                            id="team2-name"
@@ -42,7 +42,7 @@ class Settings extends React.Component {
                            value={this.props.teamName2} />
                 </div>
                 <div className='form-group'>
-                    <label for='bestof'>Best Of</label>
+                    <label htmlFor='bestof'>Best Of</label>
                     <Select name="select-bestof"
                             onChange={(value) => this.props.onBestOfChanged(value)}
                             disabled={this.props.isVetoStarted}
@@ -51,7 +51,7 @@ class Settings extends React.Component {
                             clearable={false} />
                 </div>
                 <div className="form-group">
-                    <label for="select-mode">Mode</label>
+                    <label htmlFor="select-mode">Mode</label>
                     <Select name="select-mode"
                             onChange={(value, selectedValues) => this.props.onModeChanged(selectedValues)}
                             disabled={this.props.isVetoStarted}
@@ -60,7 +60,7 @@ class Settings extends React.Component {
                             clearable={false} />
                 </div>
                 <div className="form-group">
-                    <label for="maps">Maps</label>
+                    <label htmlFor="maps">Maps</label>
                     <Select multi
                             name="select-maps"
                             options={this.props.maps}
@@ -68,7 +68,7 @@ class Settings extends React.Component {
                             disabled={this.props.isVetoStarted}
                             onChange={(maps) => this.props.onUpdateSelectedMaps(maps)} />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <button className='btn btn-success'
                             type='button'
                             onClick={this.props.onStartClicked}
@@ -83,8 +83,8 @@ class Settings extends React.Component {
                     </button>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default Settings;
+export default Settings

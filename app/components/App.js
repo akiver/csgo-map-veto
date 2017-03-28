@@ -1,10 +1,10 @@
-import React from 'react';
-import Settings from '../containers/Settings';
-import VoteList from '../containers/VoteList';
-import MapList from '../containers/MapList';
-import Error from '../containers/Error';
-import ModalVote from '../containers/ModalVote';
-import _ from 'lodash';
+import React from 'react'
+import Settings from '../containers/Settings'
+import VoteList from '../containers/VoteList'
+import MapList from '../containers/MapList'
+import Error from '../containers/Error'
+import ModalVote from '../containers/ModalVote'
+import _ from 'lodash'
 
 class App extends React.Component {
 
@@ -14,14 +14,14 @@ class App extends React.Component {
         selectedMapList: React.PropTypes.array,
         selectedBestOf: React.PropTypes.object,
         selectedMode: React.PropTypes.object
-    };
+    }
 
     shouldComponentUpdate(nextProps) {
-        return !_.isEqual(this.props, nextProps);
+        return !_.isEqual(this.props, nextProps)
     }
 
     render() {
-        //console.log('render App', this.props);
+        //console.log('render App', this.props)
         return (
             <div className='container-fluid'>
                 <div className='row'>
@@ -49,8 +49,8 @@ class App extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default App;
+export default App

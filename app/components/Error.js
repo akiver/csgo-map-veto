@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 class Error extends React.Component {
 
     static propTypes = {
         message: React.PropTypes.string
-    };
+    }
 
     render() {
-        //console.log('render Error', this.props);
+        //console.log('render Error', this.props)
         if (this.props.message !== null) {
             return (
                 <div className='row'>
@@ -15,10 +15,10 @@ class Error extends React.Component {
                         <p className="text-center">{this.props.message}</p>
                     </div>
                 </div>
-            );
+            )
         }
-        return null;
+        return null
     }
 }
 
-export default Error;
+export default Error

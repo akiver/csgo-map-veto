@@ -7,22 +7,19 @@
     "react"
   ],
   "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "settings": {
-    "react": {
-      "pragma": "React"
-    }
-  },
   "rules": {
-    "strict": [2, "never"],
-    "comma-dangle": [2, "never"],
-    "no-cond-assign": [2, "always"],
+    "strict": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "no-cond-assign": [
+      2,
+      "always"
+    ],
     "no-constant-condition": 1,
     "no-dupe-args": 2,
     "no-dupe-keys": 2,
@@ -45,42 +42,133 @@
     "valid-jsdoc": 0,
     "valid-typeof": 2,
     "block-scoped-var": 2,
-    "curly": [2, "multi-line"],
+    "curly": [
+      2,
+      "multi-line"
+    ],
     "consistent-return": 1,
     "dot-notation": 2,
     "no-alert": 0,
     "no-undef": 1,
-    "no-unused-vars": [1, {"vars": "all", "args": "none"}],
+    "no-unused-vars": [
+      1,
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
     "no-console": 0,
     "eol-last": 0,
     "no-use-before-define": 0,
     "no-shadow": 0,
     "no-process-exit": 0,
-    "array-bracket-spacing": [2, "never"],
-    "brace-style": [2, "1tbs", { "allowSingleLine": true }],
-    "camelcase": [2, {"properties": "always"}],
-    "comma-spacing": [2, {"before": false, "after": true}],
-    "comma-style": [2,"last"],
-    "computed-property-spacing": [2, "never"],
-    "indent": [2, 4, {"SwitchCase": 1}],
-    "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
-    "linebreak-style": [2, "unix"],
-    "max-len": [1,120],
-    "max-nested-callbacks": [2,3],
+    "array-bracket-spacing": [
+      2,
+      "never"
+    ],
+    "brace-style": [
+      2,
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "camelcase": [
+      2,
+      {
+        "properties": "always"
+      }
+    ],
+    "comma-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "comma-style": [
+      2,
+      "last"
+    ],
+    "computed-property-spacing": [
+      2,
+      "never"
+    ],
+    "indent": [
+      2,
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "key-spacing": [
+      2,
+      {
+        "beforeColon": false,
+        "afterColon": true
+      }
+    ],
+    "linebreak-style": [
+      2,
+      "unix"
+    ],
+    "max-len": [
+      1,
+      120
+    ],
+    "max-nested-callbacks": [
+      2,
+      3
+    ],
     "no-mixed-spaces-and-tabs": 2,
-    "no-multiple-empty-lines": [2,{"max": 3}],
+    "no-multiple-empty-lines": [
+      2,
+      {
+        "max": 3
+      }
+    ],
     "no-trailing-spaces": 2,
     "no-underscore-dangle": 0,
     "no-unneeded-ternary": 2,
     "padded-blocks": 0,
-    "quotes": [0, "double", "avoid-escape"],
-    "semi": [2, "always"],
-    "semi-spacing": [2, {"before": false,"after": true}],
+    "quotes": [
+      0,
+      "double",
+      "avoid-escape"
+    ],
+    "semi": [
+      2,
+      "never"
+    ],
+    "semi-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
     "keyword-spacing": 2,
-    "space-before-blocks": [2, "always"],
-    "space-before-function-paren": [2, {"anonymous": "always", "named": "never"}],
-    "space-in-parens": [2, "never"],
-    "space-infix-ops": [2, {"int32Hint": false}],
+    "space-before-blocks": [
+      2,
+      "always"
+    ],
+    "space-before-function-paren": [
+      2,
+      {
+        "anonymous": "always",
+        "named": "never"
+      }
+    ],
+    "space-in-parens": [
+      2,
+      "never"
+    ],
+    "space-infix-ops": [
+      2,
+      {
+        "int32Hint": false
+      }
+    ],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,

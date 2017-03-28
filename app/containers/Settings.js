@@ -1,17 +1,17 @@
-import { connect } from 'react-redux';
-import Settings from '../components/Settings';
+import { connect } from 'react-redux'
+import Settings from '../components/Settings'
 import {
     bestOfChanged,
     modeChanged,
     updateSelectedMaps,
     updateTeamName1,
     updateTeamName2
-} from '../actions/settings';
+} from '../actions/settings'
 import {
     startVeto,
     cancelVeto,
     initVoteList
-} from '../actions/votes';
+} from '../actions/votes'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -23,21 +23,21 @@ const mapStateToProps = (state, ownProps) => {
         selectedMapList: ownProps.selectedMapList,
         selectedBestOf: ownProps.selectedBestOf,
         selectedMode: ownProps.selectedMode
-    };
-};
+    }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onBestOfChanged(value) {
-            dispatch(bestOfChanged(value));
+            dispatch(bestOfChanged(value))
         },
         onModeChanged(selectedValues) {
-            let mode = selectedValues[0];
-            dispatch(modeChanged(ownProps.selectedBestOf.value, mode.value));
-            dispatch(initVoteList(mode));
+            let mode = selectedValues[0]
+            dispatch(modeChanged(ownProps.selectedBestOf.value, mode.value))
+            dispatch(initVoteList(mode))
         },
         onUpdateSelectedMaps(mapLabelList) {
-            dispatch(updateSelectedMaps(mapLabelList));
+            dispatch(updateSelectedMaps(mapLabelList))
         },
         onStartClicked() {
             dispatch(startVeto({
@@ -45,18 +45,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 selectedMapList: ownProps.selectedMapList,
                 teamName1: ownProps.teamName1,
                 teamName2: ownProps.teamName2
-            }));
+            }))
         },
         onCancelClicked() {
-            dispatch(cancelVeto());
+            dispatch(cancelVeto())
         },
         onTeamName1Changed(name) {
-            dispatch(updateTeamName1(name));
+            dispatch(updateTeamName1(name))
         },
         onTeamName2Changed(name) {
-            dispatch(updateTeamName2(name));
+            dispatch(updateTeamName2(name))
         }
-    };
-};
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)

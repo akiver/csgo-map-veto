@@ -1,5 +1,5 @@
-import React from 'react';
-import _ from 'lodash';
+import React from 'react'
+import _ from 'lodash'
 
 class VoteRow extends React.Component {
 
@@ -9,24 +9,24 @@ class VoteRow extends React.Component {
         onShowModalVote: React.PropTypes.func,
         selectRandomMap: React.PropTypes.func,
         remainingMapList: React.PropTypes.array
-    };
+    }
 
     shouldComponentUpdate(nextProps) {
-        return !_.isEqual(this.props, nextProps);
+        return !_.isEqual(this.props, nextProps)
     }
 
     renderWaiting() {
-        let text = '';
+        let text = ''
         switch (this.props.vote.type) {
             case 'ban':
-                text = ' has to ban a map';
-                break;
+                text = ' has to ban a map'
+                break
             case 'pick':
-                text = ' has to pick a map';
-                break;
+                text = ' has to pick a map'
+                break
             case 'random':
-                text = ' will pick a random map';
-                break;
+                text = ' will pick a random map'
+                break
         }
         if (this.props.isVetoStarted) {
             if (this.props.vote.isCurrentVote) {
@@ -47,7 +47,7 @@ class VoteRow extends React.Component {
                                 </button>
                             </div>
                         </div>
-                    );
+                    )
                 }
 
                 return (
@@ -69,7 +69,7 @@ class VoteRow extends React.Component {
                             </button>
                         </div>
                     </div>
-                );
+                )
             }
         }
         return (
@@ -82,25 +82,25 @@ class VoteRow extends React.Component {
                 </div>
                 <div className="col-xs-2">
                     <img className="img-responsive"
-                         src="app/images/maps/unknown.png"
+                         src="images/maps/unknown.png"
                          alt="Unknown map"/>
                 </div>
             </div>
-        );
+        )
     }
 
     renderDone() {
-        let text = '';
+        let text = ''
         switch (this.props.vote.type) {
             case 'ban':
-                text = ' banned ' + this.props.vote.selectedMap.name;
-                break;
+                text = ' banned ' + this.props.vote.selectedMap.name
+                break
             case 'pick':
-                text = ' picked ' + this.props.vote.selectedMap.name;
-                break;
+                text = ' picked ' + this.props.vote.selectedMap.name
+                break
             case 'random':
-                text = ' randomly picked ' + this.props.vote.selectedMap.name;
-                break;
+                text = ' randomly picked ' + this.props.vote.selectedMap.name
+                break
         }
         return (
             <div>
@@ -112,35 +112,35 @@ class VoteRow extends React.Component {
                 </div>
                 <div className="col-xs-2">
                     <img className="img-responsive"
-                         src={this.props.vote.selectedMap.imagePath}
+                         src={`images/maps/${this.props.vote.selectedMap.imageName}`}
                          alt={this.props.vote.selectedMap.name}/>
                 </div>
             </div>
 
-        );
+        )
     }
 
     renderContent() {
         if (this.props.vote.status === 'done') {
-            return this.renderDone();
+            return this.renderDone()
         }
-        return this.renderWaiting();
+        return this.renderWaiting()
     }
 
     render() {
-        //console.log('render VoteRow', this.props);
-        let className = 'col-xs-12 alert';
+        //console.log('render VoteRow', this.props)
+        let className = 'col-xs-12 alert'
         if (this.props.vote.status === 'done') {
             if (this.props.vote.type === 'ban') {
-                className += ' alert-danger';
+                className += ' alert-danger'
             } else {
-                className += ' alert-success';
+                className += ' alert-success'
             }
         } else {
-            className += ' alert-info';
+            className += ' alert-info'
         }
         if (this.props.isVetoStarted && this.props.vote.isCurrentVote) {
-            className += ' border-current';
+            className += ' border-current'
         }
         return (
             <div className='row'>
@@ -148,8 +148,8 @@ class VoteRow extends React.Component {
                     {this.renderContent()}
                 </div>
             </div>
-        );
+        )
     }
 }
 
-export default VoteRow;
+export default VoteRow

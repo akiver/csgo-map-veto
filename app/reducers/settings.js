@@ -1,6 +1,6 @@
-import * as types from '../actions/types';
-import MAPS from '../data/maps';
-import BO from '../data/bo';
+import * as types from '../actions/types'
+import MAPS from '../data/maps'
+import BO from '../data/BO'
 
 export default function settings(state = {
     teamName1: 'Team 1',
@@ -15,29 +15,29 @@ export default function settings(state = {
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
                 maps: state.maps.map(c => map(c, action))
-            });
+            })
         case types.TEAM_1_NAME_CHANGED:
             return Object.assign({}, state, {
                 teamName1: action.name
-            });
+            })
         case types.TEAM_2_NAME_CHANGED:
             return Object.assign({}, state, {
                 teamName2: action.name
-            });
+            })
         case types.BEST_OF_CHANGED:
             return Object.assign({}, state, {
                 bestOfList: state.bestOfList.map(m => bestOf(m, action))
-            });
+            })
         case types.MODE_CHANGED:
             return Object.assign({}, state, {
                 bestOfList: state.bestOfList.map(m => bestOf(m, action))
-            });
+            })
         case types.UPDATE_SELECTED_MAPS:
             return Object.assign({}, state, {
                 maps: state.maps.map(m => map(m, action))
-            });
+            })
         default:
-            return state;
+            return state
     }
 }
 
@@ -53,58 +53,58 @@ const map = (state = {
     switch (action.type) {
         case types.SETTINGS_SELECT_MAP:
             if (state.name !== action.map.name) {
-                return state;
+                return state
             }
             return Object.assign({}, state, {
                 isSelected: true
-            });
+            })
         case types.UPDATE_SELECTED_MAPS:
             if (action.selectedMapLabelList.indexOf(state.value) !== -1) {
                 return {
                     ...state,
                     isSelected: true
-                };
+                }
             }
             return {
                 ...state,
                 isSelected: false
-            };
+            }
         case types.SELECT_MAP:
             if (action.map !== state) {
-                return state;
+                return state
             }
             switch (action.vote.type) {
                 case 'ban':
                     return Object.assign({}, state, {
                         isBanned: true
-                    });
+                    })
                 case 'pick':
                     return Object.assign({}, state, {
                         isPicked: true
-                    });
+                    })
                 case 'random':
                     return Object.assign({}, state, {
                         isRandom: true
-                    });
+                    })
             }
-            return state;
+            return state
         case types.SELECT_RANDOM_MAP:
             if (action.map !== state) {
-                return state;
+                return state
             }
             return Object.assign({}, state, {
                 isRandom: true
-            });
+            })
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
                 isPicked: false,
                 isBanned: false,
                 isRandom: false
-            });
+            })
         default:
-            return state;
+            return state
     }
-};
+}
 
 const bestOf = (state = {
     value: null,
@@ -116,22 +116,22 @@ const bestOf = (state = {
             if (state.value !== action.value) {
                 return Object.assign({}, state, {
                     isSelected: false
-                });
+                })
             }
             return Object.assign({}, state, {
                 isSelected: true
-            });
+            })
         case types.MODE_CHANGED:
             if (state.value !== action.bestOfValue) {
-                return state;
+                return state
             }
             return Object.assign({}, state, {
                 modes: state.modes.map(m => mode(m, action))
-            });
+            })
         default:
-            return state;
+            return state
     }
-};
+}
 
 const mode = (state = {
     value: null,
@@ -143,13 +143,13 @@ const mode = (state = {
                 return {
                     ...state,
                     isSelected: false
-                };
+                }
             }
             return {
                 ...state,
                 isSelected: true
-            };
+            }
         default:
-            return state;
+            return state
     }
-};
+}
