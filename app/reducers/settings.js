@@ -70,6 +70,7 @@ const map = (state = {
                 isSelected: false
             }
         case types.SELECT_MAP:
+        case types.SELECT_RANDOM_MAP:
             if (action.map !== state) {
                 return state
             }
@@ -88,13 +89,6 @@ const map = (state = {
                     })
             }
             return state
-        case types.SELECT_RANDOM_MAP:
-            if (action.map !== state) {
-                return state
-            }
-            return Object.assign({}, state, {
-                isRandom: true
-            })
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
                 isPicked: false,

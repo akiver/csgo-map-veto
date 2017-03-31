@@ -1,0 +1,49 @@
+$red: #EF5350
+$blue: #81D4FA
+$orange: #FFB74D
+// override bulma variables
+$grey-dark: hsl(0, 0%, 29%)
+$white-ter: hsl(0, 0%, 96%)
+$body-background: $white-ter
+$primary: $grey-dark
+@import "bulma/bulma"
+
+.app-container
+  padding: 10px
+.app-container-mac
+  padding-top: 20px
+
+// map list
+.image-map
+  border: solid 1px $black
+  height: 50px
+  margin: 0 auto
+// end map list
+
+// row vote
+.level
+  padding: 5px
+  border-radius: 4px
+  flex-wrap: wrap
+.text-vote
+  font-size: 1.2em
+.vote-current
+  border: solid 2px $grey-dark
+.vote-pending
+  background-color: $white
+.vote-ban
+  background-color: $red
+.vote-pick
+  background-color: $blue
+.vote-random
+  background-color: $orange
+.image-vote
+  height: 50px
+// end row vote
+
+// modal vote
+.modal-map-block
+  cursor: pointer
+.modal-map-block:hover
+  outline: solid 1px $red
+// end modal vote

@@ -15,139 +15,123 @@ class VoteRow extends React.Component {
         return !_.isEqual(this.props, nextProps)
     }
 
-    renderWaiting() {
-        let text = ''
-        switch (this.props.vote.type) {
-            case 'ban':
-                text = ' has to ban a map'
-                break
-            case 'pick':
-                text = ' has to pick a map'
-                break
-            case 'random':
-                text = ' will pick a random map'
-                break
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isVetoStarted && nextProps.vote.isCurrentVote && nextProps.vote.type === 'random') {
+            this.props.selectRandomMap(
+                nextProps.vote,
+                nextProps.remainingMapList
+            )
         }
-        if (this.props.isVetoStarted) {
-            if (this.props.vote.isCurrentVote) {
-                if (this.props.vote.type !== 'random') {
-                    return (
-                        <div>
-                            <div className="col-xs-10">
-                                <p className="text-vote">
-                                    <span className="text-bold">{this.props.vote.teamName}</span>
-                                    <span>{text}</span>
-                                </p>
-                            </div>
-                            <div className="col-xs-2">
-                                <button type="button"
-                                        className="btn btn-info"
-                                        onClick={() => this.props.onShowModalVote(this.props.vote)}>
-                                    Select Map
-                                </button>
-                            </div>
-                        </div>
-                    )
-                }
+    }
 
-                return (
-                    <div>
-                        <div className="col-xs-10">
-                            <p className="text-vote">
-                                <span className="text-bold">{this.props.vote.teamName}</span>
-                                <span>{text}</span>
-                            </p>
-                        </div>
-                        <div className="col-xs-2">
-                            <button type="button"
-                                    className="btn btn-info"
-                                    onClick={() => this.props.selectRandomMap(
-                                        this.props.vote,
-                                        this.props.remainingMapList
-                                    )}>
-                                Generate
-                            </button>
-                        </div>
-                    </div>
-                )
+    getVoteRowClassName() {
+        let className = 'vote-pending'
+        if (this.props.vote.type === 'ban') {
+            className += ' vote-ban'
+        } else if (this.props.vote.type == 'pick') {
+            className += ' vote-pick'
+        } else {
+            className += ' vote-random'
+        }
+
+        if (this.props.isVetoStarted && this.props.vote.isCurrentVote) {
+            className += ' vote-current'
+        }
+
+        return className
+    }
+
+    getText() {
+        if (this.props.vote.status == 'waiting') {
+            switch (this.props.vote.type) {
+                case 'ban':
+                    return ' has to ban a map'
+                case 'pick':
+                    return ' has to pick a map'
+                case 'random':
+                    return ' will pick a random map'
+                default:
+                    return ''
             }
         }
-        return (
-            <div className="row">
-                <div className="col-xs-10">
-                    <p className="text-vote">
-                        <span className="text-bold">{this.props.vote.teamName}</span>
-                        <span>{text}</span>
-                    </p>
-                </div>
-                <div className="col-xs-2">
-                    <img className="img-responsive"
-                         src="images/maps/unknown.png"
-                         alt="Unknown map"/>
-                </div>
-            </div>
-        )
-    }
 
-    renderDone() {
-        let text = ''
         switch (this.props.vote.type) {
             case 'ban':
-                text = ' banned ' + this.props.vote.selectedMap.name
-                break
+                return ' banned ' + this.props.vote.selectedMap.name
             case 'pick':
-                text = ' picked ' + this.props.vote.selectedMap.name
-                break
+                return ' picked ' + this.props.vote.selectedMap.name
             case 'random':
-                text = ' randomly picked ' + this.props.vote.selectedMap.name
-                break
+                return ' randomly picked ' + this.props.vote.selectedMap.name
+            default:
+                return ''
         }
-        return (
-            <div>
-                <div className="col-xs-10">
-                    <p className="text-vote">
-                        <span className="text-bold">{this.props.vote.teamName}</span>
-                        <span>{text}</span>
-                    </p>
-                </div>
-                <div className="col-xs-2">
-                    <img className="img-responsive"
-                         src={`images/maps/${this.props.vote.selectedMap.imageName}`}
-                         alt={this.props.vote.selectedMap.name}/>
-                </div>
-            </div>
+    }
 
+    renderLeft() {
+        let text = this.getText()
+        return (
+            <p className="text-vote">
+                <strong>{this.props.vote.teamName}</strong>
+                <span>{text}</span>
+            </p>
         )
     }
 
-    renderContent() {
+    renderRight() {
+        // vote done, show the selected map picture
         if (this.props.vote.status === 'done') {
-            return this.renderDone()
+            return (
+                <img className="image image-vote"
+                     src={`images/maps/${this.props.vote.selectedMap.imageName}`}
+                     alt={this.props.vote.selectedMap.name}/>
+            )
         }
-        return this.renderWaiting()
+
+        // veto hasn't started, just show the unknown map picture
+        if (!this.props.isVetoStarted || !this.props.vote.isCurrentVote) {
+            return (
+                <img className="image image-vote"
+                     src="images/maps/unknown.png"
+                     alt="Unknown map"/>
+            )
+        }
+
+        // current vote
+        if (this.props.vote.isCurrentVote) {
+            return (
+                <button type="button"
+                        className="button is-success"
+                        onClick={() => this.props.onShowModalVote(this.props.vote)}>
+                    Select Map
+                </button>
+            )
+        }
+
+        // pending vote, show unknown map
+        return (
+            <img className="image image-vote"
+                 src={`images/maps/${this.props.vote.selectedMap.imageName}`}
+                 alt={this.props.vote.selectedMap.name}/>
+        )
     }
+
 
     render() {
         //console.log('render VoteRow', this.props)
-        let className = 'col-xs-12 alert'
-        if (this.props.vote.status === 'done') {
-            if (this.props.vote.type === 'ban') {
-                className += ' alert-danger'
-            } else {
-                className += ' alert-success'
-            }
-        } else {
-            className += ' alert-info'
-        }
-        if (this.props.isVetoStarted && this.props.vote.isCurrentVote) {
-            className += ' border-current'
-        }
+        let className = 'level ' + this.getVoteRowClassName()
         return (
-            <div className='row'>
-                <div className={className} role="alert">
-                    {this.renderContent()}
+            <nav className={className}>
+                <div className="level-left">
+                    <div className="level-item">
+                        {this.renderLeft()}
+                    </div>
                 </div>
-            </div>
+                <div className="level-right">
+                    <div className="level-item">
+                        {this.renderRight()}
+                    </div>
+                </div>
+            </nav>
         )
     }
 }

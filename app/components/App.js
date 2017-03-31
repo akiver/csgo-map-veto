@@ -5,13 +5,15 @@ import MapList from '../containers/MapList'
 import Error from '../containers/Error'
 import ModalVote from '../containers/ModalVote'
 import _ from 'lodash'
+import is from 'electron-is'
 
 class App extends React.Component {
 
     static propTypes = {
         teamName1: React.PropTypes.string,
         teamName2: React.PropTypes.string,
-        selectedMapList: React.PropTypes.array,
+        remainingMapList: React.PropTypes.array,
+        pickedMapList: React.PropTypes.array,
         selectedBestOf: React.PropTypes.object,
         selectedMode: React.PropTypes.object
     }
@@ -22,32 +24,37 @@ class App extends React.Component {
 
     render() {
         //console.log('render App', this.props)
+        let className = is.macOS() ? 'app-container-mac' : ''
         return (
-            <div className='container-fluid'>
-                <div className='row'>
-                    <div className='col-xs-12'>
-                        <h1 className='text-center'>CSGO Map Veto</h1>
-                        <div className="row">
-                            <div className="col-xs-3">
-                                <Settings teamName1={this.props.teamName1}
-                                          teamName2={this.props.teamName2}
-                                          selectedMapList={this.props.selectedMapList}
-                                          selectedBestOf={this.props.selectedBestOf}
-                                          selectedMode={this.props.selectedMode}/>
-                            </div>
-                            <div className="col-xs-9">
-                                <div className='row'>
-                                    <div className="col-xs-12">
-                                        <MapList selectedMapList={this.props.selectedMapList}/>
-                                        <Error />
-                                        <VoteList selectedMode={this.props.selectedMode}/>
-                                        <ModalVote />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className={`columns app-container ${className}`}>
+                <div className='column is-3'>
+                    <p className="has-text-centered">
+                        <strong>Settings</strong>
+                    </p>
+                    <Settings teamName1={this.props.teamName1}
+                              teamName2={this.props.teamName2}
+                              selectedMapList={this.props.selectedMapList}
+                              selectedBestOf={this.props.selectedBestOf}
+                              selectedMode={this.props.selectedMode}/>
                 </div>
+                <div className='column is-5'>
+                    <p className="has-text-centered">
+                        <strong>Votes</strong>
+                    </p>
+                    <Error />
+                    <VoteList selectedMode={this.props.selectedMode}/>
+                </div>
+                <div className='column is-2'>
+                    <MapList title="Remaining maps"
+                             maps={this.props.remainingMapList}
+                    />
+                </div>
+                <div className='column is-2'>
+                    <MapList title="Picked maps"
+                             maps={this.props.pickedMapList}
+                    />
+                </div>
+                <ModalVote />
             </div>
         )
     }

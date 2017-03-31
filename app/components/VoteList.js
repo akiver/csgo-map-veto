@@ -19,12 +19,10 @@ class VoteList extends React.Component {
     render() {
         //console.log('render VoteList', this.props)
         return (
-            <div className='row push-top'>
-                <div className="col-xs-12">
-                    {this.props.votes.map((vote, idx) => {
-                        return this.renderVote(idx, vote)
-                    })}
-                </div>
+            <div>
+                {this.props.votes.map((vote, idx) => {
+                    return this.renderVote(idx, vote)
+                })}
             </div>
         )
     }

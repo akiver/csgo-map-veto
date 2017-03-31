@@ -3,35 +3,32 @@ import React from 'react'
 class MapList extends React.Component {
 
     static propTypes = {
-        selectedMapList: React.PropTypes.array
+        title: React.PropTypes.string,
+        maps: React.PropTypes.array
     }
 
     renderMap(idx, map) {
-        let className = 'img-responsive img-thumbnail img-list'
-        if (map.isBanned) {
-            className += ' img-banned'
-        } else if (map.isPicked) {
-            className += ' img-picked'
-        } else if (map.isRandom) {
-            className += ' img-random'
-        }
         return (
-            <img key={idx}
-                 src={`images/maps/${map.imageName}`}
-                 alt={map.name}
-                 className={className}/>
+            <div key={idx}>
+                <img src={`images/maps/${map.imageName}`}
+                     alt={map.name}
+                     className="image image-map">
+                </img>
+                <p className="has-text-centered">{map.name}</p>
+            </div>
         )
     }
 
     render() {
         //console.log('render MapList', this.props)
         return (
-            <div className='row'>
-                <div className="col-xs-12">
-                    {this.props.selectedMapList.map((map, idx) => {
-                        return this.renderMap(idx, map)
-                    })}
-                </div>
+            <div>
+                <p className="has-text-centered">
+                    <strong>{this.props.title}</strong>
+                </p>
+                {this.props.maps.map((map, idx) => {
+                    return this.renderMap(idx, map)
+                })}
             </div>
         )
     }

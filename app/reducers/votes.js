@@ -48,9 +48,6 @@ export default function votes(state = {
                 isModalVoteOpened: true
             })
         case types.SELECT_MAP:
-            return Object.assign({}, state, {
-                votes: state.votes.map(m => vote(m, action))
-            })
         case types.SELECT_RANDOM_MAP:
             return Object.assign({}, state, {
                 votes: state.votes.map(m => vote(m, action))

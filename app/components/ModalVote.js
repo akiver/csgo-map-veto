@@ -1,5 +1,4 @@
 import React from 'react'
-import Modal from 'react-modal'
 
 class ModalVote extends React.Component {
 
@@ -13,63 +12,51 @@ class ModalVote extends React.Component {
 
     renderMap(map, idx) {
         return (
-            <div key={idx}
-                 className="col-xs-4">
-                <img
-                    src={`images/maps/${map.imageName}`}
-                    alt={map.name}
-                    className="img-responsive img-thumbnail img-modal"
-                    onClick={() => this.props.onMapSelected(this.props.vote, map)}/>
-                <p className="text-center">{map.name}</p>
-            </div>
-        )
-    }
-
-    renderMapRow(maps, idx) {
-        return (
-            <div key={idx}
-                 className="row">
-                {maps.map((map, idx) => {
-                    return this.renderMap(map, idx)
-                })}
+            <div key={idx} className="column is-4">
+                <div className="modal-map-block" onClick={() => this.props.onMapSelected(this.props.vote, map)}>
+                    <img src={`images/maps/${map.imageName}`}
+                         alt={map.name}
+                         className="image"/>
+                    <p className="has-text-centered">{map.name}</p>
+                </div>
             </div>
         )
     }
 
     renderMaps() {
-        let rowCount = Math.ceil(this.props.remainingMapList.length / 3)
-        let content = []
-        for (let i = 0; i < rowCount; i++) {
-            let maps = this.props.remainingMapList.slice(i * 3, i * 3 + 3)
-            content.push(this.renderMapRow(maps, i))
-        }
-
-        return content
+        return this.props.remainingMapList.map((map, idx) => {
+            return this.renderMap(map, idx)
+        })
     }
 
     render() {
-        //console.log('render ModalVote', this.props)
-        return (
-            <Modal className="Modal__Bootstrap modal-dialog"
-                   onRequestClose={this.props.onHide}
-                   contentLabel="Test"
-                   isOpen={this.props.isOpen}>
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title">Select map</h4>
-                    </div>
-                    <div className="modal-body">
-                        {this.renderMaps()}
-                    </div>
-                    <div className="modal-footer">
-                        <button className="btn btn-info center-block"
-                                onClick={this.props.onHide}>
-                            Cancel
-                        </button>
+        // console.log('render ModalVote', this.props)
+        if (this.props.isOpen) {
+            return (
+                <div className="modal is-active">
+                    <div className="modal-background" onClick={this.props.onHide}></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head">
+                            <p className="modal-card-title">Select a map</p>
+                            <button className="delete" onClick={this.props.onHide}></button>
+                        </header>
+                        <section className="modal-card-body">
+                            <div className="columns is-multiline">
+                                {this.renderMaps()}
+                            </div>
+                        </section>
+                        <footer className="modal-card-foot">
+                            <button className="button"
+                                    onClick={this.props.onHide}>
+                                Cancel
+                            </button>
+                        </footer>
                     </div>
                 </div>
-            </Modal>
-        )
+            )
+        }
+
+        return null
     }
 }
 

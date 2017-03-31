@@ -10,13 +10,14 @@ class Error extends React.Component {
         //console.log('render Error', this.props)
         if (this.props.message !== null) {
             return (
-                <div className='row'>
-                    <div className="alert alert-danger">
-                        <p className="text-center">{this.props.message}</p>
+                <article className="message is-danger">
+                    <div className="message-body">
+                        {this.props.message}
                     </div>
-                </div>
+                </article>
             )
         }
+
         return null
     }
 }

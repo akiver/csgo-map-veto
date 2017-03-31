@@ -3,7 +3,7 @@ import MapList from '../components/MapList'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        selectedMapList: ownProps.selectedMapList
+        maps: ownProps.maps
     }
 }
 
