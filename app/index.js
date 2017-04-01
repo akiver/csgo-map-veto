@@ -6,7 +6,7 @@ import store from './stores/configureStore'
 import {AppContainer} from 'react-hot-loader'
 
 const render = () => {
-    const App = require('./containers/App').default
+    const App = require('./components/App').default
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>

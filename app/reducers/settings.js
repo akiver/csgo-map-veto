@@ -6,14 +6,25 @@ export default function settings(state = {
     teamName1: 'Team 1',
     teamName2: 'Team 2',
     maps: MAPS,
-    bestOfList: BO
+    bestOfList: BO,
+    selectedBestOf: BO.filter(b => b.isSelected)[0],
+    selectedMode: BO.filter(b => b.isSelected)[0].modes.filter(b => b.isSelected)[0],
+    isVetoStarted: false
 }, action) {
     switch (action.type) {
         case types.SETTINGS_SELECT_MAP:
         case types.SELECT_MAP:
         case types.SELECT_RANDOM_MAP:
+            return Object.assign({}, state, {
+                maps: state.maps.map(c => map(c, action))
+            })
+        case types.START_VETO:
+            return Object.assign({}, state, {
+                isVetoStarted: true
+            })
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
+                isVetoStarted: false,
                 maps: state.maps.map(c => map(c, action))
             })
         case types.TEAM_1_NAME_CHANGED:
@@ -24,14 +35,20 @@ export default function settings(state = {
             return Object.assign({}, state, {
                 teamName2: action.name
             })
-        case types.BEST_OF_CHANGED:
+        case types.BEST_OF_CHANGED: {
+            const bestOfList = state.bestOfList.map(m => bestOf(m, action));
             return Object.assign({}, state, {
-                bestOfList: state.bestOfList.map(m => bestOf(m, action))
+                bestOfList: state.bestOfList.map(m => bestOf(m, action)),
+                selectedBestOf: bestOfList.filter(b => b.isSelected)[0]
             })
-        case types.MODE_CHANGED:
+        }
+        case types.MODE_CHANGED: {
+            const bestOfList = state.bestOfList.map(m => bestOf(m, action));
             return Object.assign({}, state, {
-                bestOfList: state.bestOfList.map(m => bestOf(m, action))
+                bestOfList,
+                selectedMode: bestOfList.filter(b => b.isSelected)[0].modes.filter(b => b.isSelected)[0]
             })
+        }
         case types.UPDATE_SELECTED_MAPS:
             return Object.assign({}, state, {
                 maps: state.maps.map(m => map(m, action))

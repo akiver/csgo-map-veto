@@ -7,6 +7,10 @@ class MapList extends React.Component {
         maps: React.PropTypes.array
     }
 
+    shouldComponentUpdate(nextProps) {
+        return this.props.maps.length !== nextProps.maps.length
+    }
+
     renderMap(idx, map) {
         return (
             <div key={idx}>

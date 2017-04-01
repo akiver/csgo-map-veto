@@ -9,7 +9,7 @@ const getRemainingMapList = (maps) => {
 
 const mapStateToProps = (state) => {
     return {
-        isVetoStarted: state.votes.isVetoStarted,
+        isVetoStarted: state.settings.isVetoStarted,
         remainingMapList: getRemainingMapList(state.settings.maps)
     }
 }

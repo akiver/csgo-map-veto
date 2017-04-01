@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 
 class VoteRow extends React.Component {
 
@@ -12,7 +11,7 @@ class VoteRow extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return !_.isEqual(this.props, nextProps)
+        return this.props.vote != nextProps.vote
     }
 
     componentWillReceiveProps(nextProps) {

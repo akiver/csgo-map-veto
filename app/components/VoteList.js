@@ -4,12 +4,7 @@ import VoteRow from '../containers/VoteRow'
 class VoteList extends React.Component {
 
     static propTypes = {
-        votes: React.PropTypes.array,
-        initVoteList: React.PropTypes.func
-    }
-
-    componentDidMount() {
-        this.props.initVoteList()
+        votes: React.PropTypes.array
     }
 
     renderVote(idx, vote) {

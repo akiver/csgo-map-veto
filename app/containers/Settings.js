@@ -13,39 +13,39 @@ import {
     initVoteList
 } from '../actions/votes'
 
-const mapStateToProps = (state, ownProps) => {
+const getSelectedMapList = (maps) => {
+    return maps.filter(m => m.isSelected)
+}
+
+const mapStateToProps = (state) => {
+    const { settings } = state
     return {
-        isVetoStarted: state.votes.isVetoStarted,
-        maps: state.settings.maps,
-        bestOfList: state.settings.bestOfList,
-        teamName1: state.settings.teamName1,
-        teamName2: state.settings.teamName2,
-        selectedMapList: ownProps.selectedMapList,
-        selectedBestOf: ownProps.selectedBestOf,
-        selectedMode: ownProps.selectedMode
+        isVetoStarted: settings.isVetoStarted,
+        maps: settings.maps,
+        bestOfList: settings.bestOfList,
+        teamName1: settings.teamName1,
+        teamName2: settings.teamName2,
+        selectedMapList: getSelectedMapList(settings.maps),
+        selectedBestOf: settings.selectedBestOf,
+        selectedMode: settings.selectedMode
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onBestOfChanged(value) {
             dispatch(bestOfChanged(value))
         },
-        onModeChanged(selectedValues) {
+        onModeChanged(selectedBestOfValue, selectedValues) {
             let mode = selectedValues[0]
-            dispatch(modeChanged(ownProps.selectedBestOf.value, mode.value))
+            dispatch(modeChanged(selectedBestOfValue, mode.value))
             dispatch(initVoteList(mode))
         },
         onUpdateSelectedMaps(mapLabelList) {
             dispatch(updateSelectedMaps(mapLabelList))
         },
-        onStartClicked() {
-            dispatch(startVeto({
-                mode: ownProps.selectedMode,
-                selectedMapList: ownProps.selectedMapList,
-                teamName1: ownProps.teamName1,
-                teamName2: ownProps.teamName2
-            }))
+        onStartClicked(options) {
+            dispatch(startVeto(options))
         },
         onCancelClicked() {
             dispatch(cancelVeto())

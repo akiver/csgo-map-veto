@@ -2,10 +2,7 @@ import * as types from '../actions/types'
 
 export default function votes(state = {
     votes: [],
-    remainingMapList: [],
-    isVetoStarted: false,
-    isRulesValid: true,
-    isModalVoteOpened: false
+    remainingMapList: []
 }, action) {
     switch (action.type) {
         case types.ADD_VOTE:
@@ -30,22 +27,16 @@ export default function votes(state = {
         case types.START_VETO:
             return Object.assign({}, state, {
                 remainingMapList: action.maps,
-                isVetoStarted: true,
                 votes: state.votes.map(m => vote(m, action))
             })
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
-                isVetoStarted: false,
                 votes: state.votes.map(m => vote(m, action))
             })
         case types.TEAM_1_NAME_CHANGED:
         case types.TEAM_2_NAME_CHANGED:
             return Object.assign({}, state, {
                 votes: state.votes.map(m => vote(m, action))
-            })
-        case types.SHOW_MODAL_VOTE:
-            return Object.assign({}, state, {
-                isModalVoteOpened: true
             })
         case types.SELECT_MAP:
         case types.SELECT_RANDOM_MAP:
@@ -98,11 +89,7 @@ const vote = (state = {
                     isCurrentVote: true
                 })
             }
-            return Object.assign({}, state, {
-                status: 'waiting',
-                selectedMap: {},
-                isCurrentVote: false
-            })
+            return state
         case types.CANCEL_VETO:
             return Object.assign({}, state, {
                 status: 'waiting',

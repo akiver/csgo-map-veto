@@ -16,7 +16,40 @@ class Settings extends React.Component {
         selectedMapList: React.PropTypes.array,
         bestOfList: React.PropTypes.array,
         selectedBestOf: React.PropTypes.object,
-        selectedMode: React.PropTypes.object
+        selectedMode: React.PropTypes.object,
+        onCancelClicked: React.PropTypes.func
+    }
+
+    startVeto = () => {
+        this.props.onStartClicked({
+            mode: this.props.selectedMode,
+            selectedMapList: this.props.selectedMapList,
+            teamName1: this.props.teamName1,
+            teamName2: this.props.teamName2
+        })
+    }
+
+    changeBestOf = (value) => {
+        this.props.onBestOfChanged(value)
+    }
+
+    changeMode = (value, selectedValues) => {
+        this.props.onModeChanged(
+            this.props.selectedBestOf.value,
+            selectedValues
+        )
+    }
+
+    changeTeam1Name = (e) => {
+        this.props.onTeamName1Changed(e.target.value)
+    }
+
+    changeTeam2Name = (e) => {
+        this.props.onTeamName2Changed(e.target.value)
+    }
+
+    updateSelectedMaps = (maps) => {
+        this.props.onUpdateSelectedMaps(maps)
     }
 
     render() {
@@ -30,9 +63,9 @@ class Settings extends React.Component {
                                className="input"
                                id="team1-name"
                                placeholder="Team 1"
-                               onChange={(e) => this.props.onTeamName1Changed(e.target.value)}
+                               onChange={this.changeTeam1Name}
                                disabled={this.props.isVetoStarted}
-                               value={this.props.teamName1} />
+                               value={this.props.teamName1}/>
                     </p>
                 </div>
                 <div className="field">
@@ -42,28 +75,28 @@ class Settings extends React.Component {
                                className="input"
                                id="team2-name"
                                placeholder="Team 2"
-                               onChange={(e) => this.props.onTeamName2Changed(e.target.value)}
+                               onChange={this.changeTeam2Name}
                                disabled={this.props.isVetoStarted}
-                               value={this.props.teamName2} />
+                               value={this.props.teamName2}/>
                     </p>
                 </div>
                 <div className="field">
                     <label htmlFor='bestof' className="label">Best Of</label>
                     <Select name="select-bestof"
-                            onChange={(value) => this.props.onBestOfChanged(value)}
+                            onChange={this.changeBestOf}
                             disabled={this.props.isVetoStarted}
                             options={this.props.bestOfList}
                             value={this.props.selectedBestOf}
-                            clearable={false} />
+                            clearable={false}/>
                 </div>
                 <div className="field">
                     <label htmlFor="select-mode" className="label">Mode</label>
                     <Select name="select-mode"
-                            onChange={(value, selectedValues) => this.props.onModeChanged(selectedValues)}
+                            onChange={this.changeMode}
                             disabled={this.props.isVetoStarted}
                             options={this.props.selectedBestOf.modes}
                             value={this.props.selectedMode}
-                            clearable={false} />
+                            clearable={false}/>
                 </div>
                 <div className="field">
                     <label htmlFor="maps" className="label">Maps</label>
@@ -72,13 +105,13 @@ class Settings extends React.Component {
                             options={this.props.maps}
                             value={this.props.selectedMapList}
                             disabled={this.props.isVetoStarted}
-                            onChange={(maps) => this.props.onUpdateSelectedMaps(maps)} />
+                            onChange={this.updateSelectedMaps}/>
                 </div>
                 <div className="field is-grouped">
                     <p className="control">
                         <button className='button is-success'
                                 type='button'
-                                onClick={this.props.onStartClicked}
+                                onClick={this.startVeto}
                                 disabled={this.props.isVetoStarted}>
                             Start
                         </button>

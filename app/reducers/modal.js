@@ -2,7 +2,6 @@ import * as types from '../actions/types'
 
 export default function modal(state = {
     isOpen: false,
-    remainingMapList: [],
     vote: {}
 }, action) {
     switch (action.type) {
@@ -14,11 +13,8 @@ export default function modal(state = {
         case types.HIDE_MODAL_VOTE:
         case types.SELECT_MAP:
             return Object.assign({}, state, {
-                isOpen: false
-            })
-        case types.START_VETO:
-            return Object.assign({}, state, {
-                remainingMapList: action.maps
+                isOpen: false,
+                vote: {}
             })
         default:
             return state
