@@ -38,7 +38,8 @@
     "electron-prebuilt-compile": "^1.6.2",
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^6.10.3",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "shelljs": "^0.7.7"
   },
   "build": {
     "appId": "com.electron.csgomapveto",
