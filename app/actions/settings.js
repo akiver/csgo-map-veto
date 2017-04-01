@@ -15,11 +15,10 @@ export function modeChanged(bestOfValue, modeValue) {
     }
 }
 
-export function updateSelectedMaps(mapLabelList) {
-    let selectedMapLabelList = mapLabelList.split(',')
+export function updateSelectedMaps(maps) {
     return {
         type: types.UPDATE_SELECTED_MAPS,
-        selectedMapLabelList
+        maps
     }
 }
 

@@ -33,10 +33,10 @@ class Settings extends React.Component {
         this.props.onBestOfChanged(value)
     }
 
-    changeMode = (value, selectedValues) => {
+    changeMode = (value) => {
         this.props.onModeChanged(
             this.props.selectedBestOf.value,
-            selectedValues
+            value
         )
     }
 
@@ -48,8 +48,8 @@ class Settings extends React.Component {
         this.props.onTeamName2Changed(e.target.value)
     }
 
-    updateSelectedMaps = (maps) => {
-        this.props.onUpdateSelectedMaps(maps)
+    updateSelectedMaps = (map) => {
+        this.props.onUpdateSelectedMaps(map)
     }
 
     render() {

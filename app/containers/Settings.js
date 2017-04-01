@@ -33,11 +33,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onBestOfChanged(value) {
-            dispatch(bestOfChanged(value))
+        onBestOfChanged(bestOf) {
+            dispatch(bestOfChanged(bestOf.value))
         },
-        onModeChanged(selectedBestOfValue, selectedValues) {
-            let mode = selectedValues[0]
+        onModeChanged(selectedBestOfValue, mode) {
             dispatch(modeChanged(selectedBestOfValue, mode.value))
             dispatch(initVoteList(mode))
         },

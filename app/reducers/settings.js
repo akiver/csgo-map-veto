@@ -38,7 +38,7 @@ export default function settings(state = {
         case types.BEST_OF_CHANGED: {
             const bestOfList = state.bestOfList.map(m => bestOf(m, action));
             return Object.assign({}, state, {
-                bestOfList: state.bestOfList.map(m => bestOf(m, action)),
+                bestOfList,
                 selectedBestOf: bestOfList.filter(b => b.isSelected)[0]
             })
         }
@@ -76,7 +76,7 @@ const map = (state = {
                 isSelected: true
             })
         case types.UPDATE_SELECTED_MAPS:
-            if (action.selectedMapLabelList.indexOf(state.value) !== -1) {
+            if (action.maps.filter(m => m.value == state.value).length !== 0) {
                 return {
                     ...state,
                     isSelected: true
