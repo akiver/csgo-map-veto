@@ -8,4 +8,8 @@ main.js
 main.js.map
 index.html
 release
-web
+web/bundle.js
+web/bundle.js.map
+web/index.html
+web/style.css
+web/style.css.map
