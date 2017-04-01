@@ -6,10 +6,10 @@ const GITHUB_URL = 'https://github.com/akiver/csgo-map-veto'
 const mapDispatchToProps = (dispatch) => {
     return {
         onGitHubClicked() {
-            if (process) {
-                (require('electron').shell).openExternal(GITHUB_URL)
-            } else {
+            if (process.browser) {
                 window.open(GITHUB_URL)
+            } else {
+                (require('electron').shell).openExternal(GITHUB_URL)
             }
         },
     }
