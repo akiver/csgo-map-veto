@@ -44,11 +44,11 @@ class VoteRow extends React.Component {
         if (this.props.vote.status == 'waiting') {
             switch (this.props.vote.type) {
                 case 'ban':
-                    return ' has to ban a map'
+                    return ' BAN'
                 case 'pick':
-                    return ' has to pick a map'
+                    return ' PICK'
                 case 'random':
-                    return ' will pick a random map'
+                    return ' RANDOM PICK'
                 default:
                     return ''
             }
@@ -56,11 +56,11 @@ class VoteRow extends React.Component {
 
         switch (this.props.vote.type) {
             case 'ban':
-                return ' banned ' + this.props.vote.selectedMap.name
+                return ' BANNED ' + this.props.vote.selectedMap.name
             case 'pick':
-                return ' picked ' + this.props.vote.selectedMap.name
+                return ' PICKED ' + this.props.vote.selectedMap.name
             case 'random':
-                return ' randomly picked ' + this.props.vote.selectedMap.name
+                return ' RANDOMLY PICKED ' + this.props.vote.selectedMap.name
             default:
                 return ''
         }
