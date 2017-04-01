@@ -36,14 +36,14 @@ export default function settings(state = {
                 teamName2: action.name
             })
         case types.BEST_OF_CHANGED: {
-            const bestOfList = state.bestOfList.map(m => bestOf(m, action));
+            const bestOfList = state.bestOfList.map(m => bestOf(m, action))
             return Object.assign({}, state, {
                 bestOfList,
                 selectedBestOf: bestOfList.filter(b => b.isSelected)[0]
             })
         }
         case types.MODE_CHANGED: {
-            const bestOfList = state.bestOfList.map(m => bestOf(m, action));
+            const bestOfList = state.bestOfList.map(m => bestOf(m, action))
             return Object.assign({}, state, {
                 bestOfList,
                 selectedMode: bestOfList.filter(b => b.isSelected)[0].modes.filter(b => b.isSelected)[0]

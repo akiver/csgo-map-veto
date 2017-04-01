@@ -4,9 +4,10 @@ import React from 'react'
 import {Provider} from 'react-redux'
 import store from './stores/configureStore'
 import {AppContainer} from 'react-hot-loader'
+import './app.sass'
 
 const render = () => {
-    const App = require('./components/App').default
+    const App = require('./components/App')
     ReactDOM.render(
         <AppContainer>
             <Provider store={store}>

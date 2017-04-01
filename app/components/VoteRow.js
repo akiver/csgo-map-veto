@@ -81,7 +81,7 @@ class VoteRow extends React.Component {
         if (this.props.vote.status === 'done') {
             return (
                 <img className="image image-vote"
-                     src={`images/maps/${this.props.vote.selectedMap.imageName}`}
+                     src={require(`images/maps/${this.props.vote.selectedMap.imageName}`)}
                      alt={this.props.vote.selectedMap.name}/>
             )
         }
@@ -90,7 +90,7 @@ class VoteRow extends React.Component {
         if (!this.props.isVetoStarted || !this.props.vote.isCurrentVote) {
             return (
                 <img className="image image-vote"
-                     src="images/maps/unknown.png"
+                     src={require('../images/maps/unknown.png')}
                      alt="Unknown map"/>
             )
         }
@@ -109,7 +109,7 @@ class VoteRow extends React.Component {
         // pending vote, show unknown map
         return (
             <img className="image image-vote"
-                 src={`images/maps/${this.props.vote.selectedMap.imageName}`}
+                 src={require(`../images/maps/${this.props.vote.selectedMap.imageName}`)}
                  alt={this.props.vote.selectedMap.name}/>
         )
     }

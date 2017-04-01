@@ -14,7 +14,7 @@ class ModalVote extends React.Component {
         return (
             <div key={idx} className="column is-4">
                 <div className="modal-map-block" onClick={() => this.props.onMapSelected(this.props.vote, map)}>
-                    <img src={`images/maps/${map.imageName}`}
+                    <img src={require(`images/maps/${map.imageName}`)}
                          alt={map.name}
                          className="image"/>
                     <p className="has-text-centered">{map.name}</p>

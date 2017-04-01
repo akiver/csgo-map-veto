@@ -1,6 +1,10 @@
+.DS_Store
 node_modules
 .idea
-.cache
 *.log
-dist/
-app/bulma/
+
+app/dist
+main.js
+main.js.map
+index.html
+release

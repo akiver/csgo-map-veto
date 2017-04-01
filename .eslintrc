@@ -14,7 +14,7 @@
     ],
     "comma-dangle": [
       2,
-      "never"
+      "only-multiline"
     ],
     "no-cond-assign": [
       2,

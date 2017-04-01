@@ -14,7 +14,7 @@ class MapList extends React.Component {
     renderMap(idx, map) {
         return (
             <div key={idx}>
-                <img src={`images/maps/${map.imageName}`}
+                <img src={require(`../images/maps/${map.imageName}`)}
                      alt={map.name}
                      className="image image-map">
                 </img>
