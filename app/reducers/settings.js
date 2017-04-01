@@ -1,6 +1,6 @@
 import * as types from '../actions/types'
 import MAPS from '../data/maps'
-import BO from '../data/BO'
+import BO from '../data/bo'
 
 export default function settings(state = {
     teamName1: 'Team 1',
