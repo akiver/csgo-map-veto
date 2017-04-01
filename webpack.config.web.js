@@ -56,6 +56,16 @@ export default {
                 })
             },
             {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        mimetype: 'image/svg+xml',
+                    }
+                }
+            },
+            {
                 test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
                 use: 'url-loader',
             },
@@ -73,6 +83,7 @@ export default {
             filename: '../web/index.html',
             template: 'app/index-web.html',
             inject: false
-        })
+        }),
+        new webpack.IgnorePlugin(/^(electron)$/),
     ],
 }

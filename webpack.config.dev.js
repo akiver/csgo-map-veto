@@ -56,6 +56,16 @@ export default merge(baseConfig, {
                 ]
             },
             {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        mimetype: 'image/svg+xml',
+                    }
+                }
+            },
+            {
                 test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
                 use: 'url-loader',
             }
