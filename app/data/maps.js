@@ -3,7 +3,7 @@ const MAPS = [{
     label: 'de_dust2',
     name: 'de_dust2',
     imageName: 'dust2.png',
-    isSelected: true,
+    isSelected: false,
     isBanned: false,
     isPicked: false,
     isRandom: false
@@ -57,7 +57,7 @@ const MAPS = [{
     label: 'de_nuke',
     name: 'de_nuke',
     imageName: 'nuke.png',
-    isSelected: false,
+    isSelected: true,
     isBanned: false,
     isPicked: false,
     isRandom: false
