@@ -46,9 +46,8 @@ class VoteRow extends React.Component {
                 case 'ban':
                     return ' BAN'
                 case 'pick':
-                    return ' PICK'
                 case 'random':
-                    return ' RANDOM PICK'
+                    return ' PICK'
                 default:
                     return ''
             }
@@ -57,10 +56,9 @@ class VoteRow extends React.Component {
         switch (this.props.vote.type) {
             case 'ban':
                 return ' BANNED ' + this.props.vote.selectedMap.name
+            case 'random':
             case 'pick':
                 return ' PICKED ' + this.props.vote.selectedMap.name
-            case 'random':
-                return ' RANDOMLY PICKED ' + this.props.vote.selectedMap.name
             default:
                 return ''
         }
