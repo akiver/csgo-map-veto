@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render with custom styles properties 1`] = `
+.c0 {
+  text-transform: uppercase;
+  font-family: Lato-bold;
+  text-align: center;
+  font-size: 22px;
+  color: #222;
+}
+
+<p
+  class="c0"
+>
+  A text
+</p>
+`;
+
+exports[`Text should render with dark theme 1`] = `
+.c0 {
+  font-size: 16px;
+  color: #fff;
+}
+
+<p
+  class="c0"
+>
+  A text
+</p>
+`;
+
+exports[`Text should render with light theme 1`] = `
+.c0 {
+  font-size: 16px;
+  color: #222;
+}
+
+<p
+  class="c0"
+>
+  A text
+</p>
+`;

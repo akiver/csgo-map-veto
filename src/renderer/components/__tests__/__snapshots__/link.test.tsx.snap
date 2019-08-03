@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render with dark theme 1`] = `
+.c0 {
+  background-color: #90caf9;
+  border: none;
+  color: #222;
+  cursor: pointer;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+  border-radius: 4px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0:hover {
+  opacity: 0.8;
+}
+
+<a
+  class="c0"
+  href="/other"
+>
+  Dark link
+</a>
+`;
+
+exports[`Link should render with light theme 1`] = `
+.c0 {
+  background-color: #1976d2;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 10px 20px 10px 20px;
+  border-radius: 4px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0:hover {
+  opacity: 0.8;
+}
+
+<a
+  class="c0"
+  href="/other"
+>
+  Light link
+</a>
+`;

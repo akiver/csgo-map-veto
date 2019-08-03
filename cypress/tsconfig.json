@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": "../node_modules",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "types": [
+      "node",
+      "cypress",
+      "@testing-library/dom/typings",
+      "@testing-library/cypress/typings"
+    ],
+    "paths": {
+      "renderer/*": ["../src/renderer/*"]
+    }
+  },
+  "include": ["**/*.ts"]
+}
