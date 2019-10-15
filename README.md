@@ -6,7 +6,7 @@ Desktop and WEB application to do maps veto for the game Counter-Strike Global O
 
 ## Installation
 
-You can use the web version [here](https://csgo-demos-manager.com/map-veto) or download the last desktop version [here](https://github.com/akiver/csgo-map-veto/releases).
+You can use the web version [here](https://csgomapveto.csgo-demos-manager.com) or download the last desktop version [here](https://github.com/akiver/csgo-map-veto/releases).
 
 ### Database
 
