@@ -4,6 +4,6 @@ Given('Bob is on the home page', () => {
 
 Given('Bob goes to the settings', () => {
   cy.visit('/')
-    .getByTestId('button-settings')
+    .findByTestId('button-settings')
     .click()
 })

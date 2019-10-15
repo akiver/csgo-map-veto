@@ -1,5 +1,5 @@
 module.exports = {
-  setupFilesAfterEnv: ['./setupTest.ts', '@testing-library/react/cleanup-after-each'],
+  setupFilesAfterEnv: ['./setupTest.ts'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/cypress/'],
   coveragePathIgnorePatterns: ['<rootDir>/test/'],
   moduleNameMapper: {

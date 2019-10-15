@@ -1,11 +1,17 @@
 import React from 'react'
 import { ButtonCancelVeto } from '../button-cancel-veto'
 import { renderWithRedux } from 'test/render-with-redux'
+import { AppWithTheme } from 'test/utils'
 
 describe('ButtonCancelVeto', () => {
-  const { getByText } = renderWithRedux(<ButtonCancelVeto />)
+  const { getByRole } = renderWithRedux(
+    <AppWithTheme>
+      <ButtonCancelVeto />
+    </AppWithTheme>
+  )
 
   it('should render', () => {
-    expect(getByText('Cancel')).toBeTruthy()
+    const button = getByRole('button')
+    expect(button).toHaveTextContent('Cancel')
   })
 })

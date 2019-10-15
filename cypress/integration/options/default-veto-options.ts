@@ -1,9 +1,9 @@
 import { MAPS } from 'renderer/constants/maps'
 
 Then('The displayed options must be correct', () => {
-  cy.getByLabelText('Team 1')
+  cy.findByLabelText('Team 1')
     .should('have.value', 'Team 1')
-    .getByLabelText('Team 2')
+    .findByLabelText('Team 2')
     .should('have.value', 'Team 2')
     .queryByText('BO 3')
     .should('be.visible')
@@ -11,7 +11,7 @@ Then('The displayed options must be correct', () => {
     .should('be.visible')
     .then(() => {
       MAPS.forEach((mapName, index) => {
-        cy.getByAltText(mapName).should('have.css', 'opacity', index >= 7 ? '0.5' : '1')
+        cy.findByAltText(mapName).should('have.css', 'opacity', index >= 7 ? '0.5' : '1')
       })
     })
 })

@@ -1,35 +1,35 @@
 Given('The map {string} is currently unselected', (mapName: string) => {
-  cy.getByAltText(mapName).should('have.css', 'opacity', '0.5')
+  cy.findByAltText(mapName).should('have.css', 'opacity', '0.5')
 })
 
 Given('The map {string} is currently selected', (mapName: string) => {
-  cy.getByAltText(mapName).should('have.css', 'opacity', '1')
+  cy.findByAltText(mapName).should('have.css', 'opacity', '1')
 })
 
 When('Bob click on the map {string}', (mapName: string) => {
-  cy.getByAltText(mapName).click()
+  cy.findByAltText(mapName).click()
 })
 
 Then('The map {string} is now selected', (mapName: string) => {
-  cy.getByAltText(mapName).should('have.css', 'opacity', '1')
+  cy.findByAltText(mapName).should('have.css', 'opacity', '1')
 })
 
 Then('The map {string} is now unselected', (mapName: string) => {
-  cy.getByAltText(mapName).should('have.css', 'opacity', '0.5')
+  cy.findByAltText(mapName).should('have.css', 'opacity', '0.5')
 })
 
 Given('BestOf is {int}', (bestOf: number) => {
-  cy.getByText('BO 3')
+  cy.findByText('BO 3')
     .click()
-    .getAllByText(`BO ${bestOf}`)
+    .findAllByText(`BO ${bestOf}`)
     .last()
     .click()
 })
 
 Given('The mode is {string}', (mode: string) => {
-  cy.getByText('Ban / Ban / Ban / Random')
+  cy.findByText('Ban / Ban / Ban / Random')
     .click()
-    .getAllByText(mode)
+    .findAllByText(mode)
     .last()
     .click()
 })

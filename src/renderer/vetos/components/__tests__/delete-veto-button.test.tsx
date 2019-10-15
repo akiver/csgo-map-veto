@@ -2,7 +2,7 @@ import React from 'react'
 import { renderWithRedux } from 'test/render-with-redux'
 import { DeleteVetoButton } from '../delete-veto-button'
 import { VetosProvider } from 'renderer/vetos/vetos-context'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, wait } from '@testing-library/react'
 
 describe('DeleteVetoButton', () => {
   const renderComponent = () => {
@@ -39,7 +39,7 @@ describe('DeleteVetoButton', () => {
     expect(button).toBeEnabled()
   })
 
-  it('should make a delete request', () => {
+  it('should make a delete request', async () => {
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         status: 200,
@@ -50,19 +50,21 @@ describe('DeleteVetoButton', () => {
     const button = getByText(/delete/i)
     fireEvent.click(button)
 
-    expect(global.fetch).toHaveBeenCalledWith('https://hi.com/api/vetos/1', {
-      method: 'DELETE',
-    })
+    await wait(() =>
+      expect(global.fetch).toHaveBeenCalledWith('https://hi.com/api/vetos/1', {
+        method: 'DELETE',
+      })
+    )
   })
 
   describe('when the request is pending', () => {
-    it('should be disabled', () => {
+    it('should be disabled', async () => {
       const { getByText } = renderComponent()
 
       const button = getByText(/delete/i)
       fireEvent.click(button)
 
-      expect(getByText(/delete/i)).toBeDisabled()
+      await wait(() => expect(getByText(/delete/i)).toBeDisabled())
     })
   })
 })

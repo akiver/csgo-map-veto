@@ -1,7 +1,7 @@
 import { vetosFixture } from '../fixtures/vetos'
 
 When('Bob navigate to the vetos listing', () => {
-  cy.getByTestId('link-vetos').click()
+  cy.findByTestId('link-vetos').click()
 })
 
 When('The vetos request return a status {int}', (status: number) => {

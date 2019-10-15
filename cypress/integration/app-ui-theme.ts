@@ -3,7 +3,7 @@ Given('Bob is using the app with {string} theme', (theme: string) => {
 })
 
 When('Bob click on the button to switch between themes', () => {
-  cy.getByTestId('button-toggle-theme').click()
+  cy.findByTestId('button-toggle-theme').click()
 })
 
 Then('The app is using the {string} theme', (theme: string) => {

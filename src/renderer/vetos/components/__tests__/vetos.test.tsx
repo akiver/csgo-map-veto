@@ -1,5 +1,5 @@
 import React from 'react'
-import { waitForElementToBeRemoved, fireEvent } from '@testing-library/react'
+import { waitForElementToBeRemoved, fireEvent, wait } from '@testing-library/react'
 import { renderWithRedux } from 'test/render-with-redux'
 import { VetosProvider } from 'renderer/vetos/vetos-context'
 import { VetosResponse, VetoResponse } from 'renderer/types/api'
@@ -92,18 +92,18 @@ describe('Vetos', () => {
     expect(queryAllByText(/delete/i)).toHaveLength(2)
   })
 
-  it('should render a loading message', () => {
+  it('should render a loading message', async () => {
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         json: () => {
-          return Promise.resolve([])
+          return new Promise(res => setTimeout(res, 10000))
         },
       }
     })
 
     const { getByText } = renderComponent()
 
-    expect(getByText(/loading/i)).toBeTruthy()
+    await wait(() => expect(getByText(/loading/i)).toBeTruthy())
   })
 
   it('should render an error message', () => {

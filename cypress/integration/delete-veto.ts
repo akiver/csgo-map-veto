@@ -7,7 +7,7 @@ Given('Bob is on the vetos listing page', () => {
 })
 
 When('Bob click on the button to delete the veto with id {int}', (vetoId: number) => {
-  cy.getByTestId(`button-delete-veto-${vetoId}`).click()
+  cy.findByTestId(`button-delete-veto-${vetoId}`).click()
 })
 
 Then('The request return a status {int} for the veto {int}', (status: number, vetoId: number) => {
@@ -23,7 +23,7 @@ Then('The request return a status {int} for the veto {int}', (status: number, ve
 })
 
 Then('The delete button for the veto with id {int} is disabled', (vetoId: number) => {
-  cy.getByTestId(`button-delete-veto-${vetoId}`)
+  cy.findByTestId(`button-delete-veto-${vetoId}`)
     .should('be.disabled')
     .and('be.visible')
 })

@@ -1,5 +1,5 @@
 When('Bob select the BestOf {string}', (bestOf: string) => {
-  cy.getByLabelText('BO')
+  cy.findByLabelText('BO')
     .click({
       force: true,
     })

@@ -6,7 +6,7 @@ describe('InputText', () => {
   afterEach(cleanup)
 
   const Consumer = () => {
-    let [value, setValue] = useState('a-value')
+    const [value, setValue] = useState('a-value')
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
     }

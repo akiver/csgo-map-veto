@@ -9,7 +9,7 @@ Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
       .within(() => {
         cy.queryByText(`BO${veto.best_of}`)
           .should('be.visible')
-          .getByTestId(`veto-${veto.id}-detail`)
+          .findByTestId(`veto-${veto.id}-detail`)
           .within(() => {
             cy.queryByText(veto.team_one_name)
               .should('be.visible')
@@ -24,7 +24,7 @@ Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
     veto.votes.forEach(vote => {
       const teamName = getTeamNameByTeamNumber(vote.team_number, veto.team_one_name, veto.team_two_name)
       const voteTypeText = getVoteTypeText(vote.type)
-      cy.getByTestId(`vote-${vote.id}`).within(() => {
+      cy.findByTestId(`vote-${vote.id}`).within(() => {
         cy.queryByAltText(vote.map_name)
           .should('be.visible')
           .queryByText(teamName)
