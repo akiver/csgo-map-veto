@@ -56,7 +56,7 @@ type Props = {
   children?: never
 }
 
-const Veto = ({  }: Props) => {
+const Veto = ({}: Props) => {
   return (
     <>
       <StyledVeto>

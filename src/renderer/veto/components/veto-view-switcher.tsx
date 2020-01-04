@@ -9,7 +9,7 @@ type Props = {
   children?: never
 }
 
-const VetoViewSwitcher = ({  }: Props) => {
+const VetoViewSwitcher = ({}: Props) => {
   const status = useSelector(getVetoStatus)
 
   return status === VetoStatuses.SETUP ? <Options /> : <Veto />

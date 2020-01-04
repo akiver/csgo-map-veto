@@ -9,7 +9,7 @@ type Props = {
   children?: never
 }
 
-const InputApiAddress = ({  }: Props) => {
+const InputApiAddress = ({}: Props) => {
   const dispatch = useDispatch()
   const apiAddress = useSelector(getApiAddress)
 

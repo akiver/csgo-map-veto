@@ -13,7 +13,7 @@ type Props = {
   children?: never
 }
 
-const MapsSelection = ({  }: Props) => {
+const MapsSelection = ({}: Props) => {
   return (
     <Wrapper>
       {MAPS.map(mapName => {

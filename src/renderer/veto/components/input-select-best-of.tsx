@@ -10,7 +10,7 @@ type Props = {
   children?: never
 }
 
-const InputSelectBestOf = ({  }: Props) => {
+const InputSelectBestOf = ({}: Props) => {
   const selectedBestOf = useSelector(getSelectedBestOf)
   const dispatch = useDispatch()
 

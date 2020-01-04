@@ -14,7 +14,7 @@ const AppWithTheme = ({
     <AppThemeContext.Provider
       value={{
         theme,
-        toggleTheme: () => {},
+        toggleTheme: () => {}, // eslint-disable-line
       }}
     >
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -31,7 +31,7 @@ const renderWithTheme = (
     <AppThemeContext.Provider
       value={{
         theme,
-        toggleTheme: () => {},
+        toggleTheme: () => {}, // eslint-disable-line
       }}
     >
       <ThemeProvider theme={theme}>{ui}</ThemeProvider>

@@ -10,7 +10,7 @@ type Props = {
   children?: never
 }
 
-const InputSelectMode = ({  }: Props) => {
+const InputSelectMode = ({}: Props) => {
   const dispatch = useDispatch()
   const selectedMode = useSelector(getSelectedMode)
   const availableModes = useSelector(getAvailableModes)

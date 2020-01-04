@@ -8,7 +8,7 @@ type Props = {
   children?: never
 }
 
-const InputTeamOneName = ({  }: Props) => {
+const InputTeamOneName = ({}: Props) => {
   const dispatch = useDispatch()
   const teamName = useSelector(getTeamOneName)
 

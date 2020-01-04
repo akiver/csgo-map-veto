@@ -50,7 +50,7 @@ type ThemeContext = {
 
 const AppThemeContext = createContext<ThemeContext>({
   theme: themes[THEME_DARK],
-  toggleTheme: () => {},
+  toggleTheme: () => {}, // eslint-disable-line
 })
 
 export { Theme, THEME_DARK, THEME_LIGHT, ThemesKeys, AppThemeContext, themes }

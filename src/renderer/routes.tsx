@@ -8,7 +8,7 @@ type Props = {
   children?: never
 }
 
-const Routes = ({  }: Props) => {
+const Routes = ({}: Props) => {
   return (
     <Switch>
       <Route path="/" exact component={VetoViewSwitcher} />
