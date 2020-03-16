@@ -37,14 +37,14 @@ describe('ButtonTestDatabaseConnection', () => {
       };
     });
 
-    const { getByText, findByText } = renderComponent();
+    const { getByText, queryByAltText } = renderComponent();
     fireEvent.click(getByText('Test connection'));
 
     await waitForElement(() => getByText(/Connection success/i));
     expect(localStorage.setItem).toHaveBeenCalledWith(KEY_API_ADDRESS, DEFAULT_API_ADDRESS);
 
     fireEvent.click(getByText(/close/i));
-    expect(findByText(/Connection success/i)).not.toBeInTheDocument();
+    expect(queryByAltText(/Connection success/i)).not.toBeInTheDocument();
   });
 
   it('should show an error message', async () => {
@@ -54,11 +54,11 @@ describe('ButtonTestDatabaseConnection', () => {
       };
     });
 
-    const { getByText, findByText } = renderComponent();
+    const { getByText, queryByAltText } = renderComponent();
 
     fireEvent.click(getByText('Test connection'));
     await waitForElement(() => getByText(/Connection failed/i));
     fireEvent.click(getByText(/close/i));
-    expect(findByText(/Connection failed/i)).not.toBeInTheDocument();
+    expect(queryByAltText(/Connection failed/i)).not.toBeInTheDocument();
   });
 });

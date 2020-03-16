@@ -7,7 +7,7 @@ import { VoteTypes } from 'renderer/types/vote-type';
 import { PickedMaps } from '../picked-maps';
 
 describe('PickedMaps', () => {
-  const { getByAltText, getByText, findByAltText } = renderWithRedux(<PickedMaps />, {
+  const { getByAltText, getByText, queryByAltText } = renderWithRedux(<PickedMaps />, {
     initialState: {
       maps: [
         {
@@ -43,7 +43,7 @@ describe('PickedMaps', () => {
     expect(getByText('de_picked')).toBeTruthy();
     expect(getByAltText('de_picked_other')).toBeTruthy();
     expect(getByText('de_picked_other')).toBeTruthy();
-    expect(findByAltText('de_banned')).not.toBeInTheDocument();
-    expect(findByAltText('de_remaining')).not.toBeInTheDocument();
+    expect(queryByAltText('de_banned')).not.toBeInTheDocument();
+    expect(queryByAltText('de_remaining')).not.toBeInTheDocument();
   });
 });

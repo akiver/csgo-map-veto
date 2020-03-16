@@ -1,6 +1,6 @@
 module.exports = {
   setupFilesAfterEnv: ['./setupTest.ts'],
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/cypress/'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/cypress/', '<rootDir>/dist/'],
   coveragePathIgnorePatterns: ['<rootDir>/test/'],
   moduleNameMapper: {
     '\\.svg': '<rootDir>/__mocks__/svg.ts',
