@@ -1,6 +1,6 @@
 {
   "name": "csgo-map-veto",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "A WEB and desktop app to do CSGO map veto.",
   "license": "GPL-2.0",
@@ -15,7 +15,7 @@
     "cy:run": "cypress run",
     "db": "cd backend && gin --port 3080 run main.go && popd",
     "build": "yarn compile && electron-builder",
-    "build:all": "electron-builder -mwl",
+    "build:all": "yarn compile && electron-builder -mwl",
     "build:db": "cd backend && go build -ldflags=\"-s -w\"",
     "build:db:win": "cd backend && GOOS=windows GOARCH=amd64 go build -ldflags=\"-s -w\"",
     "build:db:linux": "cd backend && env GOOS=linux GOARCH=arm GOARM=7 go build -ldflags=\"-s -w\"",
