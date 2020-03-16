@@ -36,7 +36,7 @@ const Vetos = () => {
     try {
       const response = await fetch(`${apiAddress}/api/vetos`)
       if (response.status === 500) {
-        throw new Error('An error occured while fetching vetos')
+        throw new Error('An error occurred while fetching vetos')
       }
 
       const json: VetosResponse = await response.json()

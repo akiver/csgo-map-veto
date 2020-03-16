@@ -20,7 +20,7 @@ const renderWithRedux = (
   ui: React.ReactNode,
   {
     initialState,
-    store = createStore(reducer, initialState, applyMiddleware(thunk)),
+    store = createStore(reducer, initialState as StoreState, applyMiddleware(thunk)),
   }: {
     initialState?: RecursivePartial<StoreState>
     store?: Store<StoreState>

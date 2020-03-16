@@ -36,7 +36,7 @@ const ButtonSaveVeto = withRouter(({ history }: Props) => {
       throw new Error()
     } catch (error) {
       console.error(error)
-      setError('An error occured, make sure the database is running and the API address is correct.')
+      setError('An error occurred, make sure the database is running and the API address is correct.')
       setIsLoading(false)
     }
   }

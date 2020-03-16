@@ -31,13 +31,13 @@ Then('The delete button for the veto with id {int} is disabled', (vetoId: number
 Then('The veto with id {int} disappears from the UI', (vetoId: string) => {
   cy.wait('@deleteVeto')
 
-  cy.queryByTestId(`veto-${vetoId}`).should('not.be.visible')
+  cy.findByTestId(`veto-${vetoId}`).should('not.be.visible')
 })
 
 Then('The delete button for the veto with id {int} is enabled', (vetoId: number) => {
   cy.wait('@deleteVeto')
 
-  cy.queryByTestId(`button-delete-veto-${vetoId}`)
+  cy.findByTestId(`button-delete-veto-${vetoId}`)
     .should('be.enabled')
     .and('be.visible')
 })

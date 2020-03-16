@@ -20,8 +20,8 @@ Then('Bob sees the vetos', () => {
 })
 
 Then('Bob sees an error message', () => {
-  cy.queryByText('Make sure the database is running and the endpoint is correct in the settings!')
-    .should('be.visible')
-    .queryByText('An error occured while fetching vetos')
-    .should('be.visible')
+  cy.findByText('Make sure the database is running and the endpoint is correct in the settings!').should(
+    'be.visible'
+  )
+  cy.findByText('An error occurred while fetching vetos').should('be.visible')
 })

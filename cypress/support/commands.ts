@@ -4,18 +4,18 @@ import { getVoteTypeText } from 'renderer/utils/get-vote-type-text'
 
 Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
   vetos.forEach(veto => {
-    cy.queryByTestId(`veto-${veto.id}`)
+    cy.findByTestId(`veto-${veto.id}`)
       .should('be.visible')
       .within(() => {
-        cy.queryByText(`BO${veto.best_of}`)
+        cy.findByText(`BO${veto.best_of}`)
           .should('be.visible')
           .findByTestId(`veto-${veto.id}-detail`)
           .within(() => {
-            cy.queryByText(veto.team_one_name)
+            cy.findByText(veto.team_one_name)
               .should('be.visible')
-              .queryByText(veto.team_two_name)
+              .findByText(veto.team_two_name)
               .should('be.visible')
-              .queryByText(/delete/i)
+              .findByText(/delete/i)
               .should('have.text', 'Delete')
               .should('not.be.disabled')
           })
@@ -25,13 +25,13 @@ Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
       const teamName = getTeamNameByTeamNumber(vote.team_number, veto.team_one_name, veto.team_two_name)
       const voteTypeText = getVoteTypeText(vote.type)
       cy.findByTestId(`vote-${vote.id}`).within(() => {
-        cy.queryByAltText(vote.map_name)
+        cy.findByAltText(vote.map_name)
           .should('be.visible')
-          .queryByText(teamName)
+          .findByText(teamName)
           .should('be.visible')
-          .queryByText(voteTypeText)
+          .findByText(voteTypeText)
           .should('be.visible')
-          .queryByText(vote.map_name)
+          .findByText(vote.map_name)
           .should('be.visible')
       })
     })

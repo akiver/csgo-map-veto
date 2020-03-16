@@ -8,7 +8,7 @@ Feature: List all previous vetos
         When Bob navigate to the vetos listing
         Then Bob sees the vetos
 
-    Scenario: An error occured while fetching the vetos
+    Scenario: An error occurred while fetching the vetos
         Given Bob is on the home page
         And The vetos request return a status 500
         When Bob navigate to the vetos listing

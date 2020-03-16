@@ -7,7 +7,7 @@ import { VoteTypes } from 'renderer/types/vote-type'
 import { RemainingMaps } from '../remaining-maps'
 
 describe('RemainingMaps', () => {
-  const { getByAltText, getByText, queryByAltText } = renderWithRedux(<RemainingMaps />, {
+  const { getByAltText, getByText, findByAltText } = renderWithRedux(<RemainingMaps />, {
     initialState: {
       maps: [
         {
@@ -43,7 +43,7 @@ describe('RemainingMaps', () => {
     expect(getByText('de_remaining')).toBeTruthy()
     expect(getByAltText('de_remaining_other')).toBeTruthy()
     expect(getByText('de_remaining_other')).toBeTruthy()
-    expect(queryByAltText('de_banned')).not.toBeInTheDocument()
-    expect(queryByAltText('de_picked')).not.toBeInTheDocument()
+    expect(findByAltText('de_banned')).not.toBeInTheDocument()
+    expect(findByAltText('de_picked')).not.toBeInTheDocument()
   })
 })

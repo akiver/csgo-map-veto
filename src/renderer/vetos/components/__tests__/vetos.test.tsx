@@ -66,30 +66,32 @@ describe('Vetos', () => {
       }
     })
 
-    const { getByText, queryAllByText, getByAltText } = renderComponent()
+    const { getByText, findAllByText, getByAltText } = renderComponent()
 
     await waitForElementToBeRemoved(() => getByText(/loading/i))
 
-    expect(getByText('BO3')).toBeTruthy()
-    expect(queryAllByText(veto1.team_one_name)).toHaveLength(2)
-    expect(queryAllByText(veto1.team_two_name)).toHaveLength(2)
-    expect(getByText('09/10/1990')).toBeTruthy()
-    veto1.votes.forEach(vote => {
-      expect(getByAltText(vote.map_name)).toBeTruthy()
-    })
+    await wait(async () => {
+      expect(getByText('BO3')).toBeTruthy()
+      expect(await findAllByText(veto1.team_one_name)).toHaveLength(2)
+      expect(await findAllByText(veto1.team_two_name)).toHaveLength(2)
+      expect(getByText('09/10/1990')).toBeTruthy()
+      veto1.votes.forEach(vote => {
+        expect(getByAltText(vote.map_name)).toBeTruthy()
+      })
 
-    expect(getByText('BO1')).toBeTruthy()
-    expect(queryAllByText(veto2.team_one_name)).toHaveLength(1)
-    expect(queryAllByText(veto2.team_two_name)).toHaveLength(1)
-    expect(queryAllByText('SERVER')).toHaveLength(1)
-    expect(getByText('11/22/2018')).toBeTruthy()
-    veto2.votes.forEach(vote => {
-      expect(getByAltText(vote.map_name)).toBeTruthy()
-    })
+      expect(getByText('BO1')).toBeTruthy()
+      expect(await findAllByText(veto2.team_one_name)).toHaveLength(1)
+      expect(await findAllByText(veto2.team_two_name)).toHaveLength(1)
+      expect(await findAllByText('SERVER')).toHaveLength(1)
+      expect(getByText('11/22/2018')).toBeTruthy()
+      veto2.votes.forEach(vote => {
+        expect(getByAltText(vote.map_name)).toBeTruthy()
+      })
 
-    expect(queryAllByText('banned')).toHaveLength(1)
-    expect(queryAllByText('picked')).toHaveLength(2)
-    expect(queryAllByText(/delete/i)).toHaveLength(2)
+      expect(await findAllByText('banned')).toHaveLength(1)
+      expect(await findAllByText('picked')).toHaveLength(2)
+      expect(await findAllByText(/delete/i)).toHaveLength(2)
+    })
   })
 
   it('should render a loading message', async () => {

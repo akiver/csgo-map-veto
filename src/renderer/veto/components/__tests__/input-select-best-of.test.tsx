@@ -6,7 +6,7 @@ import { fireEvent } from '@testing-library/react'
 
 describe('InputSelectBestOf', () => {
   it('should update selected best of', () => {
-    const { getByLabelText, queryByText } = renderWithRedux(
+    const { getByLabelText, findByText } = renderWithRedux(
       <AppWithTheme>
         <InputSelectBestOf />
       </AppWithTheme>
@@ -16,6 +16,6 @@ describe('InputSelectBestOf', () => {
 
     fireEvent.change(input, { target: { value: 5 } })
 
-    expect(queryByText('BO 5')).toBeVisible()
+    expect(findByText('BO 5')).toBeVisible()
   })
 })

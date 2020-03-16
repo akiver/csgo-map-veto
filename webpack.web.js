@@ -70,7 +70,10 @@ module.exports = (env, { mode = 'development' }) => {
         APP_VERSION: JSON.stringify(APP_VERSION),
         GITHUB_URL: JSON.stringify(GITHUB_URL),
       }),
-      new CopyPlugin([{ from: 'static/maps', to: 'maps' }, { from: 'static/fonts', to: 'fonts' }]),
+      new CopyPlugin([
+        { from: 'static/maps', to: 'maps' },
+        { from: 'static/fonts', to: 'fonts' },
+      ]),
       new HtmlWebpackPlugin({
         template: 'public/index.html',
         title: 'CSGO Map Veto',
