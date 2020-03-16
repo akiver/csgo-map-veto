@@ -11,8 +11,10 @@
     "url": "https://github.com/akiver/csgo-map-veto.git"
   },
   "scripts": {
+    "ci:start": "DEV_SERVER_PORT=4000 webpack-dev-server --config webpack.web.js",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "cy:ci": "DEV_SERVER_PORT=4000 cypress run",
     "db": "cd backend && gin --port 3080 run main.go && popd",
     "build": "yarn compile && electron-builder",
     "build:all": "yarn compile && electron-builder -mwl",
@@ -32,6 +34,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:e2e": "node cypress/run.js",
+    "test:e2e:ci": "start-server-and-test ci:start http-get://localhost:4000 cy:ci",
     "test:e2e:dev": "node cypress/open.js",
     "tsc": "tsc --noEmit",
     "tsc:e2e": "tsc -p cypress/tsconfig.json --noEmit"
@@ -148,7 +151,7 @@
     "typescript"
   ],
   "devEngines": {
-    "node": ">=10.0.0",
-    "yarn": "1.16.0"
+    "node": ">=12.0.0",
+    "yarn": "1.22.0"
   }
 }
