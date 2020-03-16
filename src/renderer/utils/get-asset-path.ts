@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 
 /**
  * Return the correct path to a static asset from the "static" folder.
@@ -9,10 +9,10 @@ import path from 'path'
  */
 const getAssetPath = (assetPath: string) => {
   if (process.env.NODE_ENV !== 'production') {
-    return `./${assetPath}`
+    return `./${assetPath}`;
   }
 
-  return path.join(__static, assetPath)
-}
+  return path.join(__static, assetPath);
+};
 
-export { getAssetPath }
+export { getAssetPath };

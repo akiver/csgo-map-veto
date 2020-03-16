@@ -1,7 +1,7 @@
-import React from 'react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import { render } from '@testing-library/react'
+import React from 'react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { render } from '@testing-library/react';
 
 const renderWithRouter = (ui: React.ReactNode) => {
   return render(
@@ -13,7 +13,7 @@ const renderWithRouter = (ui: React.ReactNode) => {
     >
       {ui}
     </Router>
-  )
-}
+  );
+};
 
-export { renderWithRouter }
+export { renderWithRouter };

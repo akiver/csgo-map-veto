@@ -1,16 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import { ButtonToggleTheme } from 'renderer/settings/components/button-toggle-theme'
-import { Link } from 'renderer/components/link'
-import { ButtonTestDatabaseConnection } from 'renderer/settings/components/button-test-database-connection'
-import { Theme } from 'renderer/contexts/theme-context'
-import { InputApiAddress } from 'renderer/settings/components/input-api-address'
+import React from 'react';
+import styled from 'styled-components';
+import { ButtonToggleTheme } from 'renderer/settings/components/button-toggle-theme';
+import { Link } from 'renderer/components/link';
+import { ButtonTestDatabaseConnection } from 'renderer/settings/components/button-test-database-connection';
+import { Theme } from 'renderer/contexts/theme-context';
+import { InputApiAddress } from 'renderer/settings/components/input-api-address';
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-`
+`;
 
 const StyledSettings = styled.div`
   display: flex;
@@ -24,18 +24,18 @@ const StyledSettings = styled.div`
   @media (max-width: 768px) {
     width: inherit;
   }
-`
+`;
 
 const SectionTitle = styled.h1<{ theme: Theme }>`
   font-size: 22px;
   color: ${({ theme }) => theme.lightInversed};
   padding-bottom: 10px;
-`
+`;
 
 const HomeLink = styled(Link)`
   margin-top: 10px;
   align-self: flex-start;
-`
+`;
 
 const Settings = () => {
   return (
@@ -53,7 +53,7 @@ const Settings = () => {
         Home
       </HomeLink>
     </StyledSettings>
-  )
-}
+  );
+};
 
-export { Settings }
+export { Settings };

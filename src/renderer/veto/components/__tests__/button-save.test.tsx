@@ -1,16 +1,16 @@
-import React from 'react'
-import { cleanup, fireEvent } from '@testing-library/react'
-import { renderWithRedux } from 'test/render-with-redux'
-import { BEST_OF_3 } from 'renderer/constants/best-of/bo3'
-import { TeamNumbers } from 'renderer/types/team-number'
-import { VoteTypes } from 'renderer/types/vote-type'
-import { VetoStatuses } from 'renderer/types/veto-status'
-import { StoreState } from 'renderer/Store'
-import { VetoPostRequest } from 'renderer/types/api'
-import { ButtonSaveVeto } from '../button-save-veto'
+import React from 'react';
+import { cleanup, fireEvent } from '@testing-library/react';
+import { renderWithRedux } from 'test/render-with-redux';
+import { BEST_OF_3 } from 'renderer/constants/best-of/bo3';
+import { TeamNumbers } from 'renderer/types/team-number';
+import { VoteTypes } from 'renderer/types/vote-type';
+import { VetoStatuses } from 'renderer/types/veto-status';
+import { StoreState } from 'renderer/store';
+import { VetoPostRequest } from 'renderer/types/api';
+import { ButtonSaveVeto } from '../button-save-veto';
 
 describe('ButtonSave', () => {
-  afterEach(cleanup)
+  afterEach(cleanup);
 
   const renderComponent = (initialState: RecursivePartial<StoreState> = {}) => {
     return renderWithRedux(<ButtonSaveVeto />, {
@@ -32,14 +32,14 @@ describe('ButtonSave', () => {
           },
         ],
       },
-    })
-  }
+    });
+  };
 
   it('should render a save button', () => {
-    const { getByText } = renderComponent()
+    const { getByText } = renderComponent();
 
-    expect(getByText(/save/i)).toBeTruthy()
-  })
+    expect(getByText(/save/i)).toBeTruthy();
+  });
 
   describe('when the veto is not completed', () => {
     it('should be disabled', () => {
@@ -47,11 +47,11 @@ describe('ButtonSave', () => {
         options: {
           vetoStatus: VetoStatuses.IN_PROGRESS,
         },
-      })
+      });
 
-      expect(getByText(/save/i)).toBeDisabled()
-    })
-  })
+      expect(getByText(/save/i)).toBeDisabled();
+    });
+  });
 
   describe('when the veto is completed', () => {
     it('should be enabled', () => {
@@ -59,26 +59,26 @@ describe('ButtonSave', () => {
         options: {
           vetoStatus: VetoStatuses.COMPLETED,
         },
-      })
+      });
 
-      expect(getByText(/save/i)).toBeEnabled()
-    })
+      expect(getByText(/save/i)).toBeEnabled();
+    });
 
     describe('on click', () => {
       it('should make an http post request', async () => {
         global.fetch = jest.fn().mockImplementation(() => {
           return {
             status: 201,
-          }
-        })
+          };
+        });
 
         const { getByText } = renderComponent({
           options: {
             vetoStatus: VetoStatuses.COMPLETED,
           },
-        })
+        });
 
-        fireEvent.click(getByText(/save/i))
+        fireEvent.click(getByText(/save/i));
 
         const mockPostRequest: VetoPostRequest = {
           team_one_name: 'Team one',
@@ -91,13 +91,13 @@ describe('ButtonSave', () => {
               map_name: 'de_test',
             },
           ],
-        }
+        };
 
         expect(global.fetch).toHaveBeenCalledWith('https://hi.com/api/vetos', {
           method: 'POST',
           body: JSON.stringify(mockPostRequest),
-        })
-      })
-    })
-  })
-})
+        });
+      });
+    });
+  });
+});

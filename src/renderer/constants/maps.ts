@@ -8,6 +8,6 @@ const MAPS = [
   'de_nuke',
   'de_train',
   'de_vertigo',
-]
+];
 
-export { MAPS }
+export { MAPS };

@@ -1,4 +1,4 @@
-import { css, createGlobalStyle } from 'styled-components'
+import { css, createGlobalStyle } from 'styled-components';
 
 /* http://meyerweb.com/eric/tools/css/reset/
  * v2.0 | 20110126
@@ -135,8 +135,8 @@ const resetCSS = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
-`
+`;
 
-const ResetCSS = createGlobalStyle`${resetCSS}`
+const ResetCSS = createGlobalStyle`${resetCSS}`;
 
-export { ResetCSS }
+export { ResetCSS };

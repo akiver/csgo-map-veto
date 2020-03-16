@@ -1,6 +1,6 @@
-import { VoteTypes } from 'renderer/types/vote-type'
-import { BestOf } from 'renderer/types/best-of'
-import { TeamNumbers } from 'renderer/types/team-number'
+import { VoteTypes } from 'renderer/types/vote-type';
+import { BestOf } from 'renderer/types/best-of';
+import { TeamNumbers } from 'renderer/types/team-number';
 
 const BEST_OF_5: BestOf = {
   value: 5,
@@ -233,6 +233,6 @@ const BEST_OF_5: BestOf = {
       ],
     },
   ],
-}
+};
 
-export { BEST_OF_5 }
+export { BEST_OF_5 };

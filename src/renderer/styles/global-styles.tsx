@@ -1,9 +1,9 @@
-import { createGlobalStyle } from 'styled-components'
-import { Theme } from 'renderer/contexts/theme-context'
+import { createGlobalStyle } from 'styled-components';
+import { Theme } from 'renderer/contexts/theme-context';
 // Force to use file-loader because electron-webpack internally uses url-loader for fonts
 // which doesn't work in production mode.
-import lato from '!!file-loader!static/fonts/Lato-Regular.ttf'
-import latoBold from '!!file-loader!static/fonts/Lato-Bold.ttf'
+import lato from '!!file-loader!static/fonts/Lato-Regular.ttf';
+import latoBold from '!!file-loader!static/fonts/Lato-Bold.ttf';
 
 const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
   @font-face {
@@ -34,5 +34,5 @@ const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
     max-width: 100%;
     max-height: 100%;
   }
-`
-export { GlobalStyles }
+`;
+export { GlobalStyles };

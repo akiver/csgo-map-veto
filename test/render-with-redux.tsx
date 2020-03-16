@@ -1,20 +1,20 @@
-import React, { ReactNode } from 'react'
-import { createStore, Store, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import { render } from '@testing-library/react'
-import { StoreState } from 'renderer/Store'
-import { reducer } from 'renderer/root-reducer'
+import React, { ReactNode } from 'react';
+import { createStore, Store, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { render } from '@testing-library/react';
+import { StoreState } from 'renderer/store';
+import { reducer } from 'renderer/root-reducer';
 
 const AppWithRedux = ({ children, store }: { children: ReactNode; store?: Store<StoreState> }) => {
-  let storeMock = store
+  let storeMock = store;
   if (!storeMock) {
-    storeMock = createStore(reducer, applyMiddleware(thunk))
+    storeMock = createStore(reducer, applyMiddleware(thunk));
   }
-  return <Provider store={storeMock}>{children}</Provider>
-}
+  return <Provider store={storeMock}>{children}</Provider>;
+};
 
 const renderWithRedux = (
   ui: React.ReactNode,
@@ -22,11 +22,11 @@ const renderWithRedux = (
     initialState,
     store = createStore(reducer, initialState as StoreState, applyMiddleware(thunk)),
   }: {
-    initialState?: RecursivePartial<StoreState>
-    store?: Store<StoreState>
+    initialState?: RecursivePartial<StoreState>;
+    store?: Store<StoreState>;
   } = {}
 ) => {
-  const history = createMemoryHistory()
+  const history = createMemoryHistory();
   return {
     ...render(
       <Provider store={store}>
@@ -35,7 +35,7 @@ const renderWithRedux = (
     ),
     store,
     history,
-  }
-}
+  };
+};
 
-export { renderWithRedux, AppWithRedux }
+export { renderWithRedux, AppWithRedux };

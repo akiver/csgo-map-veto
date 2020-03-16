@@ -1,6 +1,6 @@
-import React from 'react'
-import { AppThemeContext } from 'renderer/contexts/theme-context'
-import { Button } from 'renderer/components/button'
+import React from 'react';
+import { AppThemeContext } from 'renderer/contexts/theme-context';
+import { Button } from 'renderer/components/button';
 
 const ButtonToggleTheme = () => {
   return (
@@ -11,7 +11,7 @@ const ButtonToggleTheme = () => {
         </Button>
       )}
     </AppThemeContext.Consumer>
-  )
-}
+  );
+};
 
-export { ButtonToggleTheme }
+export { ButtonToggleTheme };

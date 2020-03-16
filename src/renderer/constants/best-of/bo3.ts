@@ -1,7 +1,7 @@
-import { VoteTypes } from 'renderer/types/vote-type'
-import { BestOf } from 'renderer/types/best-of'
-import { TeamNumbers } from 'renderer/types/team-number'
-import { BestOfMode } from 'renderer/types/best-of-mode'
+import { VoteTypes } from 'renderer/types/vote-type';
+import { BestOf } from 'renderer/types/best-of';
+import { TeamNumbers } from 'renderer/types/team-number';
+import { BestOfMode } from 'renderer/types/best-of-mode';
 
 const BO3_MODE_BPBR: BestOfMode = {
   value: '1',
@@ -43,7 +43,7 @@ const BO3_MODE_BPBR: BestOfMode = {
       teamNumber: TeamNumbers.SERVER,
     },
   ],
-}
+};
 
 const BEST_OF_3: BestOf = {
   value: 3,
@@ -196,6 +196,6 @@ const BEST_OF_3: BestOf = {
       ],
     },
   ],
-}
+};
 
-export { BEST_OF_3, BO3_MODE_BPBR }
+export { BEST_OF_3, BO3_MODE_BPBR };

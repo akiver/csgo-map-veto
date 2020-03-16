@@ -25,16 +25,8 @@ module.exports = {
       'error',
       {
         properties: 'always',
-        allow: [
-          'team_number',
-          'map_name',
-          'team_one_name',
-          'team_two_name',
-          'created_at',
-          'veto_id',
-          'best_of',
-        ],
+        allow: ['team_number', 'map_name', 'team_one_name', 'team_two_name', 'created_at', 'veto_id', 'best_of'],
       },
     ],
   },
-}
+};

@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react'
-import { Link as RRLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { Theme } from 'renderer/contexts/theme-context'
+import React, { ReactNode } from 'react';
+import { Link as RRLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { Theme } from 'renderer/contexts/theme-context';
 
 const StyledLink = styled(RRLink)<{ theme: Theme }>`
   background-color: ${({ theme }) => theme.primary};
@@ -16,20 +16,20 @@ const StyledLink = styled(RRLink)<{ theme: Theme }>`
   :hover {
     opacity: 0.8;
   }
-`
+`;
 
 type Props = {
-  to: string
-  children: ReactNode
-  className?: string
-}
+  to: string;
+  children: ReactNode;
+  className?: string;
+};
 
 const Link = ({ to, children, className, ...props }: Props) => {
   return (
     <StyledLink to={to} className={className} {...props}>
       {children}
     </StyledLink>
-  )
-}
+  );
+};
 
-export { Link }
+export { Link };

@@ -1,16 +1,10 @@
-import { Reducer } from 'redux'
-import {
-  UpdateSelectedModeAction,
-  OPTIONS_UPDATE_SELECTED_MODE,
-} from 'renderer/veto/actions/update-select-mode'
-import {
-  UpdateSelectedBestOfAction,
-  OPTIONS_UPDATE_SELECTED_BEST_OF,
-} from 'renderer/veto/actions/update-selected-bo'
-import { VOTES_COMPLETE, CompleteVoteAction } from 'renderer/veto/actions/make-vote'
-import { UpdateVotesAction, VOTES_UPDATE } from 'renderer/veto/actions/update-votes'
-import { VoteStatuses } from 'renderer/types/vote-status'
-import { Vote } from 'renderer/types/vote'
+import { Reducer } from 'redux';
+import { UpdateSelectedModeAction, OPTIONS_UPDATE_SELECTED_MODE } from 'renderer/veto/actions/update-select-mode';
+import { UpdateSelectedBestOfAction, OPTIONS_UPDATE_SELECTED_BEST_OF } from 'renderer/veto/actions/update-selected-bo';
+import { VOTES_COMPLETE, CompleteVoteAction } from 'renderer/veto/actions/make-vote';
+import { UpdateVotesAction, VOTES_UPDATE } from 'renderer/veto/actions/update-votes';
+import { VoteStatuses } from 'renderer/types/vote-status';
+import { Vote } from 'renderer/types/vote';
 
 const updateVotes = (votes: Vote[]): Vote[] => {
   return votes.map((vote, index) => {
@@ -18,22 +12,18 @@ const updateVotes = (votes: Vote[]): Vote[] => {
       return {
         ...vote,
         status: VoteStatuses.CURRENT,
-      }
+      };
     }
 
-    return vote
-  })
-}
+    return vote;
+  });
+};
 
-type VotesState = Vote[]
+type VotesState = Vote[];
 
-type VotesActions =
-  | UpdateVotesAction
-  | UpdateSelectedModeAction
-  | UpdateSelectedBestOfAction
-  | CompleteVoteAction
+type VotesActions = UpdateVotesAction | UpdateSelectedModeAction | UpdateSelectedBestOfAction | CompleteVoteAction;
 
-const initialState: VotesState = []
+const initialState: VotesState = [];
 
 const votesReducer: Reducer<VotesState, VotesActions> = (state = initialState, action) => {
   switch (action.type) {
@@ -43,15 +33,15 @@ const votesReducer: Reducer<VotesState, VotesActions> = (state = initialState, a
           return {
             ...vote,
             status: VoteStatuses.CURRENT,
-          }
+          };
         }
 
-        return vote
-      })
+        return vote;
+      });
     case OPTIONS_UPDATE_SELECTED_BEST_OF:
-      return updateVotes(action.bestOf.modes[0].votes)
+      return updateVotes(action.bestOf.modes[0].votes);
     case OPTIONS_UPDATE_SELECTED_MODE:
-      return updateVotes(action.mode.votes)
+      return updateVotes(action.mode.votes);
     case VOTES_COMPLETE:
       return state.map(vote => {
         if (vote.id === action.payload.vote.id) {
@@ -59,21 +49,21 @@ const votesReducer: Reducer<VotesState, VotesActions> = (state = initialState, a
             ...vote,
             mapName: action.payload.map,
             status: VoteStatuses.DONE,
-          }
+          };
         }
 
         if (vote.id === action.payload.vote.id + 1) {
           return {
             ...vote,
             status: VoteStatuses.CURRENT,
-          }
+          };
         }
 
-        return vote
-      })
+        return vote;
+      });
     default:
-      return state
+      return state;
   }
-}
+};
 
-export { votesReducer }
+export { votesReducer };

@@ -1,8 +1,8 @@
-import { MapStatus } from 'renderer/types/map-status'
+import { MapStatus } from 'renderer/types/map-status';
 
 type Map = {
-  name: string
-  status?: MapStatus
-}
+  name: string;
+  status?: MapStatus;
+};
 
-export { Map }
+export { Map };

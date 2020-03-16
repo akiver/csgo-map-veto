@@ -1,8 +1,8 @@
-import { StoreState } from 'renderer/Store'
-import { getOptions } from 'renderer/veto/selectors/get-options'
+import { StoreState } from 'renderer/store';
+import { getOptions } from 'renderer/veto/selectors/get-options';
 
 const getTeamOneName = (state: StoreState) => {
-  return getOptions(state).teamOneName
-}
+  return getOptions(state).teamOneName;
+};
 
-export { getTeamOneName }
+export { getTeamOneName };

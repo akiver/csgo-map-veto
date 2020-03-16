@@ -1,8 +1,8 @@
-import React from 'react'
-import { renderWithRedux } from 'test/render-with-redux'
-import { DeleteVetoButton } from '../delete-veto-button'
-import { VetosProvider } from 'renderer/vetos/vetos-context'
-import { fireEvent, wait } from '@testing-library/react'
+import React from 'react';
+import { renderWithRedux } from 'test/render-with-redux';
+import { DeleteVetoButton } from '../delete-veto-button';
+import { VetosProvider } from 'renderer/vetos/vetos-context';
+import { fireEvent, wait } from '@testing-library/react';
 
 describe('DeleteVetoButton', () => {
   const renderComponent = () => {
@@ -28,43 +28,43 @@ describe('DeleteVetoButton', () => {
           },
         },
       }
-    )
-  }
+    );
+  };
 
   it('should render a delete button', () => {
-    const { getByText } = renderComponent()
+    const { getByText } = renderComponent();
 
-    const button = getByText(/delete/i)
-    expect(button).toBeTruthy()
-    expect(button).toBeEnabled()
-  })
+    const button = getByText(/delete/i);
+    expect(button).toBeTruthy();
+    expect(button).toBeEnabled();
+  });
 
   it('should make a delete request', async () => {
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         status: 200,
-      }
-    })
-    const { getByText } = renderComponent()
+      };
+    });
+    const { getByText } = renderComponent();
 
-    const button = getByText(/delete/i)
-    fireEvent.click(button)
+    const button = getByText(/delete/i);
+    fireEvent.click(button);
 
     await wait(() =>
       expect(global.fetch).toHaveBeenCalledWith('https://hi.com/api/vetos/1', {
         method: 'DELETE',
       })
-    )
-  })
+    );
+  });
 
   describe('when the request is pending', () => {
     it('should be disabled', async () => {
-      const { getByText } = renderComponent()
+      const { getByText } = renderComponent();
 
-      const button = getByText(/delete/i)
-      fireEvent.click(button)
+      const button = getByText(/delete/i);
+      fireEvent.click(button);
 
-      await wait(() => expect(getByText(/delete/i)).toBeDisabled())
-    })
-  })
-})
+      await wait(() => expect(getByText(/delete/i)).toBeDisabled());
+    });
+  });
+});

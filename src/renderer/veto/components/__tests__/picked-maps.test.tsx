@@ -1,10 +1,10 @@
-import React from 'react'
-import { renderWithRedux } from 'test/render-with-redux'
-import { MapStatuses } from 'renderer/types/map-status'
-import { VoteStatuses } from 'renderer/types/vote-status'
-import { TeamNumbers } from 'renderer/types/team-number'
-import { VoteTypes } from 'renderer/types/vote-type'
-import { PickedMaps } from '../picked-maps'
+import React from 'react';
+import { renderWithRedux } from 'test/render-with-redux';
+import { MapStatuses } from 'renderer/types/map-status';
+import { VoteStatuses } from 'renderer/types/vote-status';
+import { TeamNumbers } from 'renderer/types/team-number';
+import { VoteTypes } from 'renderer/types/vote-type';
+import { PickedMaps } from '../picked-maps';
 
 describe('PickedMaps', () => {
   const { getByAltText, getByText, findByAltText } = renderWithRedux(<PickedMaps />, {
@@ -36,14 +36,14 @@ describe('PickedMaps', () => {
         },
       ],
     },
-  })
+  });
 
   it('should render only picked maps', () => {
-    expect(getByAltText('de_picked')).toBeTruthy()
-    expect(getByText('de_picked')).toBeTruthy()
-    expect(getByAltText('de_picked_other')).toBeTruthy()
-    expect(getByText('de_picked_other')).toBeTruthy()
-    expect(findByAltText('de_banned')).not.toBeInTheDocument()
-    expect(findByAltText('de_remaining')).not.toBeInTheDocument()
-  })
-})
+    expect(getByAltText('de_picked')).toBeTruthy();
+    expect(getByText('de_picked')).toBeTruthy();
+    expect(getByAltText('de_picked_other')).toBeTruthy();
+    expect(getByText('de_picked_other')).toBeTruthy();
+    expect(findByAltText('de_banned')).not.toBeInTheDocument();
+    expect(findByAltText('de_remaining')).not.toBeInTheDocument();
+  });
+});

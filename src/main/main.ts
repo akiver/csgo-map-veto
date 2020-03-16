@@ -1,24 +1,20 @@
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
-import { format as formatUrl } from 'url'
+import { app, BrowserWindow } from 'electron';
+import path from 'path';
+import { format as formatUrl } from 'url';
 
-let mainWindow: BrowserWindow | null
+let mainWindow: BrowserWindow | null;
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const installExtensions = async () => {
-  require('devtron').install()
+  require('devtron').install();
 
-  const {
-    default: installExtension,
-    REACT_DEVELOPER_TOOLS,
-    REDUX_DEVTOOLS,
-  } = require('electron-devtools-installer') // eslint-disable-line
+  const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer'); // eslint-disable-line
 
-  const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS]
+  const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
 
-  return Promise.all(extensions.map(extension => installExtension(extension))).catch(console.log)
-}
+  return Promise.all(extensions.map(extension => installExtension(extension))).catch(console.log);
+};
 
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
@@ -27,10 +23,10 @@ const createWindow = async () => {
     webPreferences: {
       nodeIntegration: true,
     },
-  })
+  });
 
   if (isDevelopment) {
-    mainWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    mainWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
   } else {
     mainWindow.loadURL(
       formatUrl({
@@ -38,37 +34,37 @@ const createWindow = async () => {
         protocol: 'file',
         slashes: true,
       })
-    )
+    );
   }
 
   mainWindow.webContents.on('did-finish-load', () => {
     if (!mainWindow) {
-      throw new Error('mainWindow is not defined')
+      throw new Error('mainWindow is not defined');
     }
-    mainWindow.show()
-    mainWindow.focus()
-  })
+    mainWindow.show();
+    mainWindow.focus();
+  });
 
   mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+    mainWindow = null;
+  });
 
   if (isDevelopment) {
-    await installExtensions()
-    mainWindow.webContents.openDevTools()
+    await installExtensions();
+    mainWindow.webContents.openDevTools();
   }
-}
+};
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
 app.on('activate', async () => {
   if (mainWindow === null) {
-    await createWindow()
+    await createWindow();
   }
-})
+});

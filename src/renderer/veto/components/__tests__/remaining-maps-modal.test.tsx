@@ -1,18 +1,18 @@
-import React from 'react'
-import { renderWithRedux, AppWithRedux } from 'test/render-with-redux'
-import { RemainingMapsModal } from '../remaining-maps-modal'
-import { MapStatuses } from 'renderer/types/map-status'
-import { fireEvent } from '@testing-library/react'
-import { VoteStatuses } from 'renderer/types/vote-status'
-import { TeamNumbers } from 'renderer/types/team-number'
-import { VoteTypes } from 'renderer/types/vote-type'
+import React from 'react';
+import { renderWithRedux, AppWithRedux } from 'test/render-with-redux';
+import { RemainingMapsModal } from '../remaining-maps-modal';
+import { MapStatuses } from 'renderer/types/map-status';
+import { fireEvent } from '@testing-library/react';
+import { VoteStatuses } from 'renderer/types/vote-status';
+import { TeamNumbers } from 'renderer/types/team-number';
+import { VoteTypes } from 'renderer/types/vote-type';
 
 describe('RemainingMapsModal', () => {
-  const handleClose = jest.fn()
+  const handleClose = jest.fn();
 
   afterEach(() => {
-    handleClose.mockClear()
-  })
+    handleClose.mockClear();
+  });
 
   const renderComponent = () =>
     renderWithRedux(<RemainingMapsModal onClose={handleClose} />, {
@@ -44,40 +44,40 @@ describe('RemainingMapsModal', () => {
           },
         ],
       },
-    })
+    });
 
   it('should render only remaining maps', () => {
-    const { getByAltText, getByText, findByAltText } = renderComponent()
+    const { getByAltText, getByText, findByAltText } = renderComponent();
 
-    expect(getByAltText('de_remaining')).toBeTruthy()
-    expect(getByText('de_remaining')).toBeTruthy()
-    expect(getByAltText('de_remaining_other')).toBeTruthy()
-    expect(getByText('de_remaining_other')).toBeTruthy()
-    expect(findByAltText('de_banned')).not.toBeInTheDocument()
-    expect(findByAltText('de_picked')).not.toBeInTheDocument()
-  })
+    expect(getByAltText('de_remaining')).toBeTruthy();
+    expect(getByText('de_remaining')).toBeTruthy();
+    expect(getByAltText('de_remaining_other')).toBeTruthy();
+    expect(getByText('de_remaining_other')).toBeTruthy();
+    expect(findByAltText('de_banned')).not.toBeInTheDocument();
+    expect(findByAltText('de_picked')).not.toBeInTheDocument();
+  });
 
   it('should render a close button', () => {
-    const { getByText, getByRole } = renderComponent()
+    const { getByText, getByRole } = renderComponent();
 
-    expect(getByRole('button')).toBeTruthy()
-    expect(getByText(/close/i)).toBeTruthy()
-  })
+    expect(getByRole('button')).toBeTruthy();
+    expect(getByText(/close/i)).toBeTruthy();
+  });
 
   it('should vote for the map on image click', () => {
-    const { getByAltText, findByAltText, rerender, store } = renderComponent()
+    const { getByAltText, findByAltText, rerender, store } = renderComponent();
 
-    const image = getByAltText('de_remaining')
-    fireEvent.click(image)
+    const image = getByAltText('de_remaining');
+    fireEvent.click(image);
 
     rerender(
       <AppWithRedux store={store}>
         <RemainingMapsModal onClose={handleClose} />
       </AppWithRedux>
-    )
+    );
 
-    expect(findByAltText('de_remaining')).not.toBeInTheDocument()
-    expect(findByAltText('de_remaining_other')).toBeInTheDocument()
-    expect(handleClose).toHaveBeenCalledTimes(1)
-  })
-})
+    expect(findByAltText('de_remaining')).not.toBeInTheDocument();
+    expect(findByAltText('de_remaining_other')).toBeInTheDocument();
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+});

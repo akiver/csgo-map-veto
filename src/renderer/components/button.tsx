@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { Theme } from 'renderer/contexts/theme-context'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import { Theme } from 'renderer/contexts/theme-context';
 
 const StyledButton = styled.button.attrs({
   type: 'button',
@@ -24,21 +24,21 @@ const StyledButton = styled.button.attrs({
     opacity: 0.5;
     cursor: not-allowed;
   `}
-`
+`;
 
 type Props = {
-  onClick: () => void
-  children: ReactNode
-  isDisabled?: boolean
-  className?: string
-}
+  onClick: () => void;
+  children: ReactNode;
+  isDisabled?: boolean;
+  className?: string;
+};
 
 const Button = ({ onClick, children, isDisabled, className, ...props }: Props) => {
   return (
     <StyledButton onClick={onClick} disabled={isDisabled} className={className} role="button" {...props}>
       {children}
     </StyledButton>
-  )
-}
+  );
+};
 
-export { StyledButton, Button }
+export { StyledButton, Button };

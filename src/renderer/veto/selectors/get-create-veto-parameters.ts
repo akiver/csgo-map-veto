@@ -1,15 +1,15 @@
-import { StoreState } from 'renderer/Store'
-import { getVotes } from 'renderer/veto/selectors/get-votes'
-import { VetoPostRequest } from 'renderer/types/api'
-import { getSelectedBestOf } from 'renderer/veto/selectors/get-selected-best-of'
-import { getTeamOneName } from 'renderer/veto/selectors/get-team-one-name'
-import { getTeamTwoName } from 'renderer/veto/selectors/get-team-two-name'
+import { StoreState } from 'renderer/store';
+import { getVotes } from 'renderer/veto/selectors/get-votes';
+import { VetoPostRequest } from 'renderer/types/api';
+import { getSelectedBestOf } from 'renderer/veto/selectors/get-selected-best-of';
+import { getTeamOneName } from 'renderer/veto/selectors/get-team-one-name';
+import { getTeamTwoName } from 'renderer/veto/selectors/get-team-two-name';
 
 const getCreateVetoParameters = (state: StoreState) => {
-  const bestOf = getSelectedBestOf(state)
-  const teamOneName = getTeamOneName(state)
-  const teamTwoName = getTeamTwoName(state)
-  const votes = getVotes(state)
+  const bestOf = getSelectedBestOf(state);
+  const teamOneName = getTeamOneName(state);
+  const teamTwoName = getTeamTwoName(state);
+  const votes = getVotes(state);
 
   const parameters: VetoPostRequest = {
     team_one_name: teamOneName,
@@ -20,11 +20,11 @@ const getCreateVetoParameters = (state: StoreState) => {
         team_number: vote.teamNumber,
         type: vote.type,
         map_name: vote.mapName,
-      }
+      };
     }),
-  }
+  };
 
-  return parameters
-}
+  return parameters;
+};
 
-export { getCreateVetoParameters }
+export { getCreateVetoParameters };

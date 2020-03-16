@@ -1,6 +1,6 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import { Theme } from 'renderer/contexts/theme-context'
+import * as React from 'react';
+import styled from 'styled-components';
+import { Theme } from 'renderer/contexts/theme-context';
 
 const StyledLabel = styled.label<{ theme: Theme }>`
   display: block;
@@ -8,15 +8,15 @@ const StyledLabel = styled.label<{ theme: Theme }>`
   font-weight: bold;
   margin-bottom: 10px;
   color: ${({ theme }) => theme.lightInversed};
-`
+`;
 
 type Props = {
-  id: string
-  label: string
-}
+  id: string;
+  label: string;
+};
 
 const Label = ({ id, label }: Props) => {
-  return <StyledLabel htmlFor={id}>{label}</StyledLabel>
-}
+  return <StyledLabel htmlFor={id}>{label}</StyledLabel>;
+};
 
-export { Label }
+export { Label };

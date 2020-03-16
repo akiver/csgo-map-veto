@@ -1,6 +1,6 @@
-import { MapStatus } from 'renderer/types/map-status'
+import { MapStatus } from 'renderer/types/map-status';
 
-const MAPS_UPDATE_STATUS = 'veto.updateMapStatus'
+const MAPS_UPDATE_STATUS = 'veto.updateMapStatus';
 
 const updateMapStatus = (map: string, status: MapStatus) => {
   return {
@@ -9,9 +9,9 @@ const updateMapStatus = (map: string, status: MapStatus) => {
       map,
       status,
     },
-  }
-}
+  };
+};
 
-type UpdateMapStatusAction = ReturnType<typeof updateMapStatus>
+type UpdateMapStatusAction = ReturnType<typeof updateMapStatus>;
 
-export { MAPS_UPDATE_STATUS, updateMapStatus, UpdateMapStatusAction }
+export { MAPS_UPDATE_STATUS, updateMapStatus, UpdateMapStatusAction };

@@ -1,21 +1,21 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Button } from 'renderer/components/button'
-import { startVeto } from 'renderer/veto/actions/start-veto'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button } from 'renderer/components/button';
+import { startVeto } from 'renderer/veto/actions/start-veto';
 
 const ButtonStartVeto = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <Button
       onClick={() => {
-        dispatch(startVeto())
+        dispatch(startVeto());
       }}
       data-testid="button-start-veto"
     >
       Start
     </Button>
-  )
-}
+  );
+};
 
-export { ButtonStartVeto }
+export { ButtonStartVeto };

@@ -1,8 +1,8 @@
-import React from 'react'
-import { renderWithRedux } from 'test/render-with-redux'
-import { InputSelectBestOf } from '../input-select-best-of'
-import { AppWithTheme } from 'test/utils'
-import { fireEvent } from '@testing-library/react'
+import React from 'react';
+import { renderWithRedux } from 'test/render-with-redux';
+import { InputSelectBestOf } from '../input-select-best-of';
+import { AppWithTheme } from 'test/utils';
+import { fireEvent } from '@testing-library/react';
 
 describe('InputSelectBestOf', () => {
   it('should update selected best of', () => {
@@ -10,12 +10,12 @@ describe('InputSelectBestOf', () => {
       <AppWithTheme>
         <InputSelectBestOf />
       </AppWithTheme>
-    )
+    );
 
-    const input = getByLabelText('BO') as HTMLInputElement
+    const input = getByLabelText('BO') as HTMLInputElement;
 
-    fireEvent.change(input, { target: { value: 5 } })
+    fireEvent.change(input, { target: { value: 5 } });
 
-    expect(findByText('BO 5')).toBeVisible()
-  })
-})
+    expect(findByText('BO 5')).toBeVisible();
+  });
+});

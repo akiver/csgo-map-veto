@@ -1,7 +1,7 @@
-import { StoreState } from 'renderer/Store'
+import { StoreState } from 'renderer/store';
 
 const getSettingsState = (state: StoreState) => {
-  return state.settings
-}
+  return state.settings;
+};
 
-export { getSettingsState }
+export { getSettingsState };

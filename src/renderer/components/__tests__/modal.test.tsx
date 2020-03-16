@@ -1,47 +1,47 @@
-import React from 'react'
-import { render, fireEvent, cleanup } from '@testing-library/react'
-import { Modal } from '../modal'
+import React from 'react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
+import { Modal } from '../modal';
 
 describe('Modal', () => {
-  const handleClose = jest.fn()
+  const handleClose = jest.fn();
 
-  const renderComponent = () => render(<Modal onClose={handleClose}>Content</Modal>)
+  const renderComponent = () => render(<Modal onClose={handleClose}>Content</Modal>);
 
   beforeEach(() => {
-    handleClose.mockReset()
-    cleanup()
-  })
+    handleClose.mockReset();
+    cleanup();
+  });
 
   it('should render modal content', () => {
-    const { getByText } = renderComponent()
+    const { getByText } = renderComponent();
 
-    expect(getByText('Content')).toBeInTheDocument()
-  })
+    expect(getByText('Content')).toBeInTheDocument();
+  });
 
   it('should handle overlay click', () => {
-    const { getByTestId } = renderComponent()
+    const { getByTestId } = renderComponent();
 
-    fireEvent.click(getByTestId('modal-overlay'))
+    fireEvent.click(getByTestId('modal-overlay'));
 
-    expect(handleClose).toHaveBeenCalledTimes(1)
-  })
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
 
   it('should handle click on the modal content', () => {
-    const { getByText } = renderComponent()
+    const { getByText } = renderComponent();
 
-    fireEvent.click(getByText('Content'))
+    fireEvent.click(getByText('Content'));
 
-    expect(handleClose).toHaveBeenCalledTimes(0)
-  })
+    expect(handleClose).toHaveBeenCalledTimes(0);
+  });
 
   it('remove the node from the document when it unmounts', () => {
-    const { getByTestId, unmount } = renderComponent()
-    const portalNode = getByTestId('modal-overlay')
+    const { getByTestId, unmount } = renderComponent();
+    const portalNode = getByTestId('modal-overlay');
 
-    expect(document.body.contains(portalNode)).toBe(true)
+    expect(document.body.contains(portalNode)).toBe(true);
 
-    unmount()
+    unmount();
 
-    expect(document.body.contains(portalNode)).toBe(false)
-  })
-})
+    expect(document.body.contains(portalNode)).toBe(false);
+  });
+});

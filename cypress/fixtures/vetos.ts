@@ -1,7 +1,7 @@
-import { VetoResponse } from 'renderer/types/api'
-import { VoteTypes } from 'renderer/types/vote-type'
-import { TeamNumbers } from 'renderer/types/team-number'
-import { MAPS } from 'renderer/constants/maps'
+import { VetoResponse } from 'renderer/types/api';
+import { VoteTypes } from 'renderer/types/vote-type';
+import { TeamNumbers } from 'renderer/types/team-number';
+import { MAPS } from 'renderer/constants/maps';
 
 const vetosFixture: VetoResponse[] = [
   {
@@ -52,6 +52,6 @@ const vetosFixture: VetoResponse[] = [
     ],
     created_at: new Date('September 20, 1990'),
   },
-]
+];
 
-export { vetosFixture }
+export { vetosFixture };

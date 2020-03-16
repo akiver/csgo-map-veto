@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
-import { VetoResponse } from 'renderer/types/api'
+import { VetoResponse } from 'renderer/types/api';
 
 declare global {
-  const Given: (title: string, callback: (...args: any) => any) => void
-  const When: (title: string, callback: (...args: any) => any) => void
-  const Then: (title: string, callback: (...args: any) => any) => void
+  const Given: (title: string, callback: (...args: any) => any) => void;
+  const When: (title: string, callback: (...args: any) => any) => void;
+  const Then: (title: string, callback: (...args: any) => any) => void;
 
   namespace Cypress {
     interface Chainable<Subject> {
@@ -14,11 +14,11 @@ declare global {
        * @example
        * cy.containsVetosEntries([])
        */
-      containsVetosEntries(vetos: VetoResponse[]): Chainable<any>
+      containsVetosEntries(vetos: VetoResponse[]): Chainable<any>;
     }
   }
 
-  type EnumLiteralsOf<T extends object> = T[keyof T]
+  type EnumLiteralsOf<T extends object> = T[keyof T];
 }
 
-export {}
+export {};

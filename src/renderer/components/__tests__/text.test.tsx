@@ -1,26 +1,26 @@
-import React from 'react'
-import { renderWithTheme } from 'test/utils'
-import { themes } from 'renderer/contexts/theme-context'
-import { Text } from '../text'
+import React from 'react';
+import { renderWithTheme } from 'test/utils';
+import { themes } from 'renderer/contexts/theme-context';
+import { Text } from '../text';
 
 describe('Text', () => {
   it('should render text', () => {
-    const { getByText } = renderWithTheme(<Text>A text</Text>)
+    const { getByText } = renderWithTheme(<Text>A text</Text>);
 
-    expect(getByText('A text')).toBeTruthy()
-  })
+    expect(getByText('A text')).toBeTruthy();
+  });
 
   it('should render with dark theme', () => {
-    const { container } = renderWithTheme(<Text>A text</Text>, themes.dark)
+    const { container } = renderWithTheme(<Text>A text</Text>, themes.dark);
 
-    expect(container.firstChild).toMatchSnapshot()
-  })
+    expect(container.firstChild).toMatchSnapshot();
+  });
 
   it('should render with light theme', () => {
-    const { container } = renderWithTheme(<Text>A text</Text>, themes.light)
+    const { container } = renderWithTheme(<Text>A text</Text>, themes.light);
 
-    expect(container.firstChild).toMatchSnapshot()
-  })
+    expect(container.firstChild).toMatchSnapshot();
+  });
 
   it('should render with custom styles properties', () => {
     const { container } = renderWithTheme(
@@ -28,8 +28,8 @@ describe('Text', () => {
         A text
       </Text>,
       themes.light
-    )
+    );
 
-    expect(container.firstChild).toMatchSnapshot()
-  })
-})
+    expect(container.firstChild).toMatchSnapshot();
+  });
+});

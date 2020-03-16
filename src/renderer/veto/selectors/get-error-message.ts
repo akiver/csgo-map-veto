@@ -1,9 +1,9 @@
-import { StoreState } from 'renderer/Store'
-import { getOptions } from 'renderer/veto/selectors/get-options'
+import { StoreState } from 'renderer/store';
+import { getOptions } from 'renderer/veto/selectors/get-options';
 
 const getErrorMessage = (state: StoreState) => {
-  const options = getOptions(state)
-  return options.error
-}
+  const options = getOptions(state);
+  return options.error;
+};
 
-export { getErrorMessage }
+export { getErrorMessage };

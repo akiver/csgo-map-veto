@@ -1,7 +1,7 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import { Theme } from 'renderer/contexts/theme-context'
-import { Label } from 'renderer/components/label'
+import * as React from 'react';
+import styled from 'styled-components';
+import { Theme } from 'renderer/contexts/theme-context';
+import { Label } from 'renderer/components/label';
 
 const StyledInputText = styled.input<{ theme: Theme }>`
   border-radius: 4px;
@@ -12,16 +12,16 @@ const StyledInputText = styled.input<{ theme: Theme }>`
   background-color: ${({ theme }) => theme.light};
   color: ${({ theme }) => theme.lightInversed};
   box-sizing: border-box;
-`
+`;
 
 type Props = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  label: string
-  id: string
-  value?: string
-  isDisabled?: boolean
-  placeholder?: string
-}
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label: string;
+  id: string;
+  value?: string;
+  isDisabled?: boolean;
+  placeholder?: string;
+};
 
 const InputText = ({ onChange, value, label, id, isDisabled = false, placeholder, ...props }: Props) => {
   return (
@@ -38,7 +38,7 @@ const InputText = ({ onChange, value, label, id, isDisabled = false, placeholder
         {...props}
       />
     </>
-  )
-}
+  );
+};
 
-export { InputText }
+export { InputText };
