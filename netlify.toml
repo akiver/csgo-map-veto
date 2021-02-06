@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "https://csgomapveto.csgo-demos-manager.com"
+  to = "https://csgomapveto.csgo-demo-manager.com"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
