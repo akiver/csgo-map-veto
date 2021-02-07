@@ -11,7 +11,7 @@ const vetosReducer = (state: Veto[], action: Action) => {
     case 'set':
       return action.vetos;
     case 'remove':
-      return state.filter(veto => veto.id !== action.vetoId);
+      return state.filter((veto) => veto.id !== action.vetoId);
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

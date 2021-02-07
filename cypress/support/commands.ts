@@ -3,7 +3,7 @@ import { getTeamNameByTeamNumber } from 'renderer/utils/get-team-name-from-team-
 import { getVoteTypeText } from 'renderer/utils/get-vote-type-text';
 
 Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
-  vetos.forEach(veto => {
+  vetos.forEach((veto) => {
     cy.findByTestId(`veto-${veto.id}`)
       .should('be.visible')
       .within(() => {
@@ -21,7 +21,7 @@ Cypress.Commands.add('containsVetosEntries', (vetos: VetoResponse[]) => {
           });
       });
 
-    veto.votes.forEach(vote => {
+    veto.votes.forEach((vote) => {
       const teamName = getTeamNameByTeamNumber(vote.team_number, veto.team_one_name, veto.team_two_name);
       const voteTypeText = getVoteTypeText(vote.type);
       cy.findByTestId(`vote-${vote.id}`).within(() => {

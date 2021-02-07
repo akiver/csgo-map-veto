@@ -34,7 +34,7 @@ const makeVote = (mapName: string) => {
     dispatch(completeVote(vote, mapName));
 
     const votes = getVotes(getState());
-    if (votes.every(vote => vote.status === VoteStatuses.DONE)) {
+    if (votes.every((vote) => vote.status === VoteStatuses.DONE)) {
       dispatch(updateVetoStatus(VetoStatuses.COMPLETED));
     }
   };

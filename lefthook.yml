@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: eslint {staged_files}
+    format:
+      run: prettier --write {staged_files}

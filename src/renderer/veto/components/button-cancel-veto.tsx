@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { resetVeto } from 'renderer/veto/actions/reset-veto';
 
 const SlyledButtonCancelVeto = styled(Button)`
-  background-color: ${props => props.theme.danger};
+  background-color: ${(props) => props.theme.danger};
 `;
 
 const ButtonCancelVeto = () => {

@@ -1,1 +1,1 @@
-module.exports = 'svg'
+module.exports = 'svg';

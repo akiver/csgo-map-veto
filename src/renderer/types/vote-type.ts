@@ -1,7 +1,7 @@
 const VoteTypes = Object.freeze({
-  BAN: 'ban' as 'ban',
-  PICK: 'pick' as 'pick',
-  RANDOM: 'random' as 'random',
+  BAN: 'ban' as const,
+  PICK: 'pick' as const,
+  RANDOM: 'random' as const,
 });
 
 type VoteType = EnumLiteralsOf<typeof VoteTypes>;

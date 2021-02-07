@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Props as ReactSelectProps } from 'react-select/src/Select';
-import { StylesConfig } from 'react-select/src/styles';
-import Select from 'react-select';
+import Select, { StylesConfig, Props as ReactSelectProps } from 'react-select';
 import { withTheme } from 'styled-components';
 import { Label } from 'renderer/components/label';
 import { Theme } from 'renderer/contexts/theme-context';
@@ -13,8 +11,8 @@ type Props = ReactSelectProps & {
 };
 
 const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...props }: Props) => {
-  const styles: StylesConfig = {
-    control: provided => ({
+  const styles: StylesConfig<{ label: string; value: string }, boolean> = {
+    control: (provided) => ({
       ...provided,
       backgroundColor: theme.light,
       color: theme.lightInversed,
@@ -23,11 +21,11 @@ const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...prop
         borderColor: theme.lightInversed,
       },
     }),
-    singleValue: provided => ({
+    singleValue: (provided) => ({
       ...provided,
       color: theme.lightInversed,
     }),
-    menuList: provided => ({
+    menuList: (provided) => ({
       ...provided,
       backgroundColor: theme.light,
     }),
@@ -40,7 +38,7 @@ const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...prop
         color: theme.light,
       },
     }),
-    dropdownIndicator: provided => {
+    dropdownIndicator: (provided) => {
       return {
         ...provided,
         color: theme.lightInversed,
@@ -49,7 +47,7 @@ const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...prop
         },
       };
     },
-    indicatorSeparator: provided => {
+    indicatorSeparator: (provided) => {
       return {
         ...provided,
         backgroundColor: theme.lightInversed,

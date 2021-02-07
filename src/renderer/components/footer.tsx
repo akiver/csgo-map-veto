@@ -28,6 +28,7 @@ const Footer = () => {
         role="button"
         onClick={() => {
           if (IS_ELECTRON) {
+            // eslint-disable-next-line
             require('electron').shell.openExternal(GITHUB_URL);
           } else {
             window.open(GITHUB_URL);

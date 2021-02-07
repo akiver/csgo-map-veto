@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitForElementToBeRemoved, fireEvent, wait } from '@testing-library/react';
+import { waitForElementToBeRemoved, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { VetosProvider } from 'renderer/vetos/vetos-context';
 import { VetosResponse, VetoResponse } from 'renderer/types/api';
@@ -70,12 +70,12 @@ describe('Vetos', () => {
 
     await waitForElementToBeRemoved(() => getByText(/loading/i));
 
-    await wait(async () => {
+    await waitFor(async () => {
       expect(getByText('BO3')).toBeTruthy();
       expect(await findAllByText(veto1.team_one_name)).toHaveLength(2);
       expect(await findAllByText(veto1.team_two_name)).toHaveLength(2);
       expect(getByText('09/10/1990')).toBeTruthy();
-      veto1.votes.forEach(vote => {
+      veto1.votes.forEach((vote) => {
         expect(getByAltText(vote.map_name)).toBeTruthy();
       });
 
@@ -84,7 +84,7 @@ describe('Vetos', () => {
       expect(await findAllByText(veto2.team_two_name)).toHaveLength(1);
       expect(await findAllByText('SERVER')).toHaveLength(1);
       expect(getByText('11/22/2018')).toBeTruthy();
-      veto2.votes.forEach(vote => {
+      veto2.votes.forEach((vote) => {
         expect(getByAltText(vote.map_name)).toBeTruthy();
       });
 
@@ -98,14 +98,14 @@ describe('Vetos', () => {
     global.fetch = jest.fn().mockImplementation(() => {
       return {
         json: () => {
-          return new Promise(res => setTimeout(res, 10000));
+          return new Promise((res) => setTimeout(res, 10000));
         },
       };
     });
 
     const { getByText } = renderComponent();
 
-    await wait(() => expect(getByText(/loading/i)).toBeTruthy());
+    await waitFor(() => expect(getByText(/loading/i)).toBeTruthy());
   });
 
   it('should render an error message', () => {

@@ -35,7 +35,7 @@ const Maps = ({ maps }: Props) => {
     </MapImageWrapper>
   ) : (
     <>
-      {maps.map(map => (
+      {maps.map((map) => (
         <MapImageWrapper key={map.name}>
           <StyledMapImage mapName={map.name} />
           <Text size="sm" textAlign="center">

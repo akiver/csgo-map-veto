@@ -16,7 +16,7 @@ type Props = {
 const MapsSelection = ({}: Props) => {
   return (
     <Wrapper>
-      {MAPS.map(mapName => {
+      {MAPS.map((mapName) => {
         return <MapSelectionEntry key={`map-select-${mapName}`} mapName={mapName} />;
       })}
     </Wrapper>

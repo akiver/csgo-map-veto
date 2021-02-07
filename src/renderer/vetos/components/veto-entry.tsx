@@ -67,7 +67,7 @@ const VetoEntry = ({ veto }: Props) => {
         <DeleteVetoButton vetoId={veto.id} />
       </Details>
       <Votes>
-        {veto.votes.map(vote => {
+        {veto.votes.map((vote) => {
           return (
             <VoteSummary
               key={`vote-${veto.id}-${vote.id}`}

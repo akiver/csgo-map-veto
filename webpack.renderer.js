@@ -3,10 +3,10 @@ const path = require('path'); // eslint-disable-line
 const APP_VERSION = require('./package.json').version;
 const GITHUB_URL = require('./package.json').homepage;
 
-module.exports = function(config) {
+module.exports = function (config) {
   // Remove usage of url-loader for .svg files as we want to use @svgr/webpack
   // to be able to import it as usable React component using JSX syntax.
-  const svgRule = config.module.rules.find(rule => {
+  const svgRule = config.module.rules.find((rule) => {
     return rule.test.toString().indexOf('svg') !== -1;
   });
   svgRule.test = /\.(png|jpe?g|gif)(\?.*)?$/;

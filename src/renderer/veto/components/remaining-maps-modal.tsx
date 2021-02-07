@@ -50,7 +50,7 @@ const RemainingMapsModal = ({ onClose }: Props) => {
   return (
     <MapsModal onClose={onClose}>
       <Maps>
-        {maps.map(map => {
+        {maps.map((map) => {
           return (
             <MapWrapper
               key={map.name}

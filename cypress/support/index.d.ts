@@ -18,7 +18,7 @@ declare global {
     }
   }
 
-  type EnumLiteralsOf<T extends object> = T[keyof T];
+  type EnumLiteralsOf<T extends Record<string, unknown>> = T[keyof T];
 }
 
 export {};

@@ -20,14 +20,10 @@ Then('The map {string} is now unselected', (mapName: string) => {
 
 Given('BestOf is {int}', (bestOf: number) => {
   cy.findByText('BO 3').click();
-  cy.findAllByText(`BO ${bestOf}`)
-    .last()
-    .click();
+  cy.findAllByText(`BO ${bestOf}`).last().click();
 });
 
 Given('The mode is {string}', (mode: string) => {
   cy.findByText('Ban / Ban / Ban / Random').click();
-  cy.findAllByText(mode)
-    .last()
-    .click();
+  cy.findAllByText(mode).last().click();
 });

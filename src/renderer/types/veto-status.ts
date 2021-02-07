@@ -1,7 +1,7 @@
 const VetoStatuses = Object.freeze({
-  SETUP: 'setup' as 'setup',
-  IN_PROGRESS: 'in-progress' as 'in-progress',
-  COMPLETED: 'completed' as 'completed',
+  SETUP: 'setup' as const,
+  IN_PROGRESS: 'in-progress' as const,
+  COMPLETED: 'completed' as const,
 });
 
 type VetoStatus = EnumLiteralsOf<typeof VetoStatuses>;

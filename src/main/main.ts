@@ -7,13 +7,11 @@ let mainWindow: BrowserWindow | null;
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const installExtensions = async () => {
-  require('devtron').install();
-
   const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer'); // eslint-disable-line
 
   const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
 
-  return Promise.all(extensions.map(extension => installExtension(extension))).catch(console.log);
+  return Promise.all(extensions.map((extension) => installExtension(extension))).catch(console.log);
 };
 
 const createWindow = async () => {

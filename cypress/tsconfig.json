@@ -4,7 +4,7 @@
     "baseUrl": "../node_modules",
     "target": "es5",
     "lib": ["es6", "dom"],
-    "types": ["node", "cypress", "@types/testing-library__cypress"],
+    "types": ["node", "cypress", "@testing-library/cypress"],
     "paths": {
       "renderer/*": ["../src/renderer/*"]
     }

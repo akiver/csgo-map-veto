@@ -15,7 +15,7 @@ const getCreateVetoParameters = (state: StoreState) => {
     team_one_name: teamOneName,
     team_two_name: teamTwoName,
     best_of: bestOf.value,
-    votes: votes.map(vote => {
+    votes: votes.map((vote) => {
       return {
         team_number: vote.teamNumber,
         type: vote.type,

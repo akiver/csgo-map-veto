@@ -1,7 +1,7 @@
 const TeamNumbers = Object.freeze({
-  TEAM1: 1 as 1,
-  TEAM2: 2 as 2,
-  SERVER: 3 as 3,
+  TEAM1: 1 as const,
+  TEAM2: 2 as const,
+  SERVER: 3 as const,
 });
 
 type TeamNumber = EnumLiteralsOf<typeof TeamNumbers>;

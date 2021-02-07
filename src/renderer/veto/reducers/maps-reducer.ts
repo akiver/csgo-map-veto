@@ -13,7 +13,7 @@ const initialState: MapsState = [];
 const mapsReducer: Reducer<MapsState, MapsActions> = (state = initialState, action) => {
   switch (action.type) {
     case MAPS_UPDATE:
-      return action.payload.map(map => {
+      return action.payload.map((map) => {
         return {
           ...map,
           status: MapStatuses.REMAINING,
@@ -22,7 +22,7 @@ const mapsReducer: Reducer<MapsState, MapsActions> = (state = initialState, acti
     case MAPS_RESET:
       return initialState;
     case MAPS_UPDATE_STATUS:
-      return state.map(map => {
+      return state.map((map) => {
         if (action.payload.map === map.name) {
           return {
             ...map,

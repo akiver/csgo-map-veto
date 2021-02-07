@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, waitForElement, wait } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { DEFAULT_API_ADDRESS } from 'renderer/constants/api';
 import { KEY_API_ADDRESS } from 'renderer/constants/local-storage';
@@ -11,7 +11,7 @@ describe('ButtonTestDatabaseConnection', () => {
   it('should render a button', async () => {
     const { getByText, getByRole } = renderComponent();
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText('Test connection')).toBeTruthy();
       expect(getByRole('button')).toBeTruthy();
     });
@@ -19,13 +19,13 @@ describe('ButtonTestDatabaseConnection', () => {
 
   it('should be disabled while making request', async () => {
     global.fetch = jest.fn().mockImplementation(() => {
-      return new Promise(res => setTimeout(res, 10000));
+      return new Promise((res) => setTimeout(res, 10000));
     });
 
     const { getByText } = renderComponent();
     fireEvent.click(getByText('Test connection'));
 
-    await wait(() => {
+    await waitFor(() => {
       expect(getByText('Test connection')).toBeDisabled();
     });
   });
@@ -40,7 +40,7 @@ describe('ButtonTestDatabaseConnection', () => {
     const { getByText, queryByAltText } = renderComponent();
     fireEvent.click(getByText('Test connection'));
 
-    await waitForElement(() => getByText(/Connection success/i));
+    await waitFor(() => getByText(/Connection success/i));
     expect(localStorage.setItem).toHaveBeenCalledWith(KEY_API_ADDRESS, DEFAULT_API_ADDRESS);
 
     fireEvent.click(getByText(/close/i));
@@ -57,7 +57,7 @@ describe('ButtonTestDatabaseConnection', () => {
     const { getByText, queryByAltText } = renderComponent();
 
     fireEvent.click(getByText('Test connection'));
-    await waitForElement(() => getByText(/Connection failed/i));
+    await waitFor(() => getByText(/Connection failed/i));
     fireEvent.click(getByText(/close/i));
     expect(queryByAltText(/Connection failed/i)).not.toBeInTheDocument();
   });

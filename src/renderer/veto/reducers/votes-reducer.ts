@@ -43,7 +43,7 @@ const votesReducer: Reducer<VotesState, VotesActions> = (state = initialState, a
     case OPTIONS_UPDATE_SELECTED_MODE:
       return updateVotes(action.mode.votes);
     case VOTES_COMPLETE:
-      return state.map(vote => {
+      return state.map((vote) => {
         if (vote.id === action.payload.vote.id) {
           return {
             ...vote,

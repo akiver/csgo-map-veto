@@ -30,7 +30,7 @@ describe('VetoViewSwitcher', () => {
     expect(getByText('Start')).toBeTruthy();
     expect(getByText('Database')).toBeTruthy();
     expect(getByText('Settings')).toBeTruthy();
-    MAPS.forEach(mapName => {
+    MAPS.forEach((mapName) => {
       expect(getByAltText(mapName)).toBeTruthy();
       expect(getByText(mapName)).toBeTruthy();
     });
@@ -49,7 +49,7 @@ describe('VetoViewSwitcher', () => {
             teamTwoName: 'Team 2',
             selecteBestOf: BEST_OF_3,
           },
-          maps: MAPS.map(mapName => ({
+          maps: MAPS.map((mapName) => ({
             name: mapName,
             status: MapStatuses.REMAINING,
           })),
@@ -114,7 +114,7 @@ describe('VetoViewSwitcher', () => {
     const unknownImages = await findAllByTitle('unknown');
     expect(unknownImages).toHaveLength(5);
 
-    MAPS.forEach(mapName => {
+    MAPS.forEach((mapName) => {
       expect(getByText(mapName)).toBeTruthy();
       expect(getByTitle(mapName)).toBeTruthy();
     });

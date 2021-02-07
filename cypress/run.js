@@ -1,8 +1,12 @@
-require('dotenv').config();
-const startAndTest = require('start-server-and-test'); // eslint-disable-line
+require('dotenv').config(); // eslint-disable-line
+const { startAndTest } = require('start-server-and-test'); // eslint-disable-line
 
 startAndTest({
-  start: 'yarn dev',
-  url: `http://localhost:${process.env.DEV_SERVER_PORT}`,
+  services: [
+    {
+      start: 'yarn dev',
+      url: `http-get://localhost:${process.env.DEV_SERVER_PORT || 8080}`,
+    },
+  ],
   test: 'yarn cy:run',
 });

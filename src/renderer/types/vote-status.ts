@@ -1,7 +1,7 @@
 const VoteStatuses = Object.freeze({
-  WAITING: 'waiting' as 'waiting',
-  CURRENT: 'current' as 'current',
-  DONE: 'done' as 'done',
+  WAITING: 'waiting' as const,
+  CURRENT: 'current' as const,
+  DONE: 'done' as const,
 });
 
 type VoteStatus = EnumLiteralsOf<typeof VoteStatuses>;

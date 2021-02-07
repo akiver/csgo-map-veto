@@ -30,7 +30,7 @@ const initialState: OptionsState = {
   teamTwoName: 'Team 2',
   selecteBestOf: BEST_OF_3,
   selectedMode: BO3_MODE_BPBR,
-  selectedMaps: MAPS.slice(0, 7).map(mapName => {
+  selectedMaps: MAPS.slice(0, 7).map((mapName) => {
     return {
       name: mapName,
       status: MapStatuses.REMAINING,
@@ -73,11 +73,11 @@ const optionsReducer: Reducer<OptionsState, OptionsActions> = (state = initialSt
         selectedMode: action.mode,
       };
     case OPTIONS_TOGGLE_MAP_SELECTION: {
-      const map = state.selectedMaps.find(map => map.name === action.mapName);
+      const map = state.selectedMaps.find((map) => map.name === action.mapName);
       if (map) {
         return {
           ...state,
-          selectedMaps: state.selectedMaps.filter(map => map.name !== action.mapName),
+          selectedMaps: state.selectedMaps.filter((map) => map.name !== action.mapName),
         };
       }
 

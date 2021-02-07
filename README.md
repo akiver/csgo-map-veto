@@ -32,10 +32,9 @@ Assuming you have a working MySQL server, if you want to use it you have few ste
 
 You have to install [go](https://golang.org/) to run the database during development.
 
-1. `go get github.com/codegangsta/gin` (used for [live reload](<[gin](https://github.com/codegangsta/gin)>))
-2. `cp backend/.env.example backend/.env`
-3. Edit the `.env` file and set `DISABLE_CORS` and `DEBUG` to `true`, you can also adjust the other options if you want
-4. `yarn db` to build and start the database with auto reload
+1. `cp backend/.env.example backend/.env`
+2. Edit the `.env` file and set `DISABLE_CORS` and `DEBUG` to `true`, you can also adjust the other options if you want
+3. `yarn db` to build and start the database with auto reload
 
 ### Production build
 

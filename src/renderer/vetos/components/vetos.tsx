@@ -40,14 +40,14 @@ const Vetos = () => {
       }
 
       const json: VetosResponse = await response.json();
-      const vetos: Veto[] = json.map(veto => {
+      const vetos: Veto[] = json.map((veto) => {
         return {
           id: veto.id,
           bestOf: veto.best_of,
           teamOneName: veto.team_one_name,
           teamTwoName: veto.team_two_name,
           createdAt: new Date(veto.created_at),
-          votes: veto.votes.map(vote => {
+          votes: veto.votes.map((vote) => {
             return {
               id: vote.id,
               type: vote.type,
@@ -83,7 +83,7 @@ const Vetos = () => {
       );
     }
 
-    return vetos.map(veto => {
+    return vetos.map((veto) => {
       return <VetoEntry veto={veto} key={`veto-${veto.id}`} />;
     });
   };

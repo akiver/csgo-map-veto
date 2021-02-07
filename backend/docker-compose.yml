@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    container_name: csgo-map-veto
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: csgomapveto
+    ports:
+      - '3306:3306'

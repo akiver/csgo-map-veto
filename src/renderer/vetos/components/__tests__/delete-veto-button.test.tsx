@@ -2,7 +2,7 @@ import React from 'react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { DeleteVetoButton } from '../delete-veto-button';
 import { VetosProvider } from 'renderer/vetos/vetos-context';
-import { fireEvent, wait } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 
 describe('DeleteVetoButton', () => {
   const renderComponent = () => {
@@ -50,7 +50,7 @@ describe('DeleteVetoButton', () => {
     const button = getByText(/delete/i);
     fireEvent.click(button);
 
-    await wait(() =>
+    await waitFor(() =>
       expect(global.fetch).toHaveBeenCalledWith('https://hi.com/api/vetos/1', {
         method: 'DELETE',
       })
@@ -64,7 +64,7 @@ describe('DeleteVetoButton', () => {
       const button = getByText(/delete/i);
       fireEvent.click(button);
 
-      await wait(() => expect(getByText(/delete/i)).toBeDisabled());
+      await waitFor(() => expect(getByText(/delete/i)).toBeDisabled());
     });
   });
 });

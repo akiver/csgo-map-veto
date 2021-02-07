@@ -5,14 +5,7 @@ When('Bob navigate to the vetos listing', () => {
 });
 
 When('The vetos request return a status {int}', (status: number) => {
-  cy.server();
-
-  cy.route({
-    method: 'GET',
-    url: `/api/vetos`,
-    response: status === 200 ? vetosFixture : '',
-    status,
-  });
+  cy.intercept('GET', `/api/vetos`, { body: vetosFixture, statusCode: status });
 });
 
 Then('Bob sees the vetos', () => {

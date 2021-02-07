@@ -13,7 +13,7 @@ const Votes = () => {
   const votes = useSelector(getVotes);
   return (
     <VotesWrapper>
-      {votes.map(vote => (
+      {votes.map((vote) => (
         <VoteRow vote={vote} key={`vote-${vote.id}`} />
       ))}
     </VotesWrapper>
