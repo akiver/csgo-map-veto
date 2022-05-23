@@ -2,11 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { MapImage } from 'renderer/components/map-image';
 import { Text } from 'renderer/components/text';
-import { Theme } from 'renderer/contexts/theme-context';
-import { Map } from 'renderer/types/map';
-import Unknown from 'renderer/svg/unknown.svg';
+import { ReactComponent as Unknown } from 'renderer/svg/unknown.svg';
 
-const UnknownMap = styled(Unknown)<{ theme: Theme }>`
+const UnknownMap = styled(Unknown)`
   height: 100px;
   margin-left: auto;
   margin-right: auto;
@@ -25,26 +23,24 @@ const StyledMapImage = styled(MapImage)`
 `;
 
 type Props = {
-  maps: Map[];
+  mapNames: string[];
 };
 
-const Maps = ({ maps }: Props) => {
-  return maps.length === 0 ? (
+export function Maps({ mapNames }: Props) {
+  return mapNames.length === 0 ? (
     <MapImageWrapper>
       <UnknownMap title="unknown" data-testid="unknown-map" />
     </MapImageWrapper>
   ) : (
     <>
-      {maps.map((map) => (
-        <MapImageWrapper key={map.name}>
-          <StyledMapImage mapName={map.name} />
+      {mapNames.map((mapName) => (
+        <MapImageWrapper key={mapName}>
+          <StyledMapImage mapName={mapName} />
           <Text size="sm" textAlign="center">
-            {map.name}
+            {mapName}
           </Text>
         </MapImageWrapper>
       ))}
     </>
   );
-};
-
-export { Maps };
+}

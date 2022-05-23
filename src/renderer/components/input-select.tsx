@@ -1,17 +1,24 @@
-import * as React from 'react';
+import React from 'react';
 import Select, { StylesConfig, Props as ReactSelectProps } from 'react-select';
-import { withTheme } from 'styled-components';
+import { useTheme } from 'styled-components';
 import { Label } from 'renderer/components/label';
-import { Theme } from 'renderer/contexts/theme-context';
 
-type Props = ReactSelectProps & {
+type Props<Option, IsMulti extends boolean = false> = ReactSelectProps<Option, IsMulti> & {
   id: string;
   label: string;
-  theme: Theme;
 };
 
-const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...props }: Props) => {
-  const styles: StylesConfig<{ label: string; value: string }, boolean> = {
+export function InputSelect<Option, IsMulti extends boolean = false>({
+  onChange,
+  id,
+  label,
+  options,
+  value,
+  ...props
+}: Props<Option, IsMulti>) {
+  const theme = useTheme();
+
+  const styles: StylesConfig<Option, IsMulti> = {
     control: (provided) => ({
       ...provided,
       backgroundColor: theme.light,
@@ -61,8 +68,4 @@ const ThemedInputSelect = ({ onChange, id, label, options, value, theme, ...prop
       <Select inputId={id} onChange={onChange} options={options} value={value} styles={styles} {...props} />
     </div>
   );
-};
-
-const InputSelect = withTheme(ThemedInputSelect);
-
-export { InputSelect };
+}

@@ -4,7 +4,6 @@ import { Votes } from 'renderer/veto/components/votes';
 import { RemainingMaps } from 'renderer/veto/components/remaining-maps';
 import { PickedMaps } from 'renderer/veto/components/picked-maps';
 import { ButtonCancelVeto } from 'renderer/veto/components/button-cancel-veto';
-import { Theme } from 'renderer/contexts/theme-context';
 import { StyledButton } from 'renderer/components/button';
 import { ButtonSaveVeto } from 'renderer/veto/components/button-save-veto';
 
@@ -31,7 +30,7 @@ const SectionContent = styled.div`
   margin-top: 20px;
 `;
 
-const SectionTitle = styled.h1<{ theme: Theme }>`
+const SectionTitle = styled.h1`
   font-size: 22px;
   text-align: center;
   text-transform: uppercase;
@@ -52,11 +51,7 @@ const Buttons = styled.div`
   }
 `;
 
-type Props = {
-  children?: never;
-};
-
-const Veto = ({}: Props) => {
+export function Veto() {
   return (
     <>
       <StyledVeto>
@@ -85,6 +80,4 @@ const Veto = ({}: Props) => {
       </Buttons>
     </>
   );
-};
-
-export { Veto };
+}

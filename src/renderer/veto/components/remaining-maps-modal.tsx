@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from 'renderer/components/modal';
 import { MapImage } from 'renderer/components/map-image';
 import { Text } from 'renderer/components/text';
 import { Button } from 'renderer/components/button';
-import { makeVote } from 'renderer/veto/actions/make-vote';
-import { getRemainingMaps } from 'renderer/veto/selectors/get-remaining-maps';
+import { useRemainingMapNames } from '../use-remaining-map-names';
+import { useDispatch } from 'renderer/use-dispatch';
+import { makeVote } from '../veto-actions';
 
 const MapsModal = styled(Modal)`
   @media (max-width: 768px) {
@@ -43,25 +43,25 @@ type Props = {
   onClose: () => void;
 };
 
-const RemainingMapsModal = ({ onClose }: Props) => {
+export function RemainingMapsModal({ onClose }: Props) {
   const dispatch = useDispatch();
-  const maps = useSelector(getRemainingMaps);
+  const remainingMapNames = useRemainingMapNames();
 
   return (
     <MapsModal onClose={onClose}>
       <Maps>
-        {maps.map((map) => {
+        {remainingMapNames.map((mapName) => {
           return (
             <MapWrapper
-              key={map.name}
+              key={mapName}
               onClick={() => {
-                dispatch(makeVote(map.name));
+                dispatch(makeVote(mapName));
                 onClose();
               }}
-              data-testid={`map-${map.name}`}
+              data-testid={`map-${mapName}`}
             >
-              <StyledMapImage mapName={map.name} />
-              <Text textAlign="center">{map.name}</Text>
+              <StyledMapImage mapName={mapName} />
+              <Text textAlign="center">{mapName}</Text>
             </MapWrapper>
           );
         })}
@@ -71,6 +71,4 @@ const RemainingMapsModal = ({ onClose }: Props) => {
       </Footer>
     </MapsModal>
   );
-};
-
-export { RemainingMapsModal };
+}

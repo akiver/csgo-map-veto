@@ -1,50 +1,44 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { renderWithRedux, AppWithRedux } from 'test/render-with-redux';
 import { RemainingMapsModal } from '../remaining-maps-modal';
-import { MapStatuses } from 'renderer/types/map-status';
 import { fireEvent } from '@testing-library/react';
-import { VoteStatuses } from 'renderer/types/vote-status';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
+import { VoteStatus } from 'renderer/types/vote-status';
 
 describe('RemainingMapsModal', () => {
-  const handleClose = jest.fn();
+  const handleClose = vi.fn();
 
   afterEach(() => {
     handleClose.mockClear();
   });
 
-  const renderComponent = () =>
-    renderWithRedux(<RemainingMapsModal onClose={handleClose} />, {
+  const renderComponent = () => {
+    return renderWithRedux(<RemainingMapsModal onClose={handleClose} />, {
       initialState: {
-        maps: [
-          {
-            name: 'de_remaining',
-            status: MapStatuses.REMAINING,
-          },
-          {
-            name: 'de_remaining_other',
-            status: MapStatuses.REMAINING,
-          },
-          {
-            name: 'de_banned',
-            status: MapStatuses.BANNED,
-          },
-          {
-            name: 'de_picked',
-            status: MapStatuses.PICKED,
-          },
-        ],
-        votes: [
-          {
-            id: 1,
-            status: VoteStatuses.CURRENT,
-            teamNumber: TeamNumbers.TEAM1,
-            type: VoteTypes.PICK,
-          },
-        ],
+        veto: {
+          mapNames: ['de_picked', 'de_banned', 'de_remaining', 'de_remaining_other'],
+          votes: [
+            {
+              status: VoteStatus.Done,
+              mapName: 'de_picked',
+            },
+            {
+              status: VoteStatus.Done,
+              mapName: 'de_banned',
+            },
+            {
+              status: VoteStatus.Current,
+              mapName: 'de_remaining',
+            },
+            {
+              status: VoteStatus.Waiting,
+              mapName: 'de_remaining_other',
+            },
+          ],
+        },
       },
     });
+  };
 
   it('should render only remaining maps', () => {
     const { getByAltText, getByText, queryByAltText } = renderComponent();

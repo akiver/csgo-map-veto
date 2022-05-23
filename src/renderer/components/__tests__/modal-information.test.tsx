@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { ModalInformation } from '../modal-information';
+import { vi } from 'vitest';
 
 describe('ModalInformation', () => {
   const renderComponent = (
     props = {
-      handleClose: jest.fn(),
+      handleClose: vi.fn(),
     }
   ) => render(<ModalInformation onClose={props.handleClose} message="A message" />);
 
@@ -18,7 +19,7 @@ describe('ModalInformation', () => {
   });
 
   it('should handle a click on the close button', () => {
-    const handleClose = jest.fn();
+    const handleClose = vi.fn();
     const { getByText } = renderComponent({ handleClose });
 
     fireEvent.click(getByText(/close/i));

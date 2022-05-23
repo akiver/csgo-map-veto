@@ -1,0 +1,13 @@
+diff --git a/node_modules/@badeball/cypress-cucumber-preprocessor/lib/step-definitions.js b/node_modules/@badeball/cypress-cucumber-preprocessor/lib/step-definitions.js
+index ef12071..3c58646 100644
+--- a/node_modules/@badeball/cypress-cucumber-preprocessor/lib/step-definitions.js
++++ b/node_modules/@badeball/cypress-cucumber-preprocessor/lib/step-definitions.js
+@@ -11,7 +11,7 @@ const assert_1 = __importDefault(require("assert"));
+ const is_path_inside_1 = __importDefault(require("is-path-inside"));
+ const debug_1 = __importDefault(require("./debug"));
+ async function getStepDefinitionPaths(configuration, filepath) {
+-    const files = (await Promise.all(getStepDefinitionPatterns(configuration, filepath).map((pattern) => util_1.default.promisify(glob_1.default)(pattern, { nodir: true })))).reduce((acum, el) => acum.concat(el), []);
++    const files = (await Promise.all(getStepDefinitionPatterns(configuration, filepath).map((pattern) => util_1.default.promisify(glob_1.default)(pattern.replace(/\\/g, '/'), { nodir: true })))).reduce((acum, el) => acum.concat(el), []);
+     if (files.length === 0) {
+         (0, debug_1.default)("found no step definitions");
+     }

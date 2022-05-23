@@ -9,10 +9,8 @@ thumbs.db
 cypress/videos
 cypress/screenshots
 
-gin-bin
-gin-bin.exe
-backend/vendor
 backend/backend
 backend/backend.exe
 .env
 coverage
+out

@@ -1,30 +1,21 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { InputSelect } from 'renderer/components/input-select';
 import { BEST_OF_ARRAY } from 'renderer/constants/best-of/best-of-array';
-import { getSelectedBestOf } from 'renderer/veto/selectors/get-selected-best-of';
-import { updateSelectedBestOf } from 'renderer/veto/actions/update-selected-bo';
 import { BestOf } from 'renderer/types/best-of';
+import { bestOfChanged } from '../veto-actions';
+import { useDispatch } from 'renderer/use-dispatch';
+import { useVeto } from '../use-veto';
 
-type Props = {
-  children?: never;
-};
-
-const InputSelectBestOf = ({}: Props) => {
-  const selectedBestOf = useSelector(getSelectedBestOf);
+export function InputSelectBestOf() {
+  const { bestOf } = useVeto();
   const dispatch = useDispatch();
+  const onChange = (bestOf: BestOf | null) => {
+    if (bestOf !== null) {
+      dispatch(bestOfChanged(bestOf));
+    }
+  };
 
   return (
-    <InputSelect
-      options={BEST_OF_ARRAY}
-      id="select-best-of"
-      label="BO"
-      value={selectedBestOf}
-      onChange={(bestOf: BestOf) => {
-        dispatch(updateSelectedBestOf(bestOf));
-      }}
-    />
+    <InputSelect<BestOf> options={BEST_OF_ARRAY} id="select-best-of" label="BO" value={bestOf} onChange={onChange} />
   );
-};
-
-export { InputSelectBestOf };
+}

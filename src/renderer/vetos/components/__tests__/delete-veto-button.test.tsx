@@ -3,6 +3,7 @@ import { renderWithRedux } from 'test/render-with-redux';
 import { DeleteVetoButton } from '../delete-veto-button';
 import { VetosProvider } from 'renderer/vetos/vetos-context';
 import { fireEvent, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
 
 describe('DeleteVetoButton', () => {
   const renderComponent = () => {
@@ -40,7 +41,7 @@ describe('DeleteVetoButton', () => {
   });
 
   it('should make a delete request', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         status: 200,
       };

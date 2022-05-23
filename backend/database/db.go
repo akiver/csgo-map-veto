@@ -6,15 +6,15 @@ import (
 
 var DB *sql.DB
 
-func Initialize(databaseName string, username string, password string) {
+func Initialize(databaseName string, username string, password string) error {
 	var err error
 	DB, err = sql.Open("mysql", username+":"+password+"@/"+databaseName+"?charset=utf8mb4&parseTime=True&loc=Local")
 	if err != nil {
-		panic(err)
+		return err
 	}
 
-	if err = DB.Ping(); err != nil {
-		panic(err)
+	if err := DB.Ping(); err != nil {
+		return err
 	}
 
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS vetos (
@@ -27,7 +27,7 @@ func Initialize(databaseName string, username string, password string) {
 	)`)
 
 	if err != nil {
-		panic(err)
+		return err
 	}
 
 	_, err = DB.Exec(`CREATE TABLE IF NOT EXISTS votes (
@@ -41,6 +41,8 @@ func Initialize(databaseName string, username string, password string) {
 	)`)
 
 	if err != nil {
-		panic(err)
+		return err
 	}
+
+	return nil
 }

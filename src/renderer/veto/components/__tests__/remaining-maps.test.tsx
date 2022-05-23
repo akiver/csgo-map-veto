@@ -1,40 +1,37 @@
 import React from 'react';
 import { renderWithRedux } from 'test/render-with-redux';
-import { MapStatuses } from 'renderer/types/map-status';
-import { VoteStatuses } from 'renderer/types/vote-status';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
+import { VoteStatus } from 'renderer/types/vote-status';
+import { VoteType } from 'renderer/types/vote-type';
 import { RemainingMaps } from '../remaining-maps';
 
 describe('RemainingMaps', () => {
   const { getByAltText, getByText, queryByAltText } = renderWithRedux(<RemainingMaps />, {
     initialState: {
-      maps: [
-        {
-          name: 'de_remaining',
-          status: MapStatuses.REMAINING,
-        },
-        {
-          name: 'de_remaining_other',
-          status: MapStatuses.REMAINING,
-        },
-        {
-          name: 'de_banned',
-          status: MapStatuses.BANNED,
-        },
-        {
-          name: 'de_picked',
-          status: MapStatuses.PICKED,
-        },
-      ],
-      votes: [
-        {
-          id: 1,
-          status: VoteStatuses.CURRENT,
-          teamNumber: TeamNumbers.TEAM1,
-          type: VoteTypes.PICK,
-        },
-      ],
+      veto: {
+        mapNames: ['de_banned', 'de_picked', 'de_remaining', 'de_remaining_other'],
+        votes: [
+          {
+            type: VoteType.Ban,
+            mapName: 'de_banned',
+            status: VoteStatus.Done,
+          },
+          {
+            type: VoteType.Pick,
+            mapName: 'de_picked',
+            status: VoteStatus.Done,
+          },
+          {
+            type: VoteType.Pick,
+            mapName: 'de_remaining',
+            status: VoteStatus.Waiting,
+          },
+          {
+            type: VoteType.Pick,
+            mapName: 'de_remaining_other',
+            status: VoteStatus.Current,
+          },
+        ],
+      },
     },
   });
 

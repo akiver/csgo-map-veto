@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { VoteRow } from 'renderer/veto/components/vote-row';
-import { getVotes } from 'renderer/veto/selectors/get-votes';
+import { useVeto } from '../use-veto';
 
 const VotesWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const Votes = () => {
-  const votes = useSelector(getVotes);
+export function Votes() {
+  const { votes } = useVeto();
+
   return (
     <VotesWrapper>
       {votes.map((vote) => (
@@ -18,6 +18,4 @@ const Votes = () => {
       ))}
     </VotesWrapper>
   );
-};
-
-export { Votes };
+}

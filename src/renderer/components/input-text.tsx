@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Theme } from 'renderer/contexts/theme-context';
 import { Label } from 'renderer/components/label';
 
-const StyledInputText = styled.input<{ theme: Theme }>`
+const StyledInputText = styled.input`
   border-radius: 4px;
   border: none;
   width: 100%;
@@ -15,7 +14,7 @@ const StyledInputText = styled.input<{ theme: Theme }>`
 `;
 
 type Props = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   id: string;
   value?: string;
@@ -23,7 +22,7 @@ type Props = {
   placeholder?: string;
 };
 
-const InputText = ({ onChange, value, label, id, isDisabled = false, placeholder, ...props }: Props) => {
+export function InputText({ onChange, value, label, id, isDisabled = false, placeholder, ...props }: Props) {
   return (
     <>
       <Label id={id} label={label} />
@@ -39,6 +38,4 @@ const InputText = ({ onChange, value, label, id, isDisabled = false, placeholder
       />
     </>
   );
-};
-
-export { InputText };
+}

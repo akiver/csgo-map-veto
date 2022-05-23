@@ -1,6 +1,6 @@
-import { VoteTypes } from 'renderer/types/vote-type';
+import { VoteType } from 'renderer/types/vote-type';
 import { BestOfMode } from 'renderer/types/best-of-mode';
-import { TeamNumbers } from 'renderer/types/team-number';
+import { TeamNumber } from 'renderer/types/team-number';
 import { BestOf } from 'renderer/types/best-of';
 
 const MODE_BBBR: BestOfMode = {
@@ -9,38 +9,38 @@ const MODE_BBBR: BestOfMode = {
   votes: [
     {
       id: 1,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 2,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 3,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 4,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 5,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 6,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 7,
-      type: VoteTypes.RANDOM,
-      teamNumber: TeamNumbers.SERVER,
+      type: VoteType.Random,
+      teamNumber: TeamNumber.Server,
     },
   ],
 };
@@ -51,28 +51,28 @@ const MODE_BBR = {
   votes: [
     {
       id: 1,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 2,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 3,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 4,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 5,
-      type: VoteTypes.RANDOM,
-      teamNumber: TeamNumbers.SERVER,
+      type: VoteType.Random,
+      teamNumber: TeamNumber.Server,
     },
   ],
 };
@@ -83,18 +83,18 @@ const MODE_BR = {
   votes: [
     {
       id: 1,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM1,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team1,
     },
     {
       id: 2,
-      type: VoteTypes.BAN,
-      teamNumber: TeamNumbers.TEAM2,
+      type: VoteType.Ban,
+      teamNumber: TeamNumber.Team2,
     },
     {
       id: 3,
-      type: VoteTypes.RANDOM,
-      teamNumber: TeamNumbers.SERVER,
+      type: VoteType.Random,
+      teamNumber: TeamNumber.Server,
     },
   ],
 };
@@ -105,16 +105,14 @@ const MODE_ALL_RANDOM = {
   votes: [
     {
       id: 1,
-      type: VoteTypes.RANDOM,
-      teamNumber: TeamNumbers.SERVER,
+      type: VoteType.Random,
+      teamNumber: TeamNumber.Server,
     },
   ],
 };
 
-const BEST_OF_1: BestOf = {
+export const BEST_OF_1: BestOf = {
   value: 1,
   label: 'BO 1',
   modes: [MODE_BBBR, MODE_BBR, MODE_BR, MODE_ALL_RANDOM],
 };
-
-export { BEST_OF_1 };

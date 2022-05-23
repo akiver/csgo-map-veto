@@ -1,10 +1,11 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { waitForElementToBeRemoved, fireEvent, waitFor } from '@testing-library/react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { VetosProvider } from 'renderer/vetos/vetos-context';
 import { VetosResponse, VetoResponse } from 'renderer/types/api';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
+import { TeamNumber } from 'renderer/types/team-number';
+import { VoteType } from 'renderer/types/vote-type';
 import { BestOfType } from 'renderer/types/best-of';
 import { Vetos } from '../vetos';
 
@@ -17,14 +18,14 @@ const veto1: VetoResponse = {
   votes: [
     {
       id: 1,
-      team_number: TeamNumbers.TEAM1,
-      type: VoteTypes.PICK,
+      team_number: TeamNumber.Team1,
+      type: VoteType.Pick,
       map_name: 'de_test',
     },
     {
       id: 2,
-      team_number: TeamNumbers.TEAM2,
-      type: VoteTypes.BAN,
+      team_number: TeamNumber.Team2,
+      type: VoteType.Ban,
       map_name: 'de_test_again',
     },
   ],
@@ -39,8 +40,8 @@ const veto2: VetoResponse = {
   votes: [
     {
       id: 1,
-      team_number: TeamNumbers.SERVER,
-      type: VoteTypes.RANDOM,
+      team_number: TeamNumber.Server,
+      type: VoteType.Random,
       map_name: 'de_test_hi',
     },
   ],
@@ -58,7 +59,7 @@ describe('Vetos', () => {
   const response: VetosResponse = [veto1, veto2];
 
   it('should fetch and render the vetos', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         json: () => {
           return Promise.resolve(response);
@@ -95,7 +96,7 @@ describe('Vetos', () => {
   });
 
   it('should render a loading message', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         json: () => {
           return new Promise((res) => setTimeout(res, 10000));
@@ -109,7 +110,7 @@ describe('Vetos', () => {
   });
 
   it('should render an error message', () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       throw new Error('nop');
     });
 
@@ -120,7 +121,7 @@ describe('Vetos', () => {
   });
 
   it('should delete a veto', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         json: () => {
           return Promise.resolve([veto2]);
@@ -132,7 +133,7 @@ describe('Vetos', () => {
 
     await waitForElementToBeRemoved(() => getByText(/loading/i));
 
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         status: 200,
       };

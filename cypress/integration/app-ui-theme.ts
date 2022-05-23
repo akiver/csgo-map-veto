@@ -1,3 +1,5 @@
+import { Then, Given, When } from '@badeball/cypress-cucumber-preprocessor';
+
 Given('Bob is using the app with {string} theme', (theme: string) => {
   localStorage.setItem('csgomapveto.theme', theme);
 });

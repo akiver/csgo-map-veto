@@ -1,16 +1,21 @@
 {
-  "extends": "./node_modules/electron-webpack/tsconfig-base.json",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noEmit": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "renderer/*": ["src/renderer/*"],
-      "static/*": ["static/*"],
       "test/*": ["test/*"]
     },
-    "typeRoots": ["node_modules/@types", "typings"]
+    "types": ["vite/client", "vitest/globals", "vite-plugin-svgr/client"]
   },
-  "exclude": ["cypress/**/*.ts", "test"]
+  "include": ["src/**/*", "./test/**/*", "types"]
 }

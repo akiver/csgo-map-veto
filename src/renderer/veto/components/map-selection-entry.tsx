@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import { MapImage } from 'renderer/components/map-image';
-import { isMapSelected } from 'renderer/veto/selectors/is-map-selected';
-import { StoreState } from 'renderer/store';
-import { Theme } from 'renderer/contexts/theme-context';
 import { Text } from 'renderer/components/text';
-import { toggleMapSelection } from 'renderer/veto/actions/toggle-map-selection';
+import { useDispatch } from 'renderer/use-dispatch';
+import { mapFiltered } from '../veto-actions';
+import { useVeto } from '../use-veto';
 
 const Wrapper = styled.div`
   margin-bottom: 5px;
@@ -16,7 +14,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledMapImage = styled(MapImage)<{ theme: Theme; isSelected: boolean }>`
+const StyledMapImage = styled(MapImage)<{ isSelected: boolean }>`
   height: 80px;
   border-width: 3px;
   border-color: ${({ theme, isSelected }) => isSelected && theme.success};
@@ -31,15 +29,19 @@ type Props = {
   mapName: string;
 };
 
-const MapSelectionEntry = ({ mapName }: Props) => {
-  const isSelected = useSelector((state: StoreState) => isMapSelected(state, mapName));
+export function MapSelectionEntry({ mapName }: Props) {
+  const { mapNames } = useVeto();
+  const isSelected = mapNames.includes(mapName);
   const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(mapFiltered(mapName));
+  };
+
   return (
-    <Wrapper onClick={() => dispatch(toggleMapSelection(mapName))}>
+    <Wrapper onClick={onClick}>
       <StyledMapImage mapName={mapName} isSelected={isSelected} />
       <Text textAlign="center">{mapName}</Text>
     </Wrapper>
   );
-};
-
-export { MapSelectionEntry };
+}

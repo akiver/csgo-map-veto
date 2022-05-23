@@ -1,24 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'renderer/components/button';
-import { useDispatch } from 'react-redux';
-import { resetVeto } from 'renderer/veto/actions/reset-veto';
+import { useDispatch } from 'renderer/use-dispatch';
+import { resetVeto } from '../veto-actions';
 
-const SlyledButtonCancelVeto = styled(Button)`
+const SlyledButton = styled(Button)`
   background-color: ${(props) => props.theme.danger};
 `;
 
-const ButtonCancelVeto = () => {
+export function ButtonCancelVeto() {
   const dispatch = useDispatch();
-  return (
-    <SlyledButtonCancelVeto
-      onClick={() => {
-        dispatch(resetVeto());
-      }}
-    >
-      Cancel
-    </SlyledButtonCancelVeto>
-  );
-};
+  const onClick = () => {
+    dispatch(resetVeto());
+  };
 
-export { ButtonCancelVeto };
+  return <SlyledButton onClick={onClick}>Cancel</SlyledButton>;
+}

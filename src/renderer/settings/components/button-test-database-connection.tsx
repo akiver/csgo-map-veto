@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'renderer/components/button';
 import { KEY_API_ADDRESS } from 'renderer/constants/local-storage';
 import { ModalInformation } from 'renderer/components/modal-information';
-import { getApiAddress } from 'renderer/settings/selectors/get-api-address';
+import { useApiAddress } from '../use-api-address';
 
 const Wrapper = styled.div`
   margin-top: 10px;
 `;
 
-const ButtonTestDatabaseConnection = () => {
+export function ButtonTestDatabaseConnection() {
   const [resultMessage, setResultMessage] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const apiAddress = useSelector(getApiAddress);
+  const apiAddress = useApiAddress();
 
   const onClick = async () => {
     try {
@@ -42,6 +41,4 @@ const ButtonTestDatabaseConnection = () => {
       )}
     </Wrapper>
   );
-};
-
-export { ButtonTestDatabaseConnection };
+}

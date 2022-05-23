@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"backend/database"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 type DeleteVetoRequestParameters struct {

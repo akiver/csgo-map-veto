@@ -1,9 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Link as RRLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { Theme } from 'renderer/contexts/theme-context';
 
-const StyledLink = styled(RRLink)<{ theme: Theme }>`
+const StyledLink = styled(RRLink)`
   background-color: ${({ theme }) => theme.primary};
   border: none;
   color: ${({ theme }) => theme.dark};
@@ -24,12 +23,10 @@ type Props = {
   className?: string;
 };
 
-const Link = ({ to, children, className, ...props }: Props) => {
+export function Link({ to, children, className, ...props }: Props) {
   return (
     <StyledLink to={to} className={className} {...props}>
       {children}
     </StyledLink>
   );
-};
-
-export { Link };
+}

@@ -9,7 +9,7 @@ type VoteResponse = {
   map_name: string;
 };
 
-type VetoResponse = {
+export type VetoResponse = {
   id: number;
   created_at: Date;
   best_of: BestOfType;
@@ -18,7 +18,7 @@ type VetoResponse = {
   votes: VoteResponse[];
 };
 
-type VetosResponse = VetoResponse[];
+export type VetosResponse = VetoResponse[];
 
 type VotePostRequest = {
   team_number: TeamNumber;
@@ -26,11 +26,9 @@ type VotePostRequest = {
   map_name?: string;
 };
 
-type VetoPostRequest = {
+export type VetoPostRequest = {
   team_one_name: string;
   team_two_name: string;
   best_of: BestOfType;
   votes: VotePostRequest[];
 };
-
-export { VetoResponse, VetosResponse, VetoPostRequest };

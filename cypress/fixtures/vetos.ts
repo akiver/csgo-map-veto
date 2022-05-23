@@ -1,9 +1,9 @@
 import { VetoResponse } from 'renderer/types/api';
-import { VoteTypes } from 'renderer/types/vote-type';
-import { TeamNumbers } from 'renderer/types/team-number';
+import { VoteType } from 'renderer/types/vote-type';
+import { TeamNumber } from 'renderer/types/team-number';
 import { MAPS } from 'renderer/constants/maps';
 
-const vetosFixture: VetoResponse[] = [
+export const vetosFixture: VetoResponse[] = [
   {
     id: 1,
     team_one_name: 'Team 1',
@@ -12,26 +12,26 @@ const vetosFixture: VetoResponse[] = [
     votes: [
       {
         id: 1,
-        type: VoteTypes.PICK,
-        team_number: TeamNumbers.TEAM1,
+        type: VoteType.Pick,
+        team_number: TeamNumber.Team1,
         map_name: MAPS[0],
       },
       {
         id: 2,
         type: 'pick',
-        team_number: TeamNumbers.TEAM2,
+        team_number: TeamNumber.Team2,
         map_name: MAPS[1],
       },
       {
         id: 3,
-        type: VoteTypes.BAN,
-        team_number: TeamNumbers.TEAM1,
+        type: VoteType.Ban,
+        team_number: TeamNumber.Team1,
         map_name: MAPS[2],
       },
       {
         id: 4,
-        type: VoteTypes.BAN,
-        team_number: TeamNumbers.TEAM2,
+        type: VoteType.Ban,
+        team_number: TeamNumber.Team2,
         map_name: MAPS[3],
       },
     ],
@@ -45,13 +45,11 @@ const vetosFixture: VetoResponse[] = [
     votes: [
       {
         id: 5,
-        type: VoteTypes.RANDOM,
-        team_number: TeamNumbers.SERVER,
+        type: VoteType.Random,
+        team_number: TeamNumber.Server,
         map_name: MAPS[0],
       },
     ],
     created_at: new Date('September 20, 1990'),
   },
 ];
-
-export { vetosFixture };

@@ -1,44 +1,75 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'renderer/components/button';
-import { getCreateVetoParameters } from 'renderer/veto/selectors/get-create-veto-parameters';
 import { ModalInformation } from 'renderer/components/modal-information';
-import { resetVeto } from 'renderer/veto/actions/reset-veto';
-import { getApiAddress } from 'renderer/settings/selectors/get-api-address';
-import { getVetoStatus } from 'renderer/veto/selectors/get-veto-status';
-import { VetoStatuses } from 'renderer/types/veto-status';
+import { VetoStatus } from 'renderer/types/veto-status';
+import { useApiAddress } from 'renderer/settings/use-api-address';
+import { useDispatch } from 'renderer/use-dispatch';
+import { useVeto } from '../use-veto';
+import { VetoPostRequest } from 'renderer/types/api';
+import { resetVeto } from '../veto-actions';
 
-type Props = RouteComponentProps;
+function useBuildRequestParameters() {
+  const { teamOneName, teamTwoName, votes, bestOf } = useVeto();
 
-const ButtonSaveVeto = withRouter(({ history }: Props) => {
+  return () => {
+    const parameters: VetoPostRequest = {
+      team_one_name: teamOneName,
+      team_two_name: teamTwoName,
+      best_of: bestOf.value,
+      votes: votes.map((vote) => {
+        return {
+          team_number: vote.teamNumber,
+          type: vote.type,
+          map_name: vote.mapName,
+        };
+      }),
+    };
+
+    return parameters;
+  };
+}
+
+function useSaveVeto() {
+  const apiAddress = useApiAddress();
+  const buildParameters = useBuildRequestParameters();
+
+  return async () => {
+    const parameters = buildParameters();
+    const response = await fetch(`${apiAddress}/api/vetos`, {
+      method: 'POST',
+      body: JSON.stringify(parameters),
+    });
+
+    if (response.status !== 201) {
+      throw new Error('Failed to create veto');
+    }
+  };
+}
+
+export function ButtonSaveVeto() {
   const [error, setError] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const apiAddress = useSelector(getApiAddress);
-  const parameters = useSelector(getCreateVetoParameters);
-  const isDisabled = useSelector(getVetoStatus) !== VetoStatuses.COMPLETED;
+  const { status } = useVeto();
+  const isDisabled = status !== VetoStatus.Completed;
+  const saveVeto = useSaveVeto();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onClick = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiAddress}/api/vetos`, {
-        method: 'POST',
-        body: JSON.stringify(parameters),
-      });
-
-      if (response.status === 201) {
-        dispatch(resetVeto());
-        history.push('/vetos');
-        return;
-      }
-
-      throw new Error();
+      await saveVeto();
+      dispatch(resetVeto());
+      navigate('vetos');
     } catch (error) {
-      console.error(error);
       setError('An error occurred, make sure the database is running and the API address is correct.');
       setIsLoading(false);
     }
+  };
+
+  const onClose = () => {
+    setError(undefined);
   };
 
   return (
@@ -46,16 +77,7 @@ const ButtonSaveVeto = withRouter(({ history }: Props) => {
       <Button onClick={onClick} isDisabled={isDisabled || isLoading}>
         Save
       </Button>
-      {error && (
-        <ModalInformation
-          message={error}
-          onClose={() => {
-            setError(undefined);
-          }}
-        />
-      )}
+      {error && <ModalInformation message={error} onClose={onClose} />}
     </>
   );
-});
-
-export { ButtonSaveVeto };
+}

@@ -6,8 +6,6 @@ type Props = {
   bestOfType: BestOfType;
 };
 
-const BestOfText = ({ bestOfType }: Props) => {
+export function BestOfText({ bestOfType }: Props) {
   return <Text>{`BO${bestOfType}`}</Text>;
-};
-
-export { BestOfText };
+}

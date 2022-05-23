@@ -1,9 +1,7 @@
-const TeamNumbers = Object.freeze({
-  TEAM1: 1 as const,
-  TEAM2: 2 as const,
-  SERVER: 3 as const,
-});
+export const TeamNumber = {
+  Team1: 1,
+  Team2: 2,
+  Server: 3,
+} as const;
 
-type TeamNumber = EnumLiteralsOf<typeof TeamNumbers>;
-
-export { TeamNumber, TeamNumbers };
+export type TeamNumber = typeof TeamNumber[keyof typeof TeamNumber];

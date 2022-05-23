@@ -1,4 +1,5 @@
 import { vetosFixture } from '../fixtures/vetos';
+import { Then, Given, When } from '@badeball/cypress-cucumber-preprocessor';
 
 Given('Bob is on the vetos listing page', () => {
   cy.intercept('GET', '/api/vetos', vetosFixture);

@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Theme } from 'renderer/contexts/theme-context';
 
-const StyledButton = styled.button.attrs({
+export const StyledButton = styled.button.attrs({
   type: 'button',
-})<{ theme: Theme; disabled?: boolean }>`
+})<{ disabled?: boolean }>`
   background-color: ${({ theme }) => theme.primary};
   border: none;
   color: ${({ theme }) => theme.dark};
@@ -33,12 +32,10 @@ type Props = {
   className?: string;
 };
 
-const Button = ({ onClick, children, isDisabled, className, ...props }: Props) => {
+export function Button({ onClick, children, isDisabled, className, ...props }: Props) {
   return (
     <StyledButton onClick={onClick} disabled={isDisabled} className={className} role="button" {...props}>
       {children}
     </StyledButton>
   );
-};
-
-export { StyledButton, Button };
+}

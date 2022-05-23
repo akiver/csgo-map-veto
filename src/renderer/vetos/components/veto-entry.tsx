@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text } from 'renderer/components/text';
-import { Theme } from 'renderer/contexts/theme-context';
 import { DeleteVetoButton } from 'renderer/vetos/components/delete-veto-button';
 import { Veto } from 'renderer/vetos/types/veto';
 import { BestOfText } from 'renderer/vetos/components/best-of-text';
 import { VoteSummary } from 'renderer/vetos/components/vote-summary';
 
-const StyledVetoEntry = styled.div<{ theme: Theme }>`
+const StyledVetoEntry = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -19,7 +18,7 @@ const StyledVetoEntry = styled.div<{ theme: Theme }>`
   }
 `;
 
-const Details = styled.div<{ theme: Theme }>`
+const Details = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
@@ -43,19 +42,19 @@ const Votes = styled.div`
   width: 100%;
 `;
 
-const getFormattedDate = (date: Date) => {
+function getFormattedDate(date: Date) {
   return date.toLocaleDateString('default', {
     year: 'numeric',
     day: '2-digit',
     month: '2-digit',
   });
-};
+}
 
 type Props = {
   veto: Veto;
 };
 
-const VetoEntry = ({ veto }: Props) => {
+export function VetoEntry({ veto }: Props) {
   return (
     <StyledVetoEntry data-testid={`veto-${veto.id}`}>
       <Details data-testid={`veto-${veto.id}-detail`}>
@@ -80,6 +79,4 @@ const VetoEntry = ({ veto }: Props) => {
       </Votes>
     </StyledVetoEntry>
   );
-};
-
-export { VetoEntry };
+}

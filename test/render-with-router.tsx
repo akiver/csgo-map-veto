@@ -1,19 +1,11 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-const renderWithRouter = (ui: React.ReactNode) => {
+export function renderWithRouter(ui: React.ReactNode) {
   return render(
-    <Router
-      history={createMemoryHistory({
-        initialEntries: ['/', '/vetos'],
-        initialIndex: 0,
-      })}
-    >
+    <MemoryRouter initialEntries={['/', '/vetos']} initialIndex={0}>
       {ui}
-    </Router>
+    </MemoryRouter>
   );
-};
-
-export { renderWithRouter };
+}

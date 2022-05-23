@@ -9,11 +9,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-type Props = {
-  children?: never;
-};
-
-const MapsSelection = ({}: Props) => {
+export function MapsSelection() {
   return (
     <Wrapper>
       {MAPS.map((mapName) => {
@@ -21,6 +17,4 @@ const MapsSelection = ({}: Props) => {
       })}
     </Wrapper>
   );
-};
-
-export { MapsSelection };
+}

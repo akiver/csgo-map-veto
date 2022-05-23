@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getAssetPath } from 'renderer/utils/get-asset-path';
+import { getMapImageSrcFromMapName } from 'renderer/images/get-map-image-src-from-map-name';
 
 const Image = styled.img`
   border-radius: 2px;
@@ -12,8 +12,8 @@ type Props = {
   className?: string;
 };
 
-const MapImage = ({ mapName, className }: Props) => {
-  return <Image src={getAssetPath(`maps/${mapName}.png`)} alt={mapName} className={className} title={mapName} />;
-};
+export function MapImage({ mapName, className }: Props) {
+  const src = getMapImageSrcFromMapName(mapName);
 
-export { MapImage };
+  return <Image src={src} alt={mapName} className={className} title={mapName} />;
+}

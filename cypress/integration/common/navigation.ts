@@ -1,3 +1,5 @@
+import { Given } from '@badeball/cypress-cucumber-preprocessor';
+
 Given('Bob is on the home page', () => {
   cy.visit('/');
 });

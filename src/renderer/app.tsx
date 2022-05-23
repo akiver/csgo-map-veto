@@ -1,16 +1,13 @@
-import 'regenerator-runtime/runtime';
-import React, { useState, useEffect } from 'react';
-import { Router } from 'react-router-dom';
-import { createHashHistory, createBrowserHistory } from 'history';
-import styled, { ThemeProvider } from 'styled-components';
-import { ResetCSS } from 'renderer/styles/reset-css';
-import { GlobalStyles } from 'renderer/styles/global-styles';
-import { AppThemeContext, themes, Theme, THEME_DARK, THEME_LIGHT, ThemesKeys } from 'renderer/contexts/theme-context';
-import { KEY_THEME } from 'renderer/constants/local-storage';
-import { Routes } from 'renderer/routes';
+import React from 'react';
+import { Routes, Route, HashRouter, BrowserRouter } from 'react-router-dom';
+import styled from 'styled-components';
 import { Footer } from 'renderer/components/footer';
+import { VetoViewSwitcher } from 'renderer/veto/components/veto-view-switcher';
+import { Settings } from 'renderer/settings/components/settings';
+import { VetosRoute } from 'renderer/vetos/vetos-route';
+import { ThemeProvider } from 'renderer/theme/theme-provider';
 
-const AppWrapper = styled.div<{ theme: Theme }>`
+const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,43 +23,23 @@ const Content = styled.div`
   margin-bottom: 40px;
 `;
 
-const history = IS_ELECTRON || process.env.NODE_ENV === 'production' ? createHashHistory() : createBrowserHistory();
+const Router = IS_ELECTRON ? HashRouter : BrowserRouter;
 
-const App = () => {
-  const [theme, setTheme] = useState(themes.dark);
-
-  useEffect(() => {
-    const themeKey = localStorage.getItem(KEY_THEME) as ThemesKeys | null;
-    if (themeKey !== null) {
-      setTheme(themes[themeKey]);
-    }
-  }, []);
-
+export function App() {
   return (
-    <AppThemeContext.Provider
-      value={{
-        theme,
-        toggleTheme: () => {
-          const themeKey = theme === themes[THEME_DARK] ? THEME_LIGHT : THEME_DARK;
-          setTheme(themes[themeKey]);
-          localStorage.setItem(KEY_THEME, themeKey);
-        },
-      }}
-    >
-      <ThemeProvider theme={theme}>
-        <AppWrapper>
-          <ResetCSS />
-          <GlobalStyles />
-          <Router history={history}>
-            <Content>
-              <Routes />
-            </Content>
-          </Router>
-          <Footer />
-        </AppWrapper>
-      </ThemeProvider>
-    </AppThemeContext.Provider>
+    <ThemeProvider>
+      <AppWrapper>
+        <Router>
+          <Content>
+            <Routes>
+              <Route path="/" element={<VetoViewSwitcher />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/vetos" element={<VetosRoute />} />
+            </Routes>
+          </Content>
+        </Router>
+        <Footer />
+      </AppWrapper>
+    </ThemeProvider>
   );
-};
-
-export { App };
+}

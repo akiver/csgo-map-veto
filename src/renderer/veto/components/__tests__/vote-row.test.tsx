@@ -1,10 +1,9 @@
 import React from 'react';
 import { cleanup } from '@testing-library/react';
 import { renderWithRedux, AppWithRedux } from 'test/render-with-redux';
-import { MapStatuses } from 'renderer/types/map-status';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
-import { VoteStatuses } from 'renderer/types/vote-status';
+import { TeamNumber } from 'renderer/types/team-number';
+import { VoteType } from 'renderer/types/vote-type';
+import { VoteStatus } from 'renderer/types/vote-status';
 import { Vote } from 'renderer/types/vote';
 import { VoteRow } from '../vote-row';
 
@@ -14,20 +13,12 @@ describe('VoteRow', () => {
   const createComponent = (vote: Vote) => {
     return renderWithRedux(<VoteRow vote={vote} />, {
       initialState: {
-        maps: [
-          {
-            name: 'de_map',
-            status: MapStatuses.REMAINING,
-          },
-        ],
-        votes: [
-          {
-            id: 1,
-            teamNumber: TeamNumbers.SERVER,
-            status: VoteStatuses.CURRENT,
-            type: VoteTypes.RANDOM,
-          },
-        ],
+        veto: {
+          teamOneName: 'Team 1',
+          teamTwoName: 'Team 2',
+          mapNames: ['de_map'],
+          votes: [],
+        },
       },
     });
   };
@@ -36,9 +27,9 @@ describe('VoteRow', () => {
     it('should render', () => {
       const { getByText, getByTitle } = createComponent({
         id: 1,
-        teamNumber: TeamNumbers.TEAM1,
-        type: VoteTypes.PICK,
-        status: VoteStatuses.WAITING,
+        teamNumber: TeamNumber.Team1,
+        type: VoteType.Pick,
+        status: VoteStatus.Waiting,
       });
 
       expect(getByText(/team 1/i)).toBeTruthy();
@@ -51,9 +42,9 @@ describe('VoteRow', () => {
     it('should render', () => {
       const { getByAltText, getByText } = createComponent({
         id: 1,
-        teamNumber: TeamNumbers.TEAM2,
-        type: VoteTypes.BAN,
-        status: VoteStatuses.DONE,
+        teamNumber: TeamNumber.Team2,
+        type: VoteType.Ban,
+        status: VoteStatus.Done,
         mapName: 'toto',
       });
 
@@ -67,9 +58,9 @@ describe('VoteRow', () => {
     it('should render', () => {
       const { getByRole, getByText } = createComponent({
         id: 1,
-        teamNumber: TeamNumbers.TEAM1,
-        type: VoteTypes.BAN,
-        status: VoteStatuses.CURRENT,
+        teamNumber: TeamNumber.Team1,
+        type: VoteType.Ban,
+        status: VoteStatus.Current,
       });
 
       expect(getByText(/team 1/i)).toBeTruthy();
@@ -82,9 +73,9 @@ describe('VoteRow', () => {
     it('should make a a random vote', () => {
       const { getByText, getByRole, store, rerender } = createComponent({
         id: 1,
-        teamNumber: TeamNumbers.SERVER,
-        type: VoteTypes.RANDOM,
-        status: VoteStatuses.CURRENT,
+        teamNumber: TeamNumber.Server,
+        type: VoteType.Random,
+        status: VoteStatus.Current,
       });
 
       expect(getByText(/server/i)).toBeTruthy();
@@ -96,9 +87,9 @@ describe('VoteRow', () => {
           <VoteRow
             vote={{
               id: 1,
-              teamNumber: TeamNumbers.SERVER,
-              type: VoteTypes.RANDOM,
-              status: VoteStatuses.DONE,
+              teamNumber: TeamNumber.Server,
+              type: VoteType.Random,
+              status: VoteStatus.Done,
               mapName: 'de_map',
             }}
           />

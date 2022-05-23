@@ -1,9 +1,11 @@
+import { vi } from 'vitest';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Button } from '../button';
 
 describe('Button', () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
   const text = 'A button';
   const createComponent = (props = {}) => (
     <Button onClick={onClick} {...props}>
@@ -11,11 +13,12 @@ describe('Button', () => {
     </Button>
   );
 
-  it('should render a clickable button', () => {
+  it('should render a clickable button', async () => {
     const { getByText } = render(createComponent());
 
+    const user = userEvent.setup();
     const button = getByText(text);
-    fireEvent.click(button);
+    await user.click(button);
 
     expect(button).toBeInTheDocument();
     expect(onClick).toHaveBeenCalledTimes(1);

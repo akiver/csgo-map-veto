@@ -1,4 +1,5 @@
 import { MAPS } from 'renderer/constants/maps';
+import { Then } from '@badeball/cypress-cucumber-preprocessor';
 
 Then('The displayed options must be correct', () => {
   cy.findByLabelText('Team 1').should('have.value', 'Team 1');

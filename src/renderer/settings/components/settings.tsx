@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ButtonToggleTheme } from 'renderer/settings/components/button-toggle-theme';
 import { Link } from 'renderer/components/link';
 import { ButtonTestDatabaseConnection } from 'renderer/settings/components/button-test-database-connection';
-import { Theme } from 'renderer/contexts/theme-context';
 import { InputApiAddress } from 'renderer/settings/components/input-api-address';
 
 const Section = styled.div`
@@ -26,7 +25,7 @@ const StyledSettings = styled.div`
   }
 `;
 
-const SectionTitle = styled.h1<{ theme: Theme }>`
+const SectionTitle = styled.h1`
   font-size: 22px;
   color: ${({ theme }) => theme.lightInversed};
   padding-bottom: 10px;
@@ -37,7 +36,7 @@ const HomeLink = styled(Link)`
   align-self: flex-start;
 `;
 
-const Settings = () => {
+export function Settings() {
   return (
     <StyledSettings>
       <Section>
@@ -54,6 +53,4 @@ const Settings = () => {
       </HomeLink>
     </StyledSettings>
   );
-};
-
-export { Settings };
+}

@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
     "strict": true,
-    "baseUrl": "../node_modules",
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
     "types": ["node", "cypress", "@testing-library/cypress"],
     "paths": {
       "renderer/*": ["../src/renderer/*"]

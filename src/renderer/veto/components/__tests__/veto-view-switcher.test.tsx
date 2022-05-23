@@ -1,15 +1,14 @@
 import React from 'react';
+import { cleanup } from '@testing-library/react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { VetoViewSwitcher } from '../veto-view-switcher';
-import { AppWithTheme } from 'test/utils';
+import { AppWithTheme } from 'test/render-with-theme';
 import { MAPS } from 'renderer/constants/maps';
-import { MapStatuses } from 'renderer/types/map-status';
-import { VoteTypes } from 'renderer/types/vote-type';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteStatuses } from 'renderer/types/vote-status';
-import { VetoStatuses } from 'renderer/types/veto-status';
+import { VoteType } from 'renderer/types/vote-type';
+import { TeamNumber } from 'renderer/types/team-number';
+import { VoteStatus } from 'renderer/types/vote-status';
+import { VetoStatus } from 'renderer/types/veto-status';
 import { BEST_OF_3, BO3_MODE_BPBR } from 'renderer/constants/best-of/bo3';
-import { cleanup } from '@testing-library/react';
 
 describe('VetoViewSwitcher', () => {
   afterEach(cleanup);
@@ -36,58 +35,57 @@ describe('VetoViewSwitcher', () => {
     });
   });
 
-  it('should diplay the veto ui', async () => {
+  it('should display the veto ui', async () => {
     const { getByTitle, getByText, findByText, findAllByText, findAllByTitle } = renderWithRedux(
       <AppWithTheme>
         <VetoViewSwitcher />
       </AppWithTheme>,
       {
         initialState: {
-          options: {
-            vetoStatus: VetoStatuses.IN_PROGRESS,
+          veto: {
+            mapNames: MAPS,
+            status: VetoStatus.InProgress,
             teamOneName: 'Team 1',
             teamTwoName: 'Team 2',
-            selecteBestOf: BEST_OF_3,
+            bestOf: BEST_OF_3,
+            votes: [
+              {
+                id: 1,
+                type: VoteType.Ban,
+                teamNumber: TeamNumber.Team1,
+                status: VoteStatus.Current,
+              },
+              {
+                id: 2,
+                type: VoteType.Ban,
+                teamNumber: TeamNumber.Team2,
+                status: VoteStatus.Waiting,
+              },
+              {
+                id: 3,
+                type: VoteType.Pick,
+                teamNumber: TeamNumber.Team1,
+                status: VoteStatus.Waiting,
+              },
+              {
+                id: 4,
+                type: VoteType.Pick,
+                teamNumber: TeamNumber.Team2,
+                status: VoteStatus.Waiting,
+              },
+              {
+                id: 5,
+                type: VoteType.Random,
+                teamNumber: TeamNumber.Server,
+                status: VoteStatus.Waiting,
+              },
+            ],
           },
-          maps: MAPS.map((mapName) => ({
-            name: mapName,
-            status: MapStatuses.REMAINING,
-          })),
-          votes: [
-            {
-              id: 1,
-              type: VoteTypes.BAN,
-              teamNumber: TeamNumbers.TEAM1,
-              status: VoteStatuses.CURRENT,
-            },
-            {
-              id: 2,
-              type: VoteTypes.BAN,
-              teamNumber: TeamNumbers.TEAM2,
-              status: VoteStatuses.WAITING,
-            },
-            {
-              id: 3,
-              type: VoteTypes.PICK,
-              teamNumber: TeamNumbers.TEAM1,
-              status: VoteStatuses.WAITING,
-            },
-            {
-              id: 4,
-              type: VoteTypes.PICK,
-              teamNumber: TeamNumbers.TEAM2,
-              status: VoteStatuses.WAITING,
-            },
-            {
-              id: 5,
-              type: VoteTypes.RANDOM,
-              teamNumber: TeamNumbers.SERVER,
-              status: VoteStatuses.WAITING,
-            },
-          ],
         },
       }
     );
+
+    // debug();
 
     expect(getByText('Remaining maps')).toBeTruthy();
     expect(getByText('Votes')).toBeTruthy();

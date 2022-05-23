@@ -5,10 +5,11 @@ import (
 	"backend/models"
 	"backend/utils"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetVetos(c *gin.Context) {
@@ -49,15 +50,22 @@ func GetVetos(c *gin.Context) {
 		}
 
 		veto := models.Veto{
-			ID:        ID,
-			CreatedAt: createdAt,
+			ID:          ID,
+			CreatedAt:   createdAt,
 			TeamOneName: teamOneName,
 			TeamTwoName: teamTwoName,
-			BestOf: bestOf,
+			BestOf:      bestOf,
 		}
 
 		sql := fmt.Sprintf("SELECT V.id, V.team_number, V.type, V.map_name FROM votes V WHERE V.veto_id = %d", veto.ID)
 		votesRows, err := database.DB.Query(sql)
+		if err != nil {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": "Unable to votes data",
+			})
+			return
+		}
 		defer votesRows.Close()
 
 		var votes []models.Vote
@@ -76,10 +84,10 @@ func GetVetos(c *gin.Context) {
 			}
 
 			vote := models.Vote{
-				ID:       ID,
+				ID:         ID,
 				TeamNumber: teamNumber,
-				Type:   voteType,
-				MapName:  mapName,
+				Type:       voteType,
+				MapName:    mapName,
 			}
 
 			votes = append(votes, vote)

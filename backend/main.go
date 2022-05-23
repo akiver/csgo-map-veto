@@ -4,20 +4,19 @@ import (
 	"backend/database"
 	"backend/handlers"
 	"backend/middlewares"
+	"log"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"log"
-	"os"
 )
 
 func main() {
-	var err = godotenv.Load()
-	if err != nil {
-		log.Println(err)
-		log.Fatal("Error loading .env file")
+	if err := godotenv.Load(); err != nil {
+		log.Println("Error loading .env file")
+		log.Fatalln(err)
 	}
-
 	databaseName := os.Getenv("DB_NAME")
 	databaseUsername := os.Getenv("DB_USERNAME")
 	databasePassword := os.Getenv("DB_PASSWORD")
@@ -27,8 +26,13 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	database.Initialize(databaseName, databaseUsername, databasePassword)
+	if err := database.Initialize(databaseName, databaseUsername, databasePassword); err != nil {
+		log.Println("Error initializing database:")
+		log.Fatalln(err)
+	}
+
 	defer database.DB.Close()
+
 	router := gin.New()
 	router.Use(middlewares.JSON(disableCORS))
 
@@ -40,9 +44,8 @@ func main() {
 		api.DELETE("/vetos/:id", handlers.DeleteVeto)
 	}
 
-	err = router.Run()
-	if err != nil {
-		log.Println(err)
-		log.Fatal("Error starting routes")
+	if err := router.Run(); err != nil {
+		log.Println("Error starting router")
+		log.Fatalln(err)
 	}
 }

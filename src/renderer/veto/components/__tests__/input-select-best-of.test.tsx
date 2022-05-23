@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { InputSelectBestOf } from '../input-select-best-of';
-import { AppWithTheme } from 'test/utils';
+import { AppWithTheme } from 'test/render-with-theme';
 import { fireEvent } from '@testing-library/react';
 
 describe('InputSelectBestOf', () => {

@@ -1,30 +1,26 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { InputSelect } from 'renderer/components/input-select';
 import { BestOfMode } from 'renderer/types/best-of-mode';
-import { getSelectedMode } from 'renderer/veto/selectors/get-selected-mode';
-import { getAvailableModes } from 'renderer/veto/selectors/get-available-modes';
-import { updateSelectedMode } from 'renderer/veto/actions/update-select-mode';
+import { useDispatch } from 'renderer/use-dispatch';
+import { modeChanged } from '../veto-actions';
+import { useVeto } from '../use-veto';
 
-type Props = {
-  children?: never;
-};
-
-const InputSelectMode = ({}: Props) => {
+export function InputSelectMode() {
   const dispatch = useDispatch();
-  const selectedMode = useSelector(getSelectedMode);
-  const availableModes = useSelector(getAvailableModes);
+  const { bestOf, bestOfMode } = useVeto();
+  const onChange = (bestOfMode: BestOfMode | null) => {
+    if (bestOfMode !== null) {
+      dispatch(modeChanged(bestOfMode));
+    }
+  };
+
   return (
-    <InputSelect
-      options={availableModes}
+    <InputSelect<BestOfMode>
+      options={bestOf.modes}
       id="select-mode"
       label="Mode"
-      value={selectedMode}
-      onChange={(mode: BestOfMode) => {
-        dispatch(updateSelectedMode(mode));
-      }}
+      value={bestOfMode}
+      onChange={onChange}
     />
   );
-};
-
-export { InputSelectMode };
+}

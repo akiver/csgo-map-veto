@@ -15,7 +15,7 @@ type Props = {
   onClose: () => void;
 };
 
-const ModalInformation = ({ message, onClose }: Props) => {
+export function ModalInformation({ message, onClose }: Props) {
   return (
     <Modal onClose={onClose}>
       <Text>{message}</Text>
@@ -24,6 +24,4 @@ const ModalInformation = ({ message, onClose }: Props) => {
       </Footer>
     </Modal>
   );
-};
-
-export { ModalInformation };
+}

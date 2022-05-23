@@ -1,9 +1,7 @@
-const VoteTypes = Object.freeze({
-  BAN: 'ban' as const,
-  PICK: 'pick' as const,
-  RANDOM: 'random' as const,
-});
+export const VoteType = {
+  Ban: 'ban',
+  Pick: 'pick',
+  Random: 'random',
+} as const;
 
-type VoteType = EnumLiteralsOf<typeof VoteTypes>;
-
-export { VoteType, VoteTypes };
+export type VoteType = typeof VoteType[keyof typeof VoteType];

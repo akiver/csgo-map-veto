@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'renderer/components/button';
-import { getApiAddress } from 'renderer/settings/selectors/get-api-address';
 import { useVetosDispatch } from 'renderer/vetos/vetos-context';
+import { useApiAddress } from 'renderer/settings/use-api-address';
 
 const StyledButton = styled(Button)`
   margin-left: inherit;
@@ -13,10 +12,10 @@ type Props = {
   vetoId: number;
 };
 
-const DeleteVetoButton = ({ vetoId }: Props) => {
+export function DeleteVetoButton({ vetoId }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useVetosDispatch();
-  const apiAddress = useSelector(getApiAddress);
+  const apiAddress = useApiAddress();
 
   const onClick = async () => {
     try {
@@ -44,6 +43,4 @@ const DeleteVetoButton = ({ vetoId }: Props) => {
       Delete
     </StyledButton>
   );
-};
-
-export { DeleteVetoButton };
+}

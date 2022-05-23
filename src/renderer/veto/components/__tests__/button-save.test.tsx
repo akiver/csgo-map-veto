@@ -1,36 +1,38 @@
 import React from 'react';
-import { cleanup, fireEvent } from '@testing-library/react';
+import { vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithRedux } from 'test/render-with-redux';
 import { BEST_OF_3 } from 'renderer/constants/best-of/bo3';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
-import { VetoStatuses } from 'renderer/types/veto-status';
-import { StoreState } from 'renderer/store';
+import { TeamNumber } from 'renderer/types/team-number';
+import { VoteType } from 'renderer/types/vote-type';
+import { VetoStatus } from 'renderer/types/veto-status';
+import { RootState } from 'renderer/store';
 import { VetoPostRequest } from 'renderer/types/api';
 import { ButtonSaveVeto } from '../button-save-veto';
 
 describe('ButtonSave', () => {
   afterEach(cleanup);
 
-  const renderComponent = (initialState: RecursivePartial<StoreState> = {}) => {
+  const renderComponent = (initialState: DeepPartial<RootState> = {}) => {
     return renderWithRedux(<ButtonSaveVeto />, {
       initialState: {
         settings: {
           apiAddress: 'https://hi.com',
         },
-        options: {
-          ...initialState.options,
+        veto: {
+          ...initialState.veto,
           teamOneName: 'Team one',
           teamTwoName: 'Team two',
-          selecteBestOf: BEST_OF_3,
+          bestOf: BEST_OF_3,
+          votes: [
+            {
+              teamNumber: TeamNumber.Team1,
+              type: VoteType.Ban,
+              mapName: 'de_test',
+            },
+          ],
         },
-        votes: [
-          {
-            teamNumber: TeamNumbers.TEAM1,
-            type: VoteTypes.BAN,
-            mapName: 'de_test',
-          },
-        ],
       },
     });
   };
@@ -44,8 +46,8 @@ describe('ButtonSave', () => {
   describe('when the veto is not completed', () => {
     it('should be disabled', () => {
       const { getByText } = renderComponent({
-        options: {
-          vetoStatus: VetoStatuses.IN_PROGRESS,
+        veto: {
+          status: VetoStatus.InProgress,
         },
       });
 
@@ -56,8 +58,8 @@ describe('ButtonSave', () => {
   describe('when the veto is completed', () => {
     it('should be enabled', () => {
       const { getByText } = renderComponent({
-        options: {
-          vetoStatus: VetoStatuses.COMPLETED,
+        veto: {
+          status: VetoStatus.Completed,
         },
       });
 
@@ -66,19 +68,20 @@ describe('ButtonSave', () => {
 
     describe('on click', () => {
       it('should make an http post request', async () => {
-        global.fetch = jest.fn().mockImplementation(() => {
+        global.fetch = vi.fn().mockImplementation(() => {
           return {
             status: 201,
           };
         });
 
+        const user = userEvent.setup();
         const { getByText } = renderComponent({
-          options: {
-            vetoStatus: VetoStatuses.COMPLETED,
+          veto: {
+            status: VetoStatus.Completed,
           },
         });
 
-        fireEvent.click(getByText(/save/i));
+        await user.click(getByText(/save/i));
 
         const mockPostRequest: VetoPostRequest = {
           team_one_name: 'Team one',
@@ -86,8 +89,8 @@ describe('ButtonSave', () => {
           best_of: 3,
           votes: [
             {
-              team_number: TeamNumbers.TEAM1,
-              type: VoteTypes.BAN,
+              team_number: TeamNumber.Team1,
+              type: VoteType.Ban,
               map_name: 'de_test',
             },
           ],

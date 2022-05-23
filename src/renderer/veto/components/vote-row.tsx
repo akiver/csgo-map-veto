@@ -1,37 +1,36 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Text } from 'renderer/components/text';
 import { VoteRowAction } from 'renderer/veto/components/vote-row-action';
-import { Theme } from 'renderer/contexts/theme-context';
-import { VoteTypes, VoteType } from 'renderer/types/vote-type';
+import { VoteType } from 'renderer/types/vote-type';
 import { Vote } from 'renderer/types/vote';
-import { VoteStatuses } from 'renderer/types/vote-status';
+import { VoteStatus } from 'renderer/types/vote-status';
 import { getVoteTypeText } from 'renderer/utils/get-vote-type-text';
-import { getTeamName } from 'renderer/veto/selectors/get-team-name';
-import { StoreState } from 'renderer/store';
-import { makeRandomVote } from 'renderer/veto/actions/make-random-vote';
+import { useVeto } from '../use-veto';
+import { getTeamNameByTeamNumber } from 'renderer/utils/get-team-name-from-team-number';
+import { TeamNumber } from 'renderer/types/team-number';
+import { useDispatch } from 'renderer/use-dispatch';
+import { makeVote } from '../veto-actions';
+import { useRemainingMapNames } from '../use-remaining-map-names';
 
-const getRowColor = (voteType: VoteType, theme: Theme) => {
-  if (voteType === VoteTypes.BAN) {
-    return theme.danger;
-  }
-
-  if (voteType === VoteTypes.PICK) {
-    return theme.success;
-  }
-
-  return theme.warning;
-};
-
-const StyledVoteRow = styled.div<{ vote: Vote; theme: Theme }>`
+const StyledVoteRow = styled.div<{ vote: Vote }>`
   display: flex;
   flex: none;
   align-items: center;
   border-radius: 4px;
   margin-bottom: 10px;
-  background-color: ${({ vote, theme }) => getRowColor(vote.type, theme)};
   padding: 10px 20px 10px 20px;
+  background-color: ${({ vote, theme }) => {
+    if (vote.type === VoteType.Ban) {
+      return theme.danger;
+    }
+
+    if (vote.type === VoteType.Pick) {
+      return theme.success;
+    }
+
+    return theme.warning;
+  }};
 `;
 
 const VoteRowContent = styled.div`
@@ -46,27 +45,42 @@ const Status = styled(Text)`
   text-transform: uppercase;
 `;
 
-const getVoteText = (vote: Vote) => {
-  if (vote.status === VoteStatuses.DONE) {
+function getVoteText(vote: Vote) {
+  if (vote.status === VoteStatus.Done) {
     return `${getVoteTypeText(vote.type)} ${vote.mapName}`;
   }
 
   return vote.type;
-};
+}
+
+function useTeamName(teamNumber: TeamNumber) {
+  const { teamOneName, teamTwoName } = useVeto();
+
+  return getTeamNameByTeamNumber(teamNumber, teamOneName, teamTwoName);
+}
+
+function useGetRandomMapName() {
+  const remainingMapNames = useRemainingMapNames();
+  const randomIndex = Math.floor(Math.random() * (remainingMapNames.length - 0));
+  const mapName = remainingMapNames[randomIndex];
+
+  return mapName;
+}
 
 type Props = {
   vote: Vote;
 };
 
-const VoteRow = ({ vote }: Props) => {
-  const teamName = useSelector((state: StoreState) => getTeamName(state, vote.teamNumber));
+export function VoteRow({ vote }: Props) {
+  const teamName = useTeamName(vote.teamNumber);
   const dispatch = useDispatch();
-  const isCurrentVote = vote.status === VoteStatuses.CURRENT;
-  const isRandomVote = vote.type === VoteTypes.RANDOM;
+  const randomMapName = useGetRandomMapName();
+  const isCurrentVote = vote.status === VoteStatus.Current;
+  const isRandomVote = vote.type === VoteType.Random;
 
   useEffect(() => {
     if (isCurrentVote && isRandomVote) {
-      dispatch(makeRandomVote());
+      dispatch(makeVote(randomMapName));
     }
   });
 
@@ -83,6 +97,4 @@ const VoteRow = ({ vote }: Props) => {
       </VoteRowContent>
     </StyledVoteRow>
   );
-};
-
-export { VoteRow };
+}

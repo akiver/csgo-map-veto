@@ -1,29 +1,24 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { InputText } from 'renderer/components/input-text';
-import { getTeamOneName } from 'renderer/veto/selectors/get-team-one-name';
-import { updateTeamOneName } from 'renderer/veto/actions/update-team-one-name';
+import { useVeto } from '../use-veto';
+import { teamName1Changed } from '../veto-actions';
+import { useDispatch } from 'renderer/use-dispatch';
 
-type Props = {
-  children?: never;
-};
-
-const InputTeamOneName = ({}: Props) => {
+export function InputTeamOneName() {
   const dispatch = useDispatch();
-  const teamName = useSelector(getTeamOneName);
+  const { teamOneName } = useVeto();
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(teamName1Changed(event.target.value));
+  };
 
   return (
     <InputText
       id="input-team1"
-      value={teamName}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(updateTeamOneName(e.target.value));
-      }}
+      value={teamOneName}
+      onChange={onChange}
       label="Team 1"
       placeholder="Team 1"
       data-testid="input-team-1"
     />
   );
-};
-
-export { InputTeamOneName };
+}

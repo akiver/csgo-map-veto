@@ -1,3 +1,5 @@
+import { Then, Given, When } from '@badeball/cypress-cucumber-preprocessor';
+
 Given('The map {string} is currently unselected', (mapName: string) => {
   cy.findByAltText(mapName).should('have.css', 'opacity', '0.5');
 });
@@ -19,11 +21,11 @@ Then('The map {string} is now unselected', (mapName: string) => {
 });
 
 Given('BestOf is {int}', (bestOf: number) => {
-  cy.findByText('BO 3').click();
+  cy.findByText('BO 3').click({ force: true });
   cy.findAllByText(`BO ${bestOf}`).last().click();
 });
 
 Given('The mode is {string}', (mode: string) => {
-  cy.findByText('Ban / Ban / Ban / Random').click();
+  cy.findByText('Ban / Ban / Ban / Random').click({ force: true });
   cy.findAllByText(mode).last().click();
 });

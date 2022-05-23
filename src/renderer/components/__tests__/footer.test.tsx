@@ -1,19 +1,7 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Footer } from '../footer';
-
-const mockOpenExternal = jest.fn();
-
-jest.mock('electron', () => {
-  return {
-    shell: {
-      openExternal: mockOpenExternal,
-    },
-    ipcRenderer: {
-      on: jest.fn(),
-    },
-  };
-});
+import pkg from '../../../../package.json';
 
 describe('Footer', () => {
   const renderComponent = () => render(<Footer />);
@@ -24,36 +12,11 @@ describe('Footer', () => {
     expect(findByText('CSGO Map Veto v15 by Akiver')).toBeDefined();
   });
 
-  describe('GitHub link', () => {
-    it('should have a link to GitHub', () => {
-      const { getByRole } = renderComponent();
+  it('should have a link to the git repository', () => {
+    const { getByRole } = renderComponent();
 
-      expect(getByRole('button')).toBeInTheDocument();
-    });
+    const link = getByRole('link');
 
-    describe('on web environment', () => {
-      it('should redirect to GitHub on click', () => {
-        global.open = jest.fn();
-        global.IS_ELECTRON = false;
-        const { getByRole } = renderComponent();
-
-        const link = getByRole('button');
-        fireEvent.click(link);
-
-        expect(global.open).toHaveBeenLastCalledWith('https://github.com');
-      });
-    });
-
-    describe('on Electron environment', () => {
-      it('should redirect to GitHub on click', () => {
-        global.IS_ELECTRON = true;
-        const { getByRole } = renderComponent();
-
-        const link = getByRole('button');
-        fireEvent.click(link);
-
-        expect(mockOpenExternal).toHaveBeenLastCalledWith('https://github.com');
-      });
-    });
+    expect(link).toHaveAttribute('href', pkg.homepage);
   });
 });

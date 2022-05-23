@@ -1,5 +1,5 @@
-import { Reducer } from 'redux';
-import { UpdateApiAddressAction, UPDATE_API_ADDRESS } from 'renderer/settings/actions/update-api-address';
+import { createReducer } from '@reduxjs/toolkit';
+import { apiAddressChanged } from 'renderer/settings/settings-actions';
 import { DEFAULT_API_ADDRESS } from 'renderer/constants/api';
 
 type SettingsState = {
@@ -10,16 +10,8 @@ const initialState: SettingsState = {
   apiAddress: DEFAULT_API_ADDRESS,
 };
 
-const settingsReducer: Reducer<SettingsState, UpdateApiAddressAction> = (state = initialState, action) => {
-  switch (action.type) {
-    case UPDATE_API_ADDRESS:
-      return {
-        ...state,
-        apiAddress: action.apiAddress,
-      };
-    default:
-      return state;
-  }
-};
-
-export { settingsReducer };
+export const settingsReducer = createReducer(initialState, (builder) => {
+  builder.addCase(apiAddressChanged, (state, action) => {
+    state.apiAddress = action.payload;
+  });
+});

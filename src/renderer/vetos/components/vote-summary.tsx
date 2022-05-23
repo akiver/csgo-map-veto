@@ -3,17 +3,16 @@ import styled from 'styled-components';
 import { Vote } from 'renderer/vetos/types/vote';
 import { Text } from 'renderer/components/text';
 import { MapImage } from 'renderer/components/map-image';
-import { VoteType, VoteTypes } from 'renderer/types/vote-type';
-import { Theme } from 'renderer/contexts/theme-context';
+import { VoteType } from 'renderer/types/vote-type';
 import { getVoteTypeText } from 'renderer/utils/get-vote-type-text';
 import { getTeamNameByTeamNumber } from 'renderer/utils/get-team-name-from-team-number';
 
-const StyledVoteSummary = styled.div<{ theme: Theme; voteType: VoteType }>`
+const StyledVoteSummary = styled.div<{ voteType: VoteType }>`
   display: flex;
   align-items: center;
   padding: 10px 20px 10px 20px;
   background-color: ${({ theme, voteType }) => {
-    return voteType === VoteTypes.BAN ? theme.danger : theme.success;
+    return voteType === VoteType.Ban ? theme.danger : theme.success;
   }};
   ${Text} {
     color: ${({ theme }) => theme.dark};
@@ -39,7 +38,7 @@ type Props = {
   vote: Vote;
 };
 
-const VoteSummary = ({ vote, teamOneName, teamTwoName }: Props) => {
+export function VoteSummary({ vote, teamOneName, teamTwoName }: Props) {
   return (
     <StyledVoteSummary voteType={vote.type} data-testid={`vote-${vote.id}`}>
       <StyledMapImage mapName={vote.mapName} />
@@ -48,6 +47,4 @@ const VoteSummary = ({ vote, teamOneName, teamTwoName }: Props) => {
       <Text>{vote.mapName}</Text>
     </StyledVoteSummary>
   );
-};
-
-export { VoteSummary };
+}

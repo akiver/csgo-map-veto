@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Text } from 'renderer/components/text';
 import { VetoEntry } from 'renderer/vetos/components/veto-entry';
 import { Veto } from 'renderer/vetos/types/veto';
 import { useVetosState, useVetosDispatch } from 'renderer/vetos/vetos-context';
 import { Link } from 'renderer/components/link';
-import { getApiAddress } from 'renderer/settings/selectors/get-api-address';
 import { VetosResponse } from 'renderer/types/api';
+import { useApiAddress } from 'renderer/settings/use-api-address';
 
 const VetosWrapper = styled.div`
   display: flex;
@@ -25,12 +24,12 @@ const HomeLink = styled(Link)`
   margin-bottom: 20px;
 `;
 
-const Vetos = () => {
-  const [error, setError] = useState(undefined);
+export function Vetos() {
+  const [error, setError] = useState<string | undefined>(undefined);
   const vetos = useVetosState();
   const dispatch = useVetosDispatch();
   const [isFetching, setIsFetching] = useState(true);
-  const apiAddress = useSelector(getApiAddress);
+  const apiAddress = useApiAddress();
 
   const fetchVetos = useCallback(async () => {
     try {
@@ -59,11 +58,15 @@ const Vetos = () => {
       });
       dispatch({ type: 'set', vetos });
     } catch (error) {
-      setError(error.message);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An error occurred while fetching vetos');
+      }
     } finally {
       setIsFetching(false);
     }
-  }, []);
+  }, [apiAddress, dispatch]);
 
   useEffect(() => {
     fetchVetos();
@@ -94,6 +97,4 @@ const Vetos = () => {
       {renderContent()}
     </VetosWrapper>
   );
-};
-
-export { Vetos };
+}

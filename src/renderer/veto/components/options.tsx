@@ -43,34 +43,34 @@ const Error = styled.div`
   margin-top: 10px;
 `;
 
-const Options = () => (
-  <StyledOptions>
-    <Field>
-      <InputTeamOneName />
-    </Field>
-    <Field>
-      <InputTeamTwoName />
-    </Field>
-    <Field>
-      <InputSelectBestOf />
-    </Field>
-    <Field>
-      <InputSelectMode />
-    </Field>
-    <Field>
-      <MapsSelection />
-    </Field>
-    <Buttons>
-      <ButtonStartVeto />
-      <Link to="/vetos" data-testid="link-vetos">
-        Database
-      </Link>
-      <SettingsLink />
-    </Buttons>
-    <Error>
-      <ErrorMessage />
-    </Error>
-  </StyledOptions>
-);
-
-export { Options };
+export function Options() {
+  return (
+    <StyledOptions>
+      <Field>
+        <InputTeamOneName />
+      </Field>
+      <Field>
+        <InputTeamTwoName />
+      </Field>
+      <Field>
+        <InputSelectBestOf />
+      </Field>
+      <Field>
+        <InputSelectMode />
+      </Field>
+      <Field>
+        <MapsSelection />
+      </Field>
+      <Buttons>
+        <ButtonStartVeto />
+        <Link to="/vetos" data-testid="link-vetos">
+          Database
+        </Link>
+        <SettingsLink />
+      </Buttons>
+      <Error>
+        <ErrorMessage />
+      </Error>
+    </StyledOptions>
+  );
+}

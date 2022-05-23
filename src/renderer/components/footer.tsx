@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text } from 'renderer/components/text';
-import GitHub from 'renderer/svg/github.svg';
-import { Theme } from 'renderer/contexts/theme-context';
+import { ReactComponent as GitHub } from 'renderer/svg/github.svg';
 
 const Wrapper = styled.footer`
   display: flex;
@@ -10,7 +9,7 @@ const Wrapper = styled.footer`
   margin-top: auto;
 `;
 
-const StyledGitHub = styled(GitHub)<{ theme: Theme }>`
+const StyledGitHub = styled(GitHub)`
   width: 30px;
   height: 30px;
   margin-left: 10px;
@@ -18,25 +17,15 @@ const StyledGitHub = styled(GitHub)<{ theme: Theme }>`
   fill: ${({ theme }) => theme.primary};
 `;
 
-const Footer = () => {
+export function Footer() {
   return (
     <Wrapper>
       <Text isBold={true}>CSGO Map Veto {'\u00A0'}</Text>
       <Text>{`v${APP_VERSION} by \u00A0`}</Text>
       <Text isBold={true}>AkiVer</Text>
-      <StyledGitHub
-        role="button"
-        onClick={() => {
-          if (IS_ELECTRON) {
-            // eslint-disable-next-line
-            require('electron').shell.openExternal(GITHUB_URL);
-          } else {
-            window.open(GITHUB_URL);
-          }
-        }}
-      />
+      <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" title="GitHub" role="link">
+        <StyledGitHub />
+      </a>
     </Wrapper>
   );
-};
-
-export { Footer };
+}

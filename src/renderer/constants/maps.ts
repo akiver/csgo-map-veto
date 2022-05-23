@@ -1,4 +1,4 @@
-const MAPS = [
+export const MAPS = [
   'de_dust2',
   'de_inferno',
   'de_cache',
@@ -9,5 +9,3 @@ const MAPS = [
   'de_train',
   'de_vertigo',
 ];
-
-export { MAPS };

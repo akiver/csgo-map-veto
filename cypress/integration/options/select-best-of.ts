@@ -1,3 +1,5 @@
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
+
 When('Bob select the BestOf {string}', (bestOf: string) => {
   cy.findByLabelText('BO').click({
     force: true,

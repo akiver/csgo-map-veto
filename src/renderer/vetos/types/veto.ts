@@ -1,7 +1,7 @@
 import { BestOfType } from 'renderer/types/best-of';
 import { Vote } from 'renderer/vetos/types/vote';
 
-type Veto = {
+export type Veto = {
   id: number;
   teamOneName: string;
   teamTwoName: string;
@@ -9,5 +9,3 @@ type Veto = {
   votes: Vote[];
   createdAt: Date;
 };
-
-export { Veto };

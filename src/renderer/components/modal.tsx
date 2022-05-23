@@ -1,9 +1,8 @@
 import React, { useEffect, ReactNode, useRef, MouseEvent } from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
-import { Theme } from 'renderer/contexts/theme-context';
 
-const Overlay = styled.div`
+const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   bottom: 0;
   left: 0;
@@ -15,7 +14,7 @@ const Overlay = styled.div`
   overflow: auto;
 `;
 
-const StyledModal = styled.div<{ theme: Theme }>`
+const StyledModal = styled.div`
   background-color: ${({ theme }) => theme.dark};
   border-radius: 4px;
   position: relative;
@@ -31,47 +30,42 @@ type Props = {
   children: ReactNode;
 };
 
-const Modal = ({ onClose, children, className }: Props) => {
+export function Modal({ onClose, children, className }: Props) {
   const element = useRef(document.createElement('div'));
   const node = element.current;
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    const e = event || window.event;
-    if (e.keyCode === 27) {
-      e.stopPropagation();
-      onClose();
-    }
-  };
-
   useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.stopPropagation();
+        onClose();
+      }
+    };
+
     document.body.appendChild(node);
-    document.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener('keydown', onKeyDown);
 
     return () => {
       document.body.removeChild(node);
-      document.removeEventListener('keydown', handleKeyDown, true);
+      document.removeEventListener('keydown', onKeyDown);
     };
-  }, [node]);
+  }, [node, onClose]);
+
+  const onBackgroundClick = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    onClose();
+  };
+
+  const onModalClick = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+  };
 
   return ReactDOM.createPortal(
-    <Overlay
-      onClick={(e: MouseEvent<HTMLElement>) => {
-        e.stopPropagation();
-        onClose();
-      }}
-      data-testid="modal-overlay"
-    >
-      <StyledModal
-        onClick={(e: MouseEvent<HTMLElement>) => {
-          e.stopPropagation();
-        }}
-        className={className}
-      >
+    <Background onClick={onBackgroundClick} data-testid="modal-background">
+      <StyledModal onClick={onModalClick} className={className}>
         {children}
       </StyledModal>
-    </Overlay>,
+    </Background>,
     element.current
   );
-};
-
-export { Modal };
+}

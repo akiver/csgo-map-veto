@@ -1,14 +1,12 @@
-import { TeamNumbers, TeamNumber } from 'renderer/types/team-number';
+import { TeamNumber } from 'renderer/types/team-number';
 
-const getTeamNameByTeamNumber = (teamNumber: TeamNumber, teamOneName: string, teamTwoName: string) => {
+export function getTeamNameByTeamNumber(teamNumber: TeamNumber, teamOneName: string, teamTwoName: string) {
   switch (teamNumber) {
-    case TeamNumbers.TEAM1:
+    case TeamNumber.Team1:
       return teamOneName;
-    case TeamNumbers.TEAM2:
+    case TeamNumber.Team2:
       return teamTwoName;
     default:
       return 'SERVER';
   }
-};
-
-export { getTeamNameByTeamNumber };
+}

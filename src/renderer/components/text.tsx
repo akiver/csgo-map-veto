@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { Theme } from 'renderer/contexts/theme-context';
+import { Theme } from 'renderer/theme/theme';
 
 type FontSize = 'sm' | 'lg' | 'xl';
 
@@ -27,12 +27,10 @@ type Props = {
   className?: string;
 };
 
-const Text = styled.p<Props>`
+export const Text = styled.p<Props>`
   ${({ isUppercase }) => isUppercase && 'text-transform: uppercase;'}
   ${({ isBold }) => isBold && 'font-family: Lato-bold;'}
   ${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
   ${({ size }) => `font-size: ${getFontSize(size)}px;`}
   color: ${({ color, theme }) => (color ? theme[color] : theme.darkInversed)};
 `;
-
-export { Text };

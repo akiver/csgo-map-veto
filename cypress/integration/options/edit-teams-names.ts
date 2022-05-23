@@ -1,3 +1,5 @@
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
+
 When('Bob changes the team {int} name for {string}', (teamNumber: number, teamName: string) => {
   cy.findByTestId(`input-team-${teamNumber}`).clear().type(teamName);
 });

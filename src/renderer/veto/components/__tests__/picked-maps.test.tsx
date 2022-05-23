@@ -1,40 +1,31 @@
 import React from 'react';
 import { renderWithRedux } from 'test/render-with-redux';
-import { MapStatuses } from 'renderer/types/map-status';
-import { VoteStatuses } from 'renderer/types/vote-status';
-import { TeamNumbers } from 'renderer/types/team-number';
-import { VoteTypes } from 'renderer/types/vote-type';
+import { VoteType } from 'renderer/types/vote-type';
 import { PickedMaps } from '../picked-maps';
 
 describe('PickedMaps', () => {
   const { getByAltText, getByText, queryByAltText } = renderWithRedux(<PickedMaps />, {
     initialState: {
-      maps: [
-        {
-          name: 'de_picked',
-          status: MapStatuses.PICKED,
-        },
-        {
-          name: 'de_picked_other',
-          status: MapStatuses.PICKED,
-        },
-        {
-          name: 'de_banned',
-          status: MapStatuses.BANNED,
-        },
-        {
-          name: 'de_remaining',
-          status: MapStatuses.REMAINING,
-        },
-      ],
-      votes: [
-        {
-          id: 1,
-          status: VoteStatuses.CURRENT,
-          teamNumber: TeamNumbers.TEAM1,
-          type: VoteTypes.PICK,
-        },
-      ],
+      veto: {
+        votes: [
+          {
+            type: VoteType.Pick,
+            mapName: 'de_picked',
+          },
+          {
+            type: VoteType.Pick,
+            mapName: 'de_picked_other',
+          },
+          {
+            type: VoteType.Ban,
+            mapName: 'de_banned',
+          },
+          {
+            type: VoteType.Ban,
+            mapName: 'de_remaining',
+          },
+        ],
+      },
     },
   });
 

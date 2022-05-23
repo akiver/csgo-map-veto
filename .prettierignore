@@ -1,12 +1,12 @@
 dist
+out
 backend
-static
 yarn.lock
 node_modules
 .DS_Store
 .*ignore
 .gitattributes
-.nvmrc
+.node-version
 *.svg
 *.png
 *.jpg
@@ -19,3 +19,5 @@ node_modules
 .env*
 LICENSE
 *.log
+*.patch
+*.ttf

@@ -1,8 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Theme } from 'renderer/contexts/theme-context';
 
-const StyledLabel = styled.label<{ theme: Theme }>`
+const StyledLabel = styled.label`
   display: block;
   font-size: 16px;
   font-weight: bold;
@@ -15,8 +14,6 @@ type Props = {
   label: string;
 };
 
-const Label = ({ id, label }: Props) => {
+export function Label({ id, label }: Props) {
   return <StyledLabel htmlFor={id}>{label}</StyledLabel>;
-};
-
-export { Label };
+}

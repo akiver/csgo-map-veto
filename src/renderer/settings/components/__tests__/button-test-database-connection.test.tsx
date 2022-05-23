@@ -1,4 +1,5 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { renderWithRedux } from 'test/render-with-redux';
 import { DEFAULT_API_ADDRESS } from 'renderer/constants/api';
@@ -18,7 +19,7 @@ describe('ButtonTestDatabaseConnection', () => {
   });
 
   it('should be disabled while making request', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return new Promise((res) => setTimeout(res, 10000));
     });
 
@@ -31,7 +32,7 @@ describe('ButtonTestDatabaseConnection', () => {
   });
 
   it('should show a success message and persist the address', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         status: 200,
       };
@@ -48,7 +49,7 @@ describe('ButtonTestDatabaseConnection', () => {
   });
 
   it('should show an error message', async () => {
-    global.fetch = jest.fn().mockImplementation(() => {
+    global.fetch = vi.fn().mockImplementation(() => {
       return {
         status: 500,
       };

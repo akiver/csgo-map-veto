@@ -26,7 +26,7 @@ Assuming you have a working MySQL server, if you want to use it you have few ste
 ### Application
 
 1. `yarn`
-2. `yarn dev` for WEB version, `yarn dev:electron` for Electron version
+2. `yarn dev` for WEB version, `yarn dev:electron` for the Electron version
 
 ### Database
 
@@ -34,7 +34,7 @@ You have to install [go](https://golang.org/) to run the database during develop
 
 1. `cp backend/.env.example backend/.env`
 2. Edit the `.env` file and set `DISABLE_CORS` and `DEBUG` to `true`, you can also adjust the other options if you want
-3. `yarn db` to build and start the database with auto reload
+3. `yarn db` to build and start the database
 
 ### Production build
 
@@ -44,12 +44,12 @@ To build the WEB version
 `yarn build:web`
 
 To build the desktop application for your current OS  
-`yarn build`
+`yarn build:electron`
 
 To build the desktop application for all platforms (tested on MAC OS only)  
-`yarn build:all`
+`yarn build:electron:all`
 
-Dist files are located in the `dist` folder.
+Dist files are located in the `dist` folder for Electron build and in the `out` folder for the WEB build.
 
 ### Database
 
@@ -63,10 +63,12 @@ The binary file is located in `backend/backend[.exe]`.
 
 `yarn test`
 
+Or `yarn tw` to watch the tests.
+
 ### E2E tests
 
-`yarn test:e2e` (headless mode)  
-`yarn test:e2e:dev` (open Cypress to debug tests)
+`yarn e2e` (headless mode)  
+`yarn e2e:debug` (open Cypress to debug tests)
 
 ### Coverage report
 

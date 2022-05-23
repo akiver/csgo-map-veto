@@ -1,4 +1,5 @@
 import { vetosFixture } from '../fixtures/vetos';
+import { Then, When } from '@badeball/cypress-cucumber-preprocessor';
 
 When('Bob navigate to the vetos listing', () => {
   cy.findByTestId('link-vetos').click();

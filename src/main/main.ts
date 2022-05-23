@@ -1,10 +1,6 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'path';
-import { format as formatUrl } from 'url';
+import { app, BrowserWindow, nativeTheme, shell } from 'electron';
 
 let mainWindow: BrowserWindow | null;
-
-const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const installExtensions = async () => {
   const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer'); // eslint-disable-line
@@ -18,21 +14,16 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
+    darkTheme: nativeTheme.shouldUseDarkColors,
     webPreferences: {
       nodeIntegration: true,
     },
   });
 
-  if (isDevelopment) {
-    mainWindow.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
+  if (IS_PRODUCTION) {
+    mainWindow.loadFile('index.html');
   } else {
-    mainWindow.loadURL(
-      formatUrl({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true,
-      })
-    );
+    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
   }
 
   mainWindow.webContents.on('did-finish-load', () => {
@@ -47,7 +38,19 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  if (isDevelopment) {
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https://github.com/')) {
+      shell.openExternal(url);
+    }
+
+    return { action: 'deny' };
+  });
+
+  mainWindow.webContents.on('will-navigate', (event) => {
+    event.preventDefault();
+  });
+
+  if (!IS_PRODUCTION) {
     await installExtensions();
     mainWindow.webContents.openDevTools();
   }
