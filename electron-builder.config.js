@@ -5,7 +5,7 @@
 const config = {
   appId: 'com.akiver.csgomapveto',
   productName: 'CSGO Map Veto',
-  copyright: 'Copyright © 2019-present AkiVer',
+  copyright: 'Copyright © 2016-present AkiVer',
   mac: {
     category: 'public.app-category.utilities',
     identity: null,

@@ -43,5 +43,6 @@ module.exports = {
     '*.ttf',
     '*.patch',
     '*.toml',
+    '*.ai',
   ],
 };
